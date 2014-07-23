@@ -7,20 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F261171198039BD007AD560 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F261170198039BD007AD560 /* Parse.framework */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9271980175700F2A161 /* CoreGraphics.framework */; };
 		0F8FB92A1980175700F2A161 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9291980175700F2A161 /* UIKit.framework */; };
 		0F8FB9301980175700F2A161 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F8FB92E1980175700F2A161 /* InfoPlist.strings */; };
-		0F8FB9321980175700F2A161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9311980175700F2A161 /* main.m */; };
-		0F8FB9361980175700F2A161 /* CKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9351980175700F2A161 /* CKAppDelegate.m */; };
 		0F8FB9391980175700F2A161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F8FB9371980175700F2A161 /* Main.storyboard */; };
-		0F8FB93C1980175700F2A161 /* CKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB93B1980175700F2A161 /* CKViewController.m */; };
 		0F8FB93E1980175700F2A161 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F8FB93D1980175700F2A161 /* Images.xcassets */; };
 		0F8FB9451980175700F2A161 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9441980175700F2A161 /* XCTest.framework */; };
 		0F8FB9461980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9471980175700F2A161 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9291980175700F2A161 /* UIKit.framework */; };
 		0F8FB94F1980175700F2A161 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F8FB94D1980175700F2A161 /* InfoPlist.strings */; };
 		0F8FB9511980175700F2A161 /* LocoMojoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9501980175700F2A161 /* LocoMojoTests.m */; };
+		0F8FB9721980264F00F2A161 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9711980264F00F2A161 /* AudioToolbox.framework */; };
+		0F8FB9741980265600F2A161 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9731980265600F2A161 /* CFNetwork.framework */; };
+		0F8FB9761980266500F2A161 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9751980266500F2A161 /* CoreLocation.framework */; };
+		0F8FB9781980267300F2A161 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9771980267300F2A161 /* libz.dylib */; };
+		0F8FB97A1980267B00F2A161 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9791980267B00F2A161 /* MobileCoreServices.framework */; };
+		0F8FB97C1980268300F2A161 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB97B1980268300F2A161 /* QuartzCore.framework */; };
+		0F8FB97E1980268A00F2A161 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB97D1980268A00F2A161 /* Security.framework */; };
+		0F8FB9801980269300F2A161 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB97F1980269300F2A161 /* StoreKit.framework */; };
+		0F8FB9821980269D00F2A161 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9811980269D00F2A161 /* SystemConfiguration.framework */; };
+		0F8FB99019802D8500F2A161 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB98F19802D8500F2A161 /* MapKit.framework */; };
+		0FA18ACE198037C300CFDC8C /* CKRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96A1980246100F2A161 /* CKRootVC.m */; };
+		0FA18AD0198037DE00CFDC8C /* CKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9351980175700F2A161 /* CKAppDelegate.m */; };
+		0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96D198024BD00F2A161 /* CKUser.m */; };
+		0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB984198029AF00F2A161 /* CKMapVC.m */; };
+		0FA18AD7198037DE00CFDC8C /* CKMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB98A19802A4600F2A161 /* CKMessageVC.m */; };
+		0FA18AD9198037DE00CFDC8C /* CKMojoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */; };
+		0FA18ADB198037DE00CFDC8C /* CKGitHubNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96119801E8900F2A161 /* CKGitHubNetworkController.m */; };
+		0FA18ADD198037F200CFDC8C /* CKOAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96319801E8900F2A161 /* CKOAuthController.m */; };
+		0FA18ADF198037F700CFDC8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9311980175700F2A161 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F261170198039BD007AD560 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9251980175700F2A161 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F8FB9271980175700F2A161 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -45,14 +63,37 @@
 		0F8FB9341980175700F2A161 /* CKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKAppDelegate.h; sourceTree = "<group>"; };
 		0F8FB9351980175700F2A161 /* CKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKAppDelegate.m; sourceTree = "<group>"; };
 		0F8FB9381980175700F2A161 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0F8FB93A1980175700F2A161 /* CKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKViewController.h; sourceTree = "<group>"; };
-		0F8FB93B1980175700F2A161 /* CKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKViewController.m; sourceTree = "<group>"; };
 		0F8FB93D1980175700F2A161 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0F8FB9431980175700F2A161 /* LocoMojoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocoMojoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9441980175700F2A161 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0F8FB94C1980175700F2A161 /* LocoMojoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LocoMojoTests-Info.plist"; sourceTree = "<group>"; };
 		0F8FB94E1980175700F2A161 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F8FB9501980175700F2A161 /* LocoMojoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocoMojoTests.m; sourceTree = "<group>"; };
+		0F8FB96019801E8900F2A161 /* CKGitHubNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKGitHubNetworkController.h; path = Controllers/CKGitHubNetworkController.h; sourceTree = "<group>"; };
+		0F8FB96119801E8900F2A161 /* CKGitHubNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKGitHubNetworkController.m; path = Controllers/CKGitHubNetworkController.m; sourceTree = "<group>"; };
+		0F8FB96219801E8900F2A161 /* CKOAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKOAuthController.h; path = Controllers/CKOAuthController.h; sourceTree = "<group>"; };
+		0F8FB96319801E8900F2A161 /* CKOAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKOAuthController.m; path = Controllers/CKOAuthController.m; sourceTree = "<group>"; };
+		0F8FB96619801F7200F2A161 /* CKConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CKConstants.h; path = Organizational/CKConstants.h; sourceTree = "<group>"; };
+		0F8FB9691980246100F2A161 /* CKRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKRootVC.h; path = "View Controllers/CKRootVC.h"; sourceTree = "<group>"; };
+		0F8FB96A1980246100F2A161 /* CKRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKRootVC.m; path = "View Controllers/CKRootVC.m"; sourceTree = "<group>"; };
+		0F8FB96C198024BD00F2A161 /* CKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKUser.h; path = Model/CKUser.h; sourceTree = "<group>"; };
+		0F8FB96D198024BD00F2A161 /* CKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKUser.m; path = Model/CKUser.m; sourceTree = "<group>"; };
+		0F8FB9711980264F00F2A161 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0F8FB9731980265600F2A161 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0F8FB9751980266500F2A161 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0F8FB9771980267300F2A161 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0F8FB9791980267B00F2A161 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0F8FB97B1980268300F2A161 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0F8FB97D1980268A00F2A161 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0F8FB97F1980269300F2A161 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0F8FB9811980269D00F2A161 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0F8FB983198029AF00F2A161 /* CKMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMapVC.h; path = "View Controllers/CKMapVC.h"; sourceTree = "<group>"; };
+		0F8FB984198029AF00F2A161 /* CKMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMapVC.m; path = "View Controllers/CKMapVC.m"; sourceTree = "<group>"; };
+		0F8FB98919802A4600F2A161 /* CKMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMessageVC.h; path = "View Controllers/CKMessageVC.h"; sourceTree = "<group>"; };
+		0F8FB98A19802A4600F2A161 /* CKMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMessageVC.m; path = "View Controllers/CKMessageVC.m"; sourceTree = "<group>"; };
+		0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMojoVC.h; path = "View Controllers/CKMojoVC.h"; sourceTree = "<group>"; };
+		0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMojoVC.m; path = "View Controllers/CKMojoVC.m"; sourceTree = "<group>"; };
+		0F8FB98F19802D8500F2A161 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +101,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8FB99019802D8500F2A161 /* MapKit.framework in Frameworks */,
+				0F8FB9821980269D00F2A161 /* SystemConfiguration.framework in Frameworks */,
+				0F8FB9801980269300F2A161 /* StoreKit.framework in Frameworks */,
+				0F8FB97E1980268A00F2A161 /* Security.framework in Frameworks */,
+				0F8FB97C1980268300F2A161 /* QuartzCore.framework in Frameworks */,
+				0F8FB97A1980267B00F2A161 /* MobileCoreServices.framework in Frameworks */,
+				0F8FB9781980267300F2A161 /* libz.dylib in Frameworks */,
+				0F8FB9761980266500F2A161 /* CoreLocation.framework in Frameworks */,
 				0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */,
+				0F8FB9741980265600F2A161 /* CFNetwork.framework in Frameworks */,
+				0F261171198039BD007AD560 /* Parse.framework in Frameworks */,
+				0F8FB9721980264F00F2A161 /* AudioToolbox.framework in Frameworks */,
 				0F8FB92A1980175700F2A161 /* UIKit.framework in Frameworks */,
 				0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */,
 			);
@@ -101,6 +153,17 @@
 		0F8FB9241980175700F2A161 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F261170198039BD007AD560 /* Parse.framework */,
+				0F8FB98F19802D8500F2A161 /* MapKit.framework */,
+				0F8FB9811980269D00F2A161 /* SystemConfiguration.framework */,
+				0F8FB97F1980269300F2A161 /* StoreKit.framework */,
+				0F8FB97D1980268A00F2A161 /* Security.framework */,
+				0F8FB97B1980268300F2A161 /* QuartzCore.framework */,
+				0F8FB9791980267B00F2A161 /* MobileCoreServices.framework */,
+				0F8FB9771980267300F2A161 /* libz.dylib */,
+				0F8FB9751980266500F2A161 /* CoreLocation.framework */,
+				0F8FB9731980265600F2A161 /* CFNetwork.framework */,
+				0F8FB9711980264F00F2A161 /* AudioToolbox.framework */,
 				0F8FB9251980175700F2A161 /* Foundation.framework */,
 				0F8FB9271980175700F2A161 /* CoreGraphics.framework */,
 				0F8FB9291980175700F2A161 /* UIKit.framework */,
@@ -115,9 +178,11 @@
 				0F8FB9341980175700F2A161 /* CKAppDelegate.h */,
 				0F8FB9351980175700F2A161 /* CKAppDelegate.m */,
 				0F8FB9371980175700F2A161 /* Main.storyboard */,
-				0F8FB93A1980175700F2A161 /* CKViewController.h */,
-				0F8FB93B1980175700F2A161 /* CKViewController.m */,
-				0F8FB93D1980175700F2A161 /* Images.xcassets */,
+				0F8FB95B1980178100F2A161 /* Model */,
+				0F8FB95A1980175F00F2A161 /* View Controllers */,
+				0F8FB95F1980181600F2A161 /* Controllers */,
+				0F8FB96719801F7900F2A161 /* Organizational */,
+				0F8FB96819801F8F00F2A161 /* Media */,
 				0F8FB92C1980175700F2A161 /* Supporting Files */,
 			);
 			path = LocoMojo;
@@ -150,6 +215,57 @@
 				0F8FB94D1980175700F2A161 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F8FB95A1980175F00F2A161 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB9691980246100F2A161 /* CKRootVC.h */,
+				0F8FB96A1980246100F2A161 /* CKRootVC.m */,
+				0F8FB983198029AF00F2A161 /* CKMapVC.h */,
+				0F8FB984198029AF00F2A161 /* CKMapVC.m */,
+				0F8FB98919802A4600F2A161 /* CKMessageVC.h */,
+				0F8FB98A19802A4600F2A161 /* CKMessageVC.m */,
+				0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */,
+				0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0F8FB95B1980178100F2A161 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB96C198024BD00F2A161 /* CKUser.h */,
+				0F8FB96D198024BD00F2A161 /* CKUser.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0F8FB95F1980181600F2A161 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB96019801E8900F2A161 /* CKGitHubNetworkController.h */,
+				0F8FB96119801E8900F2A161 /* CKGitHubNetworkController.m */,
+				0F8FB96219801E8900F2A161 /* CKOAuthController.h */,
+				0F8FB96319801E8900F2A161 /* CKOAuthController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0F8FB96719801F7900F2A161 /* Organizational */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB96619801F7200F2A161 /* CKConstants.h */,
+			);
+			name = Organizational;
+			sourceTree = "<group>";
+		};
+		0F8FB96819801F8F00F2A161 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB93D1980175700F2A161 /* Images.xcassets */,
+			);
+			name = Media;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +316,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Richard Lichkus";
 				TargetAttributes = {
+					0F8FB9211980175700F2A161 = {
+						DevelopmentTeam = YW6R5GT9L6;
+					};
 					0F8FB9421980175700F2A161 = {
 						TestTargetID = 0F8FB9211980175700F2A161;
 					};
@@ -250,9 +369,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F8FB9361980175700F2A161 /* CKAppDelegate.m in Sources */,
-				0F8FB9321980175700F2A161 /* main.m in Sources */,
-				0F8FB93C1980175700F2A161 /* CKViewController.m in Sources */,
+				0FA18ADF198037F700CFDC8C /* main.m in Sources */,
+				0FA18ADD198037F200CFDC8C /* CKOAuthController.m in Sources */,
+				0FA18AD0198037DE00CFDC8C /* CKAppDelegate.m in Sources */,
+				0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */,
+				0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */,
+				0FA18AD7198037DE00CFDC8C /* CKMessageVC.m in Sources */,
+				0FA18AD9198037DE00CFDC8C /* CKMojoVC.m in Sources */,
+				0FA18ADB198037DE00CFDC8C /* CKGitHubNetworkController.m in Sources */,
+				0FA18ACE198037C300CFDC8C /* CKRootVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,10 +502,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LocoMojo/LocoMojo-Prefix.pch";
 				INFOPLIST_FILE = "LocoMojo/LocoMojo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -390,10 +522,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LocoMojo/LocoMojo-Prefix.pch";
 				INFOPLIST_FILE = "LocoMojo/LocoMojo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -457,6 +596,7 @@
 				0F8FB9561980175700F2A161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F8FB9571980175700F2A161 /* Build configuration list for PBXNativeTarget "LocoMojoTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +605,7 @@
 				0F8FB9591980175700F2A161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

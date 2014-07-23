@@ -7,12 +7,15 @@
 //
 
 #import "CKAppDelegate.h"
+#import <Parse/Parse.h>
 
 @implementation CKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [Parse setApplicationId:@"neTBf4cU4GNJB5Lg5YAW7CvbJt8z7XH1MoKgMDIj"
+                  clientKey:@"ehKzpjNpZQPgh7wfrwfzy8yGhrcsUAD4zSmRxovU"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     return YES;
 }
 							

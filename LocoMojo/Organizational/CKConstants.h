@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Richard Lichkus. All rights reserved.
 //
 
-#ifndef LocoMojo_CKConstants_h
-#define LocoMojo_CKConstants_h
 
-
-
-#endif
+typedef NS_ENUM (NSInteger, kAccountType){
+    kFacebook=0,
+    kTwitter,
+    kEmail
+};

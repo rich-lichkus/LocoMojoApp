@@ -8,6 +8,12 @@
 
 #import "CKUser.h"
 
+@interface CKUser()
+
+@end
+
 @implementation CKUser
+
+
 
 @end

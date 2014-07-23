@@ -10,4 +10,8 @@
 
 @interface CKUser : NSObject
 
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *iD;
+@property (nonatomic) kAccountType accountType;
+
 @end

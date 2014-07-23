@@ -10,40 +10,68 @@
 
 @interface CKMessageVC ()
 
+@property (weak, nonatomic) IBOutlet UITextView *txvMessage;
+
+- (IBAction)pressedBarButton:(id)sender;
+
 @end
 
 @implementation CKMessageVC
+
+#pragma mark - Instantiation
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
 
+#pragma mark - View
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
+
+#pragma mark - Target Actions
+
+- (IBAction)pressedBarButton:(id)sender {
+    UIBarButtonItem *barItem = (UIBarButtonItem*)sender;
+    
+    switch (barItem.tag) {
+        case 0: // Cancel
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+            break;
+        case 1: // Post
+        {
+            //TODO:
+            // Create post object, save to parse
+            // segue
+        }
+            break;
+    }
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+}
+
+#pragma mark - Memory
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end
