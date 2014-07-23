@@ -28,18 +28,24 @@
     return self;
 }
 
+#pragma mark - View
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 #pragma mark - Target Actions
 
 - (IBAction)pressedMojo:(id)sender {
     [self.delegate didPressMojo];
 }
 
-#pragma mark - View
-
-- (void)viewDidLoad
+#pragma mark - Navigation
+ 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super viewDidLoad];
-    
+
 }
 
 #pragma mark - Memory
@@ -49,15 +55,6 @@
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

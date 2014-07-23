@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKUser.h"
+#import "CKOAuthController.h"
+#import "CKFacebookNC.h"
+#import "CKTwitterNC.h"
 
 @interface CKAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) CKUser *currentUser;
+@property (strong, nonatomic) CKOAuthController *oAuthController;
+@property (strong, nonatomic) CKTwitterNC *twitterNC;
+@property (strong, nonatomic) CKFacebookNC *facebookNC;
 
 @end

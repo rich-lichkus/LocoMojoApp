@@ -8,37 +8,41 @@
 
 #import "CKAppDelegate.h"
 #import "CKOAuthController.h"
-//#import "CKGitHubRepo.h"
+#import <Parse/Parse.h>
 
-//#define APPLICATION_NAME @"iGitHub"
-//
 // ! Parse Dependent Format: //key=value!key=value...key=value?
 #define GENERIC_CALLBACK_URI @"igithub://web_service=%zd!call_back=%zd"
 #define GENERIC_ACCESS_KEY @"web_service=%zd!asset=%zd"
+
 //// GitHub
+//#define APPLICATION_NAME @"iGitHub"
 //#define GITHUB_OAUTH_URL  @"https://github.com/login/oauth/authorize?client_id=%@&redirect_uri=%@&scope=%@"
 //#define GITHUB_CLIENT_ID @"b7e10d79af8fd54aae59"
 //#define GITHUB_CLIENT_SECRET @"cda8f903365f93abe4f75c4d176591fdb4111895"
 //#define GITHUB_POST_TOKEN_URL @"https://github.com/login/oauth/access_token"
 
+//// Facebook
+
+//// Twitter
+
 @interface CKOAuthController () <NSURLSessionDelegate, NSURLSessionDataDelegate>
 
-//@property (weak, nonatomic) CKGitHubUser *weak_currentUser;
+@property (weak, nonatomic) CKUser *weak_currentUser;
 @property (strong, nonatomic) NSString *gitHubAccessToken;
 
 @end
 
 @implementation CKOAuthController
 
-//-(instancetype)initWithCurrentUser:(CKGitHubUser*)currentUser{
-//    self = [super init];
-//    if(self){
-//        self.weak_currentUser = currentUser;
-//    }
-//    return self;
-//}
+-(instancetype)initWithCurrentUser:(CKUser*)currentUser{
+    self = [super init];
+    if(self){
+        self.weak_currentUser = currentUser;
+    }
+    return self;
+}
 
--(void)authenticateUserWithWebService:(kAccountType)name{
+-(void)authenticateUserWithWebService:(kOAuthService)name{
     
     NSString *requestAuthenticationURL;
     BOOL authenticated = NO;
@@ -59,15 +63,11 @@
 //            }
 //        }
 //            break;
-        case kFacebook: {
+        case kFacebookOAuth: {
         
         }
             break;
-        case kTwitter: {
-        
-        }
-            break;
-        case kEmail: {
+        case kTwitterOAuth: {
         
         }
             break;
@@ -97,10 +97,6 @@
         }
             break;
         case kTwitter: {
-            
-        }
-            break;
-        case kEmail: {
             
         }
             break;

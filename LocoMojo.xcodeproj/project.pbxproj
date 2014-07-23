@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0BB66519805A3F00D1D12F /* PCLocoMojo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB66419805A3F00D1D12F /* PCLocoMojo.m */; };
+		0F0BB66819805EBA00D1D12F /* CKFacebookNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB66719805EBA00D1D12F /* CKFacebookNC.m */; };
+		0F0BB66B19805ECB00D1D12F /* CKTwitterNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB66A19805ECB00D1D12F /* CKTwitterNC.m */; };
 		0F261171198039BD007AD560 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F261170198039BD007AD560 /* Parse.framework */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9271980175700F2A161 /* CoreGraphics.framework */; };
@@ -51,6 +54,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F0BB66319805A3F00D1D12F /* PCLocoMojo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCLocoMojo.h; path = Media/PCLocoMojo.h; sourceTree = "<group>"; };
+		0F0BB66419805A3F00D1D12F /* PCLocoMojo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCLocoMojo.m; path = Media/PCLocoMojo.m; sourceTree = "<group>"; };
+		0F0BB66619805EBA00D1D12F /* CKFacebookNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKFacebookNC.h; path = Controllers/CKFacebookNC.h; sourceTree = "<group>"; };
+		0F0BB66719805EBA00D1D12F /* CKFacebookNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKFacebookNC.m; path = Controllers/CKFacebookNC.m; sourceTree = "<group>"; };
+		0F0BB66919805ECB00D1D12F /* CKTwitterNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKTwitterNC.h; path = Controllers/CKTwitterNC.h; sourceTree = "<group>"; };
+		0F0BB66A19805ECB00D1D12F /* CKTwitterNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKTwitterNC.m; path = Controllers/CKTwitterNC.m; sourceTree = "<group>"; };
 		0F261170198039BD007AD560 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9251980175700F2A161 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -248,6 +257,10 @@
 				0F8FB96119801E8900F2A161 /* CKGitHubNetworkController.m */,
 				0F8FB96219801E8900F2A161 /* CKOAuthController.h */,
 				0F8FB96319801E8900F2A161 /* CKOAuthController.m */,
+				0F0BB66619805EBA00D1D12F /* CKFacebookNC.h */,
+				0F0BB66719805EBA00D1D12F /* CKFacebookNC.m */,
+				0F0BB66919805ECB00D1D12F /* CKTwitterNC.h */,
+				0F0BB66A19805ECB00D1D12F /* CKTwitterNC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -263,6 +276,8 @@
 		0F8FB96819801F8F00F2A161 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				0F0BB66319805A3F00D1D12F /* PCLocoMojo.h */,
+				0F0BB66419805A3F00D1D12F /* PCLocoMojo.m */,
 				0F8FB93D1980175700F2A161 /* Images.xcassets */,
 			);
 			name = Media;
@@ -370,13 +385,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FA18ADF198037F700CFDC8C /* main.m in Sources */,
+				0F0BB66819805EBA00D1D12F /* CKFacebookNC.m in Sources */,
 				0FA18ADD198037F200CFDC8C /* CKOAuthController.m in Sources */,
 				0FA18AD0198037DE00CFDC8C /* CKAppDelegate.m in Sources */,
 				0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */,
 				0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */,
 				0FA18AD7198037DE00CFDC8C /* CKMessageVC.m in Sources */,
+				0F0BB66519805A3F00D1D12F /* PCLocoMojo.m in Sources */,
 				0FA18AD9198037DE00CFDC8C /* CKMojoVC.m in Sources */,
 				0FA18ADB198037DE00CFDC8C /* CKGitHubNetworkController.m in Sources */,
+				0F0BB66B19805ECB00D1D12F /* CKTwitterNC.m in Sources */,
 				0FA18ACE198037C300CFDC8C /* CKRootVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

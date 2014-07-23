@@ -14,6 +14,12 @@
 
 @implementation CKUser
 
-
+-(void)updateUserWithPFUser:(PFUser *)pfUser{
+    self.name = pfUser[@"name"];
+    self.username = pfUser.username;
+    self.userId = pfUser.objectId;
+    self.accountType = (kAccountType)pfUser[@"account_type"];
+    self.email = pfUser.email;
+}
 
 @end

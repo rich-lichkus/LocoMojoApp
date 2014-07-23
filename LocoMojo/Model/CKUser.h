@@ -7,11 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface CKUser : NSObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *iD;
+@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *username;
 @property (nonatomic) kAccountType accountType;
+@property (strong, nonatomic) NSString *email;
+
+-(void)updateUserWithPFUser:(PFUser*)pfUser;
+//TODO:-(void)updateUserWithFBUser:(*)fbUser;
+//TODO:-(void)updateUserWithTWUser:(*)twUser;
 
 @end

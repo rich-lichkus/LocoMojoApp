@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "CKGitHubUser.h"
+#import "CKUser.h"
 
 @protocol CKOAuthControllerDataDelegate <NSObject>
 
@@ -19,9 +19,9 @@
 
 @property (nonatomic, unsafe_unretained) id<CKOAuthControllerDataDelegate> dataDelegate;
 
-//-(instancetype)initWithCurrentUser:(CKGitHubUser*)currentUser;
+-(instancetype)initWithCurrentUser:(CKUser*)currentUser;
 
--(void)authenticateUserWithWebService:(kAccountType)name;
+-(void)authenticateUserWithWebService:(kOAuthService)name;
 -(void)processWebServiceCallback:(NSURL*)url;
 -(NSString*)gitHubAccessToken;
 

@@ -17,3 +17,14 @@ typedef NS_ENUM (NSInteger, kDirection){
     kLeft=0,
     kRight
 };
+
+typedef NS_ENUM (NSInteger, kLoginElementTags){
+    kLoginUsernameTxtTag = 0,
+    kLoginPasswordTxtTag
+};
+
+typedef NS_ENUM (NSInteger, kOAuthService){
+    kFacebookOAuth=0,
+    kTwitterOAuth
+};
+

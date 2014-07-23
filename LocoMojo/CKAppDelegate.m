@@ -16,9 +16,20 @@
     [Parse setApplicationId:@"neTBf4cU4GNJB5Lg5YAW7CvbJt8z7XH1MoKgMDIj"
                   clientKey:@"ehKzpjNpZQPgh7wfrwfzy8yGhrcsUAD4zSmRxovU"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    self.currentUser = [CKUser new];
+    self.oAuthController = [[CKOAuthController alloc] initWithCurrentUser:self.currentUser];
+    self.twitterNC = [CKTwitterNC new];
+    self.facebookNC = [CKFacebookNC new];
+    
     return YES;
 }
-							
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+
+    return YES;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
