@@ -12,3 +12,8 @@ typedef NS_ENUM (NSInteger, kAccountType){
     kTwitter,
     kEmail
 };
+
+typedef NS_ENUM (NSInteger, kDirection){
+    kLeft=0,
+    kRight
+};

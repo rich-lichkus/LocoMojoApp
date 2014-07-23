@@ -11,7 +11,7 @@
 #import "CKMessageVC.h"
 #import "CKMojoVC.h"
 
-@interface CKRootVC ()
+@interface CKRootVC () <CKMojoVCDelegate,CKMapVCDelegate>
 
 @property (strong, nonatomic) CKMapVC *mapVC;
 @property (strong, nonatomic) CKMessageVC *messageVC;
@@ -47,11 +47,13 @@
     [self addChildViewController:self.mojoVC];
     [self.mojoVC didMoveToParentViewController:self];
     [self.view addSubview:self.mojoVC.view];
+    self.mojoVC.delegate = self;
 
     // Map VC
     [self addChildViewController:self.mapVC];
     [self.mapVC didMoveToParentViewController:self];
     [self.view addSubview:self.mapVC.view];
+    self.mapVC.delegate = self;
 }
 
 /*
@@ -64,6 +66,31 @@
  // Pass the selected object to the new view controller.
  }
  */
+#pragma mark - Delegation
+
+-(void)didPressMap{
+    [self slideViews:kRight];
+}
+
+-(void)didPressMojo{
+    [self slideViews:kLeft];
+}
+
+#pragma mark - Animation
+
+-(void)slideViews:(kDirection)direction{
+    
+    // kRight is 1, =+width
+    CGFloat width = self.view.frame.size.width;
+    CGFloat dx = direction ? width : -width;
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.mojoVC.view.frame = CGRectOffset(self.mojoVC.view.frame, dx, 0);
+        self.mapVC.view.frame = CGRectOffset(self.mapVC.view.frame, dx, 0);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 #pragma mark - Lazy
 

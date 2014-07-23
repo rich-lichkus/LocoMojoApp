@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CKMapVCDelegate <NSObject>
+
+-(void)didPressMojo;
+
+@end
+
 @interface CKMapVC : UIViewController
+
+@property (strong, nonatomic) id<CKMapVCDelegate> delegate;
 
 @end

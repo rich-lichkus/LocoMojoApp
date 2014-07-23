@@ -56,6 +56,19 @@
     return cell;
 }
 
+#pragma mark - Target Actions
+
+-(IBAction)pressedBarButton:(id)sender{
+    UIBarButtonItem *button = (UIBarButtonItem*)sender;
+    switch (button.tag) {
+        case 0:
+        {
+            [self.delegate didPressMap];
+        }
+            break;
+    }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

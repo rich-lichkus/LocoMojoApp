@@ -7,12 +7,17 @@
 //
 
 #import "CKMapVC.h"
+#import <MapKit/MapKit.h>
 
 @interface CKMapVC ()
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
 @implementation CKMapVC
+
+#pragma mark - Intialization
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,11 +28,21 @@
     return self;
 }
 
+#pragma mark - Target Actions
+
+- (IBAction)pressedMojo:(id)sender {
+    [self.delegate didPressMojo];
+}
+
+#pragma mark - View
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
 }
+
+#pragma mark - Memory
 
 - (void)didReceiveMemoryWarning
 {

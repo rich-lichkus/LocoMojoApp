@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CKMojoVC : UIViewController
+@protocol CKMojoVCDelegate <NSObject>
+
+-(void)didPressMap;
 
 @end
+
+
+@interface CKMojoVC : UIViewController
+
+@property (nonatomic, unsafe_unretained) id<CKMojoVCDelegate> delegate;
+
+@end
+
