@@ -20,5 +20,7 @@
 
 @property (nonatomic, unsafe_unretained) id<CKMojoVCDelegate> delegate;
 
+-(void)updateOpenPosts:(NSMutableArray*)posts;
+
 @end
 

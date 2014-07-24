@@ -13,6 +13,7 @@
 		0F0BB66F19817C8B00D1D12F /* CKCircleMapOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB66E19817C8B00D1D12F /* CKCircleMapOverlay.m */; };
 		0F0BB67219817FD300D1D12F /* CKCircleOverlayRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB67119817FD300D1D12F /* CKCircleOverlayRender.m */; };
 		0F0BB6751981831200D1D12F /* CKCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB6741981831200D1D12F /* CKCircle.m */; };
+		0F0BB67B1981AD9D00D1D12F /* CKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB67A1981AD9D00D1D12F /* CKPost.m */; };
 		0F261171198039BD007AD560 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F261170198039BD007AD560 /* Parse.framework */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9271980175700F2A161 /* CoreGraphics.framework */; };
@@ -69,6 +70,8 @@
 		0F0BB67119817FD300D1D12F /* CKCircleOverlayRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKCircleOverlayRender.m; path = "View Controllers/Map/CKCircleOverlayRender.m"; sourceTree = "<group>"; };
 		0F0BB6731981831200D1D12F /* CKCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKCircle.h; path = "View Controllers/Map/CKCircle.h"; sourceTree = "<group>"; };
 		0F0BB6741981831200D1D12F /* CKCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKCircle.m; path = "View Controllers/Map/CKCircle.m"; sourceTree = "<group>"; };
+		0F0BB6791981AD9D00D1D12F /* CKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKPost.h; path = Model/CKPost.h; sourceTree = "<group>"; };
+		0F0BB67A1981AD9D00D1D12F /* CKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKPost.m; path = Model/CKPost.m; sourceTree = "<group>"; };
 		0F261170198039BD007AD560 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9251980175700F2A161 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -162,6 +165,34 @@
 			name = Map;
 			sourceTree = "<group>";
 		};
+		0F0BB6761981942E00D1D12F /* MapVC */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB983198029AF00F2A161 /* CKMapVC.h */,
+				0F8FB984198029AF00F2A161 /* CKMapVC.m */,
+				0F0BB66C19817C3B00D1D12F /* Map */,
+			);
+			name = MapVC;
+			sourceTree = "<group>";
+		};
+		0F0BB6771981943900D1D12F /* MessageVC */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB98919802A4600F2A161 /* CKMessageVC.h */,
+				0F8FB98A19802A4600F2A161 /* CKMessageVC.m */,
+			);
+			name = MessageVC;
+			sourceTree = "<group>";
+		};
+		0F0BB6781981944300D1D12F /* MojoVC */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */,
+				0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */,
+			);
+			name = MojoVC;
+			sourceTree = "<group>";
+		};
 		0F8FB9191980175700F2A161 = {
 			isa = PBXGroup;
 			children = (
@@ -253,13 +284,9 @@
 			children = (
 				0F8FB9691980246100F2A161 /* CKRootVC.h */,
 				0F8FB96A1980246100F2A161 /* CKRootVC.m */,
-				0F8FB983198029AF00F2A161 /* CKMapVC.h */,
-				0F8FB984198029AF00F2A161 /* CKMapVC.m */,
-				0F0BB66C19817C3B00D1D12F /* Map */,
-				0F8FB98919802A4600F2A161 /* CKMessageVC.h */,
-				0F8FB98A19802A4600F2A161 /* CKMessageVC.m */,
-				0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */,
-				0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */,
+				0F0BB6781981944300D1D12F /* MojoVC */,
+				0F0BB6761981942E00D1D12F /* MapVC */,
+				0F0BB6771981943900D1D12F /* MessageVC */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -269,6 +296,8 @@
 			children = (
 				0F8FB96C198024BD00F2A161 /* CKUser.h */,
 				0F8FB96D198024BD00F2A161 /* CKUser.m */,
+				0F0BB6791981AD9D00D1D12F /* CKPost.h */,
+				0F0BB67A1981AD9D00D1D12F /* CKPost.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -414,6 +443,7 @@
 				0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */,
 				0F0BB6751981831200D1D12F /* CKCircle.m in Sources */,
 				0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */,
+				0F0BB67B1981AD9D00D1D12F /* CKPost.m in Sources */,
 				0FA18AD7198037DE00CFDC8C /* CKMessageVC.m in Sources */,
 				0F0BB66519805A3F00D1D12F /* PCLocoMojo.m in Sources */,
 				0FA18AD9198037DE00CFDC8C /* CKMojoVC.m in Sources */,

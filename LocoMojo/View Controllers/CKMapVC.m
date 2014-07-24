@@ -11,8 +11,11 @@
 #import "CKCircleMapOverlay.h"
 #import "CKCircleOverlayRender.h"
 #import "PCLocoMojo.h"
+#import <Parse/Parse.h>
 
 @interface CKMapVC () <MKMapViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *visiblePosts;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -56,13 +59,19 @@
 #pragma mark - Map
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-    CKCircle *circle = [[CKCircle alloc] initWith:self.mapView.centerCoordinate boundingRect:self.mapView.visibleMapRect];
+    
+    [self.mapView removeOverlays:self.mapView.overlays];
+    CKCircle *circle = [[CKCircle alloc] initWith:self.mapView.centerCoordinate
+                                     boundingRect:MKMapRectMake(self.mapView.visibleMapRect.origin.x-10,
+                                                                self.mapView.visibleMapRect.origin.y-10,
+                                                                self.mapView.visibleMapRect.size.width+10,
+                                                                self.mapView.visibleMapRect.size.height+10)];
     [self.mapView addOverlay:[[CKCircleMapOverlay alloc] initWith:circle]];
 }
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay{
     if([overlay isKindOfClass:CKCircleMapOverlay.class]) {
-        UIImage *circleOverlayImage = [PCLocoMojo imageOfCircleOverlay];
+        UIImage *circleOverlayImage = [PCLocoMojo imageOfMapMask];
         CKCircleOverlayRender *overlayRender = [[CKCircleOverlayRender alloc] initWithOverlay:overlay overlayImage:circleOverlayImage];
         return overlayRender;
     }
@@ -91,11 +100,26 @@
     [self.delegate didPressMojo];
 }
 
+#pragma mark - Methods
+
+-(void)updateVisiblePosts:(NSMutableArray *)posts{
+    self.visiblePosts = posts;
+}
+
 #pragma mark - Navigation
  
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 
+}
+
+#pragma mark - Lazy
+
+-(NSMutableArray*)visiblePosts{
+    if(!_visiblePosts){
+        _visiblePosts = [[NSMutableArray alloc] init];
+    }
+    return _visiblePosts;
 }
 
 #pragma mark - Memory

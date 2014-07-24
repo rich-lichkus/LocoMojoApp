@@ -8,8 +8,11 @@
 
 #import "CKMojoVC.h"
 #import "CKMessageVC.h"
+#import "CKPost.h"
 
 @interface CKMojoVC () <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *openPosts;
 
 @property (weak, nonatomic) IBOutlet UITableView *tblFeed;
 
@@ -47,14 +50,16 @@
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.openPosts.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mojoCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = @"Post";
+    CKPost *post = self.openPosts[indexPath.row];
+    cell.textLabel.text = post.message;
+    cell.detailTextLabel.text = post.user.name;
     return cell;
 }
 
@@ -76,11 +81,26 @@
     }
 }
 
+#pragma mark - Methods
+-(void)updateOpenPosts:(NSMutableArray *)posts{
+    _openPosts = posts;
+    [self.tblFeed reloadData];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 
+}
+
+#pragma mark - Lazy
+
+-(NSMutableArray*)openPosts{
+    if(!_openPosts){
+        _openPosts = [[NSMutableArray alloc] init];
+    }
+    return _openPosts;
 }
 
 #pragma mark - Memory

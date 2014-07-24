@@ -18,4 +18,6 @@
 
 @property (strong, nonatomic) id<CKMapVCDelegate> delegate;
 
+-(void)updateVisiblePosts:(NSMutableArray*)posts;
+
 @end

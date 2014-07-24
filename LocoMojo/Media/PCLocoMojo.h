@@ -22,6 +22,7 @@
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* loginTwitterTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* facebookLoginTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* circleOverlayTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* mapMaskTargets;
 
 // Colors
 + (UIColor*)loginBlueColor2;
@@ -36,6 +37,7 @@
 + (void)drawLoginTwitter;
 + (void)drawFacebookLogin;
 + (void)drawCircleOverlay;
++ (void)drawMapMask;
 
 // Generated Images
 + (UIImage*)imageOfLoginDisabled;
@@ -43,6 +45,7 @@
 + (UIImage*)imageOfLoginTwitter;
 + (UIImage*)imageOfFacebookLogin;
 + (UIImage*)imageOfCircleOverlay;
++ (UIImage*)imageOfMapMask;
 
 @end
 

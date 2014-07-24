@@ -25,6 +25,7 @@ static UIImage* _imageOfLoginNormal = nil;
 static UIImage* _imageOfLoginTwitter = nil;
 static UIImage* _imageOfFacebookLogin = nil;
 static UIImage* _imageOfCircleOverlay = nil;
+static UIImage* _imageOfMapMask = nil;
 
 #pragma mark Initialization
 
@@ -120,6 +121,30 @@ static UIImage* _imageOfCircleOverlay = nil;
     CGContextRestoreGState(context);
 }
 
++ (void)drawMapMask;
+{
+    //// Color Declarations
+    UIColor* color = [UIColor colorWithRed: 0.5 green: 0.5 blue: 0.5 alpha: 0.459];
+
+    //// Bezier Drawing
+    UIBezierPath* bezierPath = UIBezierPath.bezierPath;
+    [bezierPath moveToPoint: CGPointMake(191.45, 406.95)];
+    [bezierPath addCurveToPoint: CGPointMake(191.45, 665.05) controlPoint1: CGPointMake(120.18, 478.22) controlPoint2: CGPointMake(120.18, 593.78)];
+    [bezierPath addCurveToPoint: CGPointMake(449.55, 665.05) controlPoint1: CGPointMake(262.72, 736.32) controlPoint2: CGPointMake(378.28, 736.32)];
+    [bezierPath addCurveToPoint: CGPointMake(449.55, 406.95) controlPoint1: CGPointMake(520.82, 593.78) controlPoint2: CGPointMake(520.82, 478.22)];
+    [bezierPath addCurveToPoint: CGPointMake(191.45, 406.95) controlPoint1: CGPointMake(378.28, 335.68) controlPoint2: CGPointMake(262.72, 335.68)];
+    [bezierPath closePath];
+    [bezierPath moveToPoint: CGPointMake(640, 0)];
+    [bezierPath addCurveToPoint: CGPointMake(640, 1072) controlPoint1: CGPointMake(640, 0) controlPoint2: CGPointMake(640, 1072)];
+    [bezierPath addLineToPoint: CGPointMake(0, 1072)];
+    [bezierPath addLineToPoint: CGPointMake(0, 0)];
+    [bezierPath addLineToPoint: CGPointMake(640, 0)];
+    [bezierPath addLineToPoint: CGPointMake(640, 0)];
+    [bezierPath closePath];
+    [color setFill];
+    [bezierPath fill];
+}
+
 #pragma mark Generated Images
 
 + (UIImage*)imageOfLoginDisabled;
@@ -187,6 +212,19 @@ static UIImage* _imageOfCircleOverlay = nil;
     return _imageOfCircleOverlay;
 }
 
++ (UIImage*)imageOfMapMask;
+{
+    if (_imageOfMapMask)
+        return _imageOfMapMask;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(640, 1072), NO, 0.0f);
+    [PCLocoMojo drawMapMask];
+    _imageOfMapMask = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfMapMask;
+}
+
 #pragma mark Customization Infrastructure
 
 - (void)setLoginDisabledTargets: (NSArray*)loginDisabledTargets
@@ -227,6 +265,14 @@ static UIImage* _imageOfCircleOverlay = nil;
 
     for (id target in self.circleOverlayTargets)
         [target setImage: PCLocoMojo.imageOfCircleOverlay];
+}
+
+- (void)setMapMaskTargets: (NSArray*)mapMaskTargets
+{
+    _mapMaskTargets = mapMaskTargets;
+
+    for (id target in self.mapMaskTargets)
+        [target setImage: PCLocoMojo.imageOfMapMask];
 }
 
 
