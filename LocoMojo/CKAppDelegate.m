@@ -21,6 +21,8 @@
     self.oAuthController = [[CKOAuthController alloc] initWithCurrentUser:self.currentUser];
     self.twitterNC = [CKTwitterNC new];
     self.facebookNC = [CKFacebookNC new];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     
     return YES;
 }

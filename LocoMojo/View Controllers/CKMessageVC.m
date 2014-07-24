@@ -8,8 +8,9 @@
 
 #import "CKMessageVC.h"
 
-@interface CKMessageVC ()
+@interface CKMessageVC () <UITextViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *lblGPSPosition;
 @property (weak, nonatomic) IBOutlet UITextView *txvMessage;
 
 - (IBAction)pressedBarButton:(id)sender;
@@ -34,6 +35,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self configureUIElements];
+}
+
+#pragma mark - Configuration
+
+-(void)configureUIElements{
+    // TextView
+    [self.txvMessage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [self.txvMessage.layer setBorderWidth:2];
+    self.txvMessage.delegate = self;
+}
+
+#pragma mark - Methods
+
+-(void)setTextForGPSLabel:(CLLocation *)location{
+    self.lblGPSPosition.text = [NSString stringWithFormat:@" GPS(%.6f, %.6f)",location.coordinate.latitude, location.coordinate.longitude];
 }
 
 #pragma mark - Target Actions
@@ -44,17 +62,18 @@
     switch (barItem.tag) {
         case 0: // Cancel
         {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.delegate didPressCancel];
         }
             break;
         case 1: // Post
         {
-            //TODO:
-            // Create post object, save to parse
-            // segue
+            [self.delegate postMessage:self.txvMessage.text];
         }
             break;
     }
+    
+    [self.txvMessage resignFirstResponder];
+    self.txvMessage.text = @"";
 }
 
 #pragma mark - Navigation

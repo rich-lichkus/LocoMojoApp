@@ -15,7 +15,9 @@ typedef NS_ENUM (NSInteger, kAccountType){
 
 typedef NS_ENUM (NSInteger, kDirection){
     kLeft=0,
-    kRight
+    kRight,
+    kUp,
+    kDown
 };
 
 typedef NS_ENUM (NSInteger, kLoginElementTags){

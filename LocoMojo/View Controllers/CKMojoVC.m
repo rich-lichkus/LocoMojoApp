@@ -7,8 +7,10 @@
 //
 
 #import "CKMojoVC.h"
+#import "CKMessageVC.h"
 
 @interface CKMojoVC () <UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tblFeed;
 
 @end
@@ -64,6 +66,11 @@
         case 0:
         {
             [self.delegate didPressMap];
+        }
+            break;
+        case 1:
+        {
+            [self.delegate didPressNote];
         }
             break;
     }

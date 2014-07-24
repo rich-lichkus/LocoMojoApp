@@ -21,4 +21,6 @@
 @property (strong, nonatomic) CKTwitterNC *twitterNC;
 @property (strong, nonatomic) CKFacebookNC *facebookNC;
 
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
 @end

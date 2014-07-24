@@ -19,11 +19,14 @@
 #define UIBUTTON_HEIGHT 40
 #define TEXTFIELD_PADDING 10
 
-@interface CKRootVC () <CKMojoVCDelegate,CKMapVCDelegate, UITextFieldDelegate>
+#define UPPER_BOUND_INTERVAL_SEC 15.0
+
+@interface CKRootVC () <CKMojoVCDelegate,CKMapVCDelegate, UITextFieldDelegate, CLLocationManagerDelegate, CKMessageVCDelegate>
 
 @property (strong, nonatomic) CKMapVC *mapVC;
 @property (strong, nonatomic) CKMessageVC *messageVC;
 @property (strong, nonatomic) CKMojoVC *mojoVC;
+@property (strong, nonatomic) CLLocation *lastLocation;
 
 // Weak
 @property (weak, nonatomic) CKAppDelegate *weak_appDelegate;
@@ -81,6 +84,12 @@
     [self.mapVC didMoveToParentViewController:self];
     [self.view addSubview:self.mapVC.view];
     self.mapVC.delegate = self;
+    
+    // Messages VC
+    [self addChildViewController:self.messageVC];
+    [self.messageVC didMoveToParentViewController:self];
+    [self.view addSubview:self.messageVC.view];
+    self.messageVC.delegate = self;
 }
 
 -(void)configureLockView{
@@ -159,6 +168,10 @@
     self.weak_appDelegate = (CKAppDelegate *)[UIApplication sharedApplication].delegate;
     self.weak_currentUser = self.weak_appDelegate.currentUser;
     
+    // Core Location
+    self.weak_appDelegate.locationManager.delegate = self;
+    [self.weak_appDelegate.locationManager startUpdatingLocation];
+
     // OAuth Controller
     self.weak_oAuthController = self.weak_appDelegate.oAuthController;
     
@@ -180,6 +193,7 @@
                 [self unlockScreen:YES];
             } else {
                 // TODO: Handle parse error and/or display
+                NSAssert(error, @"Error: Parse email login.");
                 NSLog(@"%@",error.localizedDescription);
             }
         }];
@@ -207,14 +221,42 @@
     }
 }
 
-#pragma mark - Delegation
+#pragma mark - Mojo Delegate
 
 -(void)didPressMap{
     [self slideViews:kRight];
 }
 
+-(void)didPressNote{
+    [self slideMessages:kUp];
+}
+
+#pragma mark - Map Delegate
+
 -(void)didPressMojo{
     [self slideViews:kLeft];
+}
+
+#pragma mark - Message Delegate
+
+-(void)didPressCancel{
+    [self slideMessages:kDown];
+}
+
+-(void)postMessage:(NSString *)message{
+    [self parsePostMessage:message];
+}
+
+#pragma mark - Core Location Delegate
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    CLLocation *lastLocation = [locations lastObject];
+    NSDate* eventDate = lastLocation.timestamp;
+    
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (abs(howRecent) < UPPER_BOUND_INTERVAL_SEC) {
+        self.lastLocation = lastLocation;
+        [self.messageVC setTextForGPSLabel:self.lastLocation];
+    }
 }
 
 #pragma mark - Animation
@@ -233,6 +275,19 @@
     }];
 }
 
+-(void)slideMessages:(kDirection)direction{
+    [self.view bringSubviewToFront:self.messageVC.view];
+    // kUp is 2, =+height
+    CGFloat height = self.view.frame.size.height;
+    CGFloat dy = direction-2 ? height : -height;
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.messageVC.view.frame = CGRectOffset(self.messageVC.view.frame, 0, dy);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 -(void)unlockScreen:(BOOL)authenticated{
     int halfScreen = self.view.frame.size.height*.5;
     int dy = authenticated ? -halfScreen : halfScreen;
@@ -245,6 +300,21 @@
     }];
 }
 
+#pragma mark - Parse
+
+-(void)parsePostMessage:(NSString*)message{
+    PFObject *pfMessage = [PFObject objectWithClassName:@"post"];
+    pfMessage[@"messageString"] = message;
+    pfMessage[@"creator"] = [PFUser currentUser];
+    PFGeoPoint *pfLocation = [PFGeoPoint geoPointWithLocation:self.lastLocation];
+    pfMessage[@"location"] = pfLocation;
+    [pfMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error){
+            NSAssert(error, @"Error saving post.");
+            NSLog(@"%@",error);
+        }
+    }];
+}
 
 #pragma mark - Navigation
 
@@ -269,6 +339,14 @@
         _mojoVC.view.frame = self.view.frame;
     }
     return _mojoVC;
+}
+
+-(CKMessageVC*)messageVC{
+    if(!_messageVC){
+        _messageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"messageVC"];
+        _messageVC.view.frame = CGRectOffset(self.view.frame,0,self.view.frame.size.height);
+    }
+    return _messageVC;
 }
 
 #pragma mark - Memory

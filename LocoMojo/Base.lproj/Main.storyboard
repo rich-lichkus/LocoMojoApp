@@ -104,9 +104,9 @@
                                                 <action selector="pressedBarButton:" destination="46n-lH-Q5g" id="MRt-fB-9pc"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Note" id="q6L-5P-q2N">
+                                        <barButtonItem key="rightBarButtonItem" tag="1" title="Note" id="q6L-5P-q2N">
                                             <connections>
-                                                <segue destination="gbR-Ad-Nil" kind="modal" id="Fgx-gI-aoL"/>
+                                                <action selector="pressedBarButton:" destination="46n-lH-Q5g" id="Jl3-yY-jsh"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -136,10 +136,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vTT-G4-Bjl">
-                                <rect key="frame" x="0.0" y="54" width="320" height="279"/>
+                                <rect key="frame" x="3" y="68" width="314" height="229"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -147,7 +147,7 @@
                                 <rect key="frame" x="0.0" y="10" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Mojo Message" id="dUY-NN-OcT">
+                                    <navigationItem title="New Message" id="dUY-NN-OcT">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="cZV-uX-hCl">
                                             <connections>
                                                 <action selector="pressedBarButton:" destination="gbR-Ad-Nil" id="MOE-EH-Oed"/>
@@ -161,10 +161,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acr-j3-QNi">
+                                <rect key="frame" x="8" y="68" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GPS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8E-ZD-E9N">
+                                <rect key="frame" x="20" y="311" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="lblGPSPosition" destination="N8E-ZD-E9N" id="UjA-CM-Fff"/>
                         <outlet property="txvMessage" destination="vTT-G4-Bjl" id="gGb-VH-zew"/>
                     </connections>
                 </viewController>

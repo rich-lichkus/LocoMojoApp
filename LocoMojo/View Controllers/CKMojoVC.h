@@ -11,6 +11,7 @@
 @protocol CKMojoVCDelegate <NSObject>
 
 -(void)didPressMap;
+-(void)didPressNote;
 
 @end
 

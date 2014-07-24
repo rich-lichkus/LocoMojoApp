@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+
+@protocol CKMessageVCDelegate <NSObject>
+
+-(void)postMessage:(NSString*)message;
+-(void)didPressCancel;
+
+@end
 
 @interface CKMessageVC : UIViewController
+
+@property (nonatomic, unsafe_unretained) id<CKMessageVCDelegate> delegate;
+
+-(void)setTextForGPSLabel:(CLLocation*)location;
 
 @end
