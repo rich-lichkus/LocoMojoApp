@@ -13,11 +13,10 @@
 @synthesize coordinate;
 @synthesize boundingMapRect;
 
-- (instancetype)initWith:(CKCircle*)circle{
+- (instancetype)initWith:(MKCircle*)circle{
     self = [super init];
     if (self) {
-        boundingMapRect = circle.overlayBoundingMapRect;
-        coordinate = circle.midCoordinate;
+        self.circle = circle;
     }
     return self;
 }

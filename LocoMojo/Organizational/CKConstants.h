@@ -30,3 +30,7 @@ typedef NS_ENUM (NSInteger, kOAuthService){
     kTwitterOAuth
 };
 
+typedef NS_ENUM (NSInteger, kPinType){
+    kVisible=0,
+    kReadable
+};

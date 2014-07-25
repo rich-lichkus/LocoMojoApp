@@ -22,10 +22,12 @@
 #define UPPER_BOUND_INTERVAL_SEC 60.0
 #define REGION_SIZE 10       // Kilo
 #define REGION_EDGE_BUFFER 2 // Kilo
-#define VISIBLE_REGION 1000  // Meters
-#define READABLE_REGION 250  // Meters
+#define VISIBLE_REGION 2000  // Meters
+#define READABLE_REGION 150  // Meters
 
 @interface CKRootVC () <CKMojoVCDelegate,CKMapVCDelegate, UITextFieldDelegate, CLLocationManagerDelegate, CKMessageVCDelegate>
+
+@property (nonatomic) BOOL regionalPostsLoaded;
 
 @property (strong, nonatomic) CKMapVC *mapVC;
 @property (strong, nonatomic) CKMessageVC *messageVC;
@@ -75,7 +77,7 @@
     
     [self configureLockView];
     
-    self.lastLocationDate = [NSDate date];
+    self.regionalPostsLoaded = NO;
 }
 
 #pragma mark - Configuration
@@ -257,13 +259,9 @@
 #pragma mark - Core Location Delegate
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *lastLocation = [locations lastObject];
-    
-    NSTimeInterval howRecent = [self.lastLocationDate timeIntervalSinceNow];
-    if (abs(howRecent) > 30) {
-        self.lastLocationDate = lastLocation.timestamp;
-        self.lastLocation = lastLocation;
-        [self updatePostMessages:lastLocation];
-    }
+    self.lastLocationDate = lastLocation.timestamp;
+    self.lastLocation = lastLocation;
+    [self updatePostMessages:lastLocation];
     [self.messageVC setTextForGPSLabel:self.lastLocation];
 }
 
@@ -330,37 +328,43 @@
 -(void)updatePostMessages:(CLLocation*)userLocation{
     
     // If no regional posts or close to region's edge => Get new regional posts
-    if(!self.weak_currentUser.regionalPosts || [self.weak_currentUser.regionalLocation distanceFromLocation:userLocation] > REGION_SIZE-REGION_EDGE_BUFFER){
-    
+    NSLog(@"should update parse?");
+    if(!self.regionalPostsLoaded || [self.weak_currentUser.regionalLocation distanceFromLocation:userLocation] > REGION_SIZE-REGION_EDGE_BUFFER){
+        self.regionalPostsLoaded = YES;
         PFQuery *geoQuery = [PFQuery queryWithClassName:@"post"];
         geoQuery.limit = 100;
         [geoQuery includeKey:@"creator"];
         [geoQuery orderByAscending:@"createdAt"];
         [geoQuery  whereKey:@"location" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:userLocation.coordinate.latitude
                                                                             longitude:userLocation.coordinate.longitude] withinKilometers:REGION_SIZE];
+        NSLog(@"Querying parse");
         [geoQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if(!error){
                 [self.weak_currentUser setRegionalPostsWithArrayofPfPosts:objects];
-                
-                NSMutableArray *visiblePosts = [[NSMutableArray alloc] init];
-                NSMutableArray *readablePosts = [[NSMutableArray alloc] init];
-                
-                for(CKPost *post in self.weak_currentUser.regionalPosts)
-                {
-                    double distance = [post.location distanceFromLocation:userLocation];
-                    if(distance <= READABLE_REGION){
-                        [readablePosts addObject:post];
-                        [visiblePosts addObject:post];
-                    } else if (distance <= VISIBLE_REGION){
-                        [visiblePosts addObject:post];
-                    }
-                }
-                
-                [self.mapVC updateVisiblePosts:[visiblePosts mutableCopy]];
-                [self.mojoVC updateOpenPosts:[readablePosts mutableCopy]];
+                [self updateFilteredPosts:userLocation];
             }
         }];
     }
+    [self updateFilteredPosts:userLocation];
+}
+
+-(void)updateFilteredPosts:(CLLocation*)userLocation{
+    NSMutableArray *visiblePosts = [[NSMutableArray alloc] init];
+    NSMutableArray *readablePosts = [[NSMutableArray alloc] init];
+    
+    for(CKPost *post in self.weak_currentUser.regionalPosts)
+    {
+        double distance = [post.location distanceFromLocation:userLocation];
+        if(distance <= READABLE_REGION){
+            [readablePosts addObject:post];
+        } else if (distance <= VISIBLE_REGION){
+            [visiblePosts addObject:post];
+        }
+    }
+    
+    [self.mapVC updateVisiblePosts:[visiblePosts mutableCopy]];
+    [self.mapVC updateOpenPosts:[readablePosts mutableCopy]];
+    [self.mojoVC updateOpenPosts:[readablePosts mutableCopy]];
 }
 
 #pragma mark - Navigation

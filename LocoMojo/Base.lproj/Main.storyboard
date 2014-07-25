@@ -56,10 +56,21 @@
                                 <rect key="frame" x="0.0" y="54" width="320" height="514"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UV6-xv-N8P" customClass="CKButtonLocation">
+                                <rect key="frame" x="20" y="508" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedLocation:" destination="oCY-ES-TKn" eventType="touchUpInside" id="bKm-8J-bJg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnLocation" destination="UV6-xv-N8P" id="mUU-N2-0TX"/>
                         <outlet property="mapView" destination="crP-cf-XYM" id="NxS-qN-x7t"/>
                     </connections>
                 </viewController>

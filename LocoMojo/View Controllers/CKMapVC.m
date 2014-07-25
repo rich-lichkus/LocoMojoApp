@@ -11,13 +11,20 @@
 #import "CKCircleMapOverlay.h"
 #import "CKCircleOverlayRender.h"
 #import "PCLocoMojo.h"
+#import "CKPost.h"
+#import "CKMapPin.h"
 #import <Parse/Parse.h>
+#import "CKButtonLocation.h"
+
+@class CKMapPin;
 
 @interface CKMapVC () <MKMapViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *visiblePosts;
+@property (strong, nonatomic) NSMutableArray *readablePosts;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet CKButtonLocation *btnLocation;
 
 @end
 
@@ -46,10 +53,9 @@
 #pragma mark - Configuration
 
 -(void)configureMapView{
+    [self.btnLocation toggleOn];
     self.mapView.delegate = self;
-    
     self.mapView.showsUserLocation = YES;
-    
     [self.mapView.userLocation addObserver:self
                                 forKeyPath:@"location"
                                    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
@@ -59,21 +65,35 @@
 #pragma mark - Map
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-    
     [self.mapView removeOverlays:self.mapView.overlays];
-    CKCircle *circle = [[CKCircle alloc] initWith:self.mapView.centerCoordinate
-                                     boundingRect:MKMapRectMake(self.mapView.visibleMapRect.origin.x-10,
-                                                                self.mapView.visibleMapRect.origin.y-10,
-                                                                self.mapView.visibleMapRect.size.width+10,
-                                                                self.mapView.visibleMapRect.size.height+10)];
-    [self.mapView addOverlay:[[CKCircleMapOverlay alloc] initWith:circle]];
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:userLocation.location.coordinate radius:150];
+    [self.mapView addOverlay:circle];
+    NSLog(@"added Overlay");
 }
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay{
-    if([overlay isKindOfClass:CKCircleMapOverlay.class]) {
-        UIImage *circleOverlayImage = [PCLocoMojo imageOfMapMask];
-        CKCircleOverlayRender *overlayRender = [[CKCircleOverlayRender alloc] initWithOverlay:overlay overlayImage:circleOverlayImage];
-        return overlayRender;
+    if([overlay isKindOfClass:MKCircle.class]) {
+        NSLog(@"render Overlay");
+        MKCircleRenderer *circleRender = [[MKCircleRenderer alloc] initWithCircle:overlay];
+        circleRender.fillColor = [UIColor colorWithRed:0.000 green:1.000 blue:0.502 alpha:0.500];
+        return circleRender;
+    }
+
+    return nil;
+}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if([annotation isKindOfClass:CKMapPin.class]){
+        MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+        switch (((CKMapPin*)annotation).pinType) {
+            case kReadable:
+                pin.pinColor = MKPinAnnotationColorGreen;
+                break;
+            case kVisible:
+                pin.pinColor = MKPinAnnotationColorRed;
+                break;
+        }
+        return pin;
     }
     return nil;
 }
@@ -82,16 +102,17 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    MKCoordinateRegion region;
-    region.center = self.mapView.userLocation.coordinate;
-    
-    MKCoordinateSpan span;
-    double delta = 0;
-    span.latitudeDelta  = delta;
-    span.longitudeDelta = delta;
-    region.span = span;
-    
-    [self.mapView setRegion:region animated:YES];
+    if(self.btnLocation.isOn){
+        MKCoordinateRegion region;
+        region.center = self.mapView.userLocation.coordinate;
+        
+        MKCoordinateSpan span;
+        span.latitudeDelta  = .005;
+        span.longitudeDelta = .005;
+        region.span = span;
+        
+        [self.mapView setRegion:region animated:YES];
+    }
 }
 
 #pragma mark - Target Actions
@@ -100,10 +121,25 @@
     [self.delegate didPressMojo];
 }
 
+- (IBAction)pressedLocation:(id)sender {
+    NSLog(@"pressed location");
+    [self.btnLocation toggleOn];
+}
+
 #pragma mark - Methods
 
 -(void)updateVisiblePosts:(NSMutableArray *)posts{
     self.visiblePosts = posts;
+    for(CKPost *post in posts){
+        [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate withPinType:kVisible]];
+    }
+}
+
+-(void)updateOpenPosts:(NSMutableArray *)posts{
+    self.readablePosts = posts;
+    for(CKPost *post in posts){
+        [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate withPinType:kReadable]];
+    }
 }
 
 #pragma mark - Navigation

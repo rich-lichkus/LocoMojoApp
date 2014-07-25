@@ -45,6 +45,8 @@
 		0FA18ADB198037DE00CFDC8C /* CKGitHubNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96119801E8900F2A161 /* CKGitHubNetworkController.m */; };
 		0FA18ADD198037F200CFDC8C /* CKOAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96319801E8900F2A161 /* CKOAuthController.m */; };
 		0FA18ADF198037F700CFDC8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9311980175700F2A161 /* main.m */; };
+		0FC8CB4D1981DB8D00D9DB19 /* CKMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC8CB4C1981DB8D00D9DB19 /* CKMapPin.m */; };
+		0FC8CB541982DA0700D9DB19 /* CKButtonLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC8CB531982DA0700D9DB19 /* CKButtonLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,10 @@
 		0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMojoVC.h; path = "View Controllers/CKMojoVC.h"; sourceTree = "<group>"; };
 		0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMojoVC.m; path = "View Controllers/CKMojoVC.m"; sourceTree = "<group>"; };
 		0F8FB98F19802D8500F2A161 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0FC8CB4B1981DB8D00D9DB19 /* CKMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMapPin.h; path = "View Controllers/Map/CKMapPin.h"; sourceTree = "<group>"; };
+		0FC8CB4C1981DB8D00D9DB19 /* CKMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMapPin.m; path = "View Controllers/Map/CKMapPin.m"; sourceTree = "<group>"; };
+		0FC8CB521982DA0700D9DB19 /* CKButtonLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKButtonLocation.h; path = "View Controllers/Map/CKButtonLocation.h"; sourceTree = "<group>"; };
+		0FC8CB531982DA0700D9DB19 /* CKButtonLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKButtonLocation.m; path = "View Controllers/Map/CKButtonLocation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,12 +161,16 @@
 		0F0BB66C19817C3B00D1D12F /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				0FC8CB521982DA0700D9DB19 /* CKButtonLocation.h */,
+				0FC8CB531982DA0700D9DB19 /* CKButtonLocation.m */,
 				0F0BB6731981831200D1D12F /* CKCircle.h */,
 				0F0BB6741981831200D1D12F /* CKCircle.m */,
 				0F0BB66D19817C8B00D1D12F /* CKCircleMapOverlay.h */,
 				0F0BB66E19817C8B00D1D12F /* CKCircleMapOverlay.m */,
 				0F0BB67019817FD300D1D12F /* CKCircleOverlayRender.h */,
 				0F0BB67119817FD300D1D12F /* CKCircleOverlayRender.m */,
+				0FC8CB4B1981DB8D00D9DB19 /* CKMapPin.h */,
+				0FC8CB4C1981DB8D00D9DB19 /* CKMapPin.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -441,6 +451,8 @@
 				0FA18ADD198037F200CFDC8C /* CKOAuthController.m in Sources */,
 				0FA18AD0198037DE00CFDC8C /* CKAppDelegate.m in Sources */,
 				0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */,
+				0FC8CB4D1981DB8D00D9DB19 /* CKMapPin.m in Sources */,
+				0FC8CB541982DA0700D9DB19 /* CKButtonLocation.m in Sources */,
 				0F0BB6751981831200D1D12F /* CKCircle.m in Sources */,
 				0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */,
 				0F0BB67B1981AD9D00D1D12F /* CKPost.m in Sources */,

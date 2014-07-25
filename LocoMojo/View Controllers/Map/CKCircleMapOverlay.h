@@ -13,6 +13,8 @@
 
 @interface CKCircleMapOverlay : NSObject <MKOverlay>
 
-- (instancetype)initWith:(CKCircle*)circle;
+@property (strong, nonatomic) MKCircle *circle;
+
+- (instancetype)initWith:(MKCircle*)circle;
 
 @end
