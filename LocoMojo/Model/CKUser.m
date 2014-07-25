@@ -49,6 +49,6 @@
 -(void)addRegionalPostWithPfPost:(PFObject*)pfPost{
     CKPost *post = [[CKPost alloc] initWithPfPost:pfPost];
     [self.regionalPosts addObject:post];
-}
+}    
 
 @end

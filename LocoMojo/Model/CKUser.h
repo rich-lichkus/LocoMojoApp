@@ -18,6 +18,7 @@
 @property (nonatomic) kAccountType accountType;
 @property (strong, nonatomic) NSString *email;
 
+@property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) CLLocation *regionalLocation;
 @property (strong, nonatomic) NSMutableArray *regionalPosts;
 

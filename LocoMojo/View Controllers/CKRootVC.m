@@ -259,6 +259,7 @@
 #pragma mark - Core Location Delegate
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *lastLocation = [locations lastObject];
+    self.weak_currentUser.lastLocation = lastLocation;
     self.lastLocationDate = lastLocation.timestamp;
     self.lastLocation = lastLocation;
     [self updatePostMessages:lastLocation];
@@ -322,6 +323,7 @@
         } else{
             [self slideViews:kRight];
             [self.weak_currentUser addRegionalPostWithPfPost:pfMessage];
+            [self updateFilteredPosts:self.weak_currentUser.lastLocation];
         }
     }];
 }
