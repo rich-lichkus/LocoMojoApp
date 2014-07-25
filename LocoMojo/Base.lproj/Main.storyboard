@@ -70,6 +70,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="bbiMojo" destination="OWK-pf-Xyl" id="6cu-Ay-xVi"/>
                         <outlet property="btnLocation" destination="UV6-xv-N8P" id="mUU-N2-0TX"/>
                         <outlet property="mapView" destination="crP-cf-XYM" id="NxS-qN-x7t"/>
                     </connections>
@@ -143,6 +144,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="bbiAddMessage" destination="q6L-5P-q2N" id="sQ6-oS-Fgb"/>
+                        <outlet property="bbiMap" destination="fed-Aw-iOq" id="iQy-Rd-339"/>
                         <outlet property="tblFeed" destination="cpc-uQ-Ky7" id="n6s-W5-qb4"/>
                     </connections>
                 </viewController>
@@ -175,12 +178,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="New Message" id="dUY-NN-OcT">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="cZV-uX-hCl">
+                                        <barButtonItem key="leftBarButtonItem" id="cZV-uX-hCl">
                                             <connections>
                                                 <action selector="pressedBarButton:" destination="gbR-Ad-Nil" id="MOE-EH-Oed"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" tag="1" title="Post" id="9Ov-nE-pOB">
+                                        <barButtonItem key="rightBarButtonItem" tag="1" id="9Ov-nE-pOB">
                                             <connections>
                                                 <action selector="pressedBarButton:" destination="gbR-Ad-Nil" id="7Ua-hf-UWd"/>
                                             </connections>
@@ -205,13 +208,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="bbiMojo" destination="cZV-uX-hCl" id="hr0-lY-pq6"/>
+                        <outlet property="bbiSend" destination="9Ov-nE-pOB" id="DiG-od-sQF"/>
                         <outlet property="lblGPSPosition" destination="N8E-ZD-E9N" id="UjA-CM-Fff"/>
                         <outlet property="txvMessage" destination="vTT-G4-Bjl" id="gGb-VH-zew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkM-x5-fZS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-272" y="726"/>
+            <point key="canvasLocation" x="97" y="59"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

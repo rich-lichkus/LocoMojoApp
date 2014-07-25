@@ -22,6 +22,11 @@
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* loginTwitterTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* facebookLoginTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* currentLocationTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* messageTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* mapIconTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* addTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* avatarTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* sendTargets;
 
 // Colors
 + (UIColor*)loginBlueColor2;
@@ -36,6 +41,11 @@
 + (void)drawLoginTwitter;
 + (void)drawFacebookLogin;
 + (void)drawCurrentLocationWithIsSelected: (BOOL)isSelected;
++ (void)drawMessage;
++ (void)drawMapIcon;
++ (void)drawAdd;
++ (void)drawAvatar;
++ (void)drawSend;
 
 // Generated Images
 + (UIImage*)imageOfLoginDisabled;
@@ -43,6 +53,11 @@
 + (UIImage*)imageOfLoginTwitter;
 + (UIImage*)imageOfFacebookLogin;
 + (UIImage*)imageOfCurrentLocationWithIsSelected: (BOOL)isSelected;
++ (UIImage*)imageOfMessage;
++ (UIImage*)imageOfMapIcon;
++ (UIImage*)imageOfAdd;
++ (UIImage*)imageOfAvatar;
++ (UIImage*)imageOfSend;
 
 @end
 

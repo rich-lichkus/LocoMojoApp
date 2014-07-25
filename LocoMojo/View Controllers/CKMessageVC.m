@@ -7,11 +7,14 @@
 //
 
 #import "CKMessageVC.h"
+#import "PCLocoMojo.h"
 
 @interface CKMessageVC () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblGPSPosition;
 @property (weak, nonatomic) IBOutlet UITextView *txvMessage;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiSend;
 
 - (IBAction)pressedBarButton:(id)sender;
 
@@ -46,6 +49,11 @@
     [self.txvMessage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [self.txvMessage.layer setBorderWidth:2];
     self.txvMessage.delegate = self;
+    
+    self.bbiMojo.image = [PCLocoMojo imageOfMessage];
+    self.bbiMojo.width = 40;
+    self.bbiSend.image = [PCLocoMojo imageOfSend];
+    self.bbiSend.width = 40;
 }
 
 #pragma mark - Methods
@@ -67,7 +75,9 @@
             break;
         case 1: // Post
         {
-            [self.delegate postMessage:self.txvMessage.text];
+            if(self.txvMessage.text.length >0){
+                [self.delegate postMessage:self.txvMessage.text];
+            }
         }
             break;
     }

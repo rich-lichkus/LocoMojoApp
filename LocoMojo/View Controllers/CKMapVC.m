@@ -25,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet CKButtonLocation *btnLocation;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
 
 @end
 
@@ -48,6 +49,8 @@
     [super viewDidLoad];
     
     [self configureMapView];
+    
+    [self configureUIElements];
 }
 
 #pragma mark - Configuration
@@ -60,6 +63,10 @@
                                 forKeyPath:@"location"
                                    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
                                    context:nil];
+}
+
+-(void)configureUIElements{
+    self.bbiMojo.image = [PCLocoMojo imageOfMessage];
 }
 
 #pragma mark - Map

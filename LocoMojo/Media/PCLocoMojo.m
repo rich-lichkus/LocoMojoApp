@@ -24,6 +24,11 @@ static UIImage* _imageOfLoginDisabled = nil;
 static UIImage* _imageOfLoginNormal = nil;
 static UIImage* _imageOfLoginTwitter = nil;
 static UIImage* _imageOfFacebookLogin = nil;
+static UIImage* _imageOfMessage = nil;
+static UIImage* _imageOfMapIcon = nil;
+static UIImage* _imageOfAdd = nil;
+static UIImage* _imageOfAvatar = nil;
+static UIImage* _imageOfSend = nil;
 
 #pragma mark Initialization
 
@@ -124,6 +129,143 @@ static UIImage* _imageOfFacebookLogin = nil;
     [polygonPath stroke];
 }
 
++ (void)drawMessage;
+{
+
+    //// Bezier 2 Drawing
+    UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
+    [bezier2Path moveToPoint: CGPointMake(31.68, 11.08)];
+    [bezier2Path addCurveToPoint: CGPointMake(31.68, 25.92) controlPoint1: CGPointMake(37.35, 15.18) controlPoint2: CGPointMake(37.35, 21.82)];
+    [bezier2Path addCurveToPoint: CGPointMake(15.18, 27.98) controlPoint1: CGPointMake(27.22, 29.16) controlPoint2: CGPointMake(20.57, 29.84)];
+    [bezier2Path addLineToPoint: CGPointMake(6.71, 32.91)];
+    [bezier2Path addCurveToPoint: CGPointMake(5, 33.91) controlPoint1: CGPointMake(6.68, 32.93) controlPoint2: CGPointMake(5, 33.91)];
+    [bezier2Path addLineToPoint: CGPointMake(6, 32.24)];
+    [bezier2Path addCurveToPoint: CGPointMake(10.24, 25.18) controlPoint1: CGPointMake(6.02, 32.21) controlPoint2: CGPointMake(10.24, 25.18)];
+    [bezier2Path addCurveToPoint: CGPointMake(11.18, 11.08) controlPoint1: CGPointMake(5.54, 21.05) controlPoint2: CGPointMake(5.85, 14.94)];
+    [bezier2Path addCurveToPoint: CGPointMake(31.68, 11.08) controlPoint1: CGPointMake(16.84, 6.97) controlPoint2: CGPointMake(26.02, 6.97)];
+    [bezier2Path closePath];
+    [UIColor.darkGrayColor setStroke];
+    bezier2Path.lineWidth = 1;
+    [bezier2Path stroke];
+
+
+    //// Oval Drawing
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(12.5, 16.5, 4, 4)];
+    [UIColor.darkGrayColor setStroke];
+    ovalPath.lineWidth = 1;
+    [ovalPath stroke];
+
+
+    //// Oval 2 Drawing
+    UIBezierPath* oval2Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(19.5, 16.5, 4, 4)];
+    [UIColor.darkGrayColor setStroke];
+    oval2Path.lineWidth = 1;
+    [oval2Path stroke];
+
+
+    //// Oval 3 Drawing
+    UIBezierPath* oval3Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(26, 16.5, 4, 4)];
+    [UIColor.darkGrayColor setStroke];
+    oval3Path.lineWidth = 1;
+    [oval3Path stroke];
+}
+
++ (void)drawMapIcon;
+{
+
+    //// Polygon Drawing
+    UIBezierPath* polygonPath = UIBezierPath.bezierPath;
+    [polygonPath moveToPoint: CGPointMake(20.25, 6.25)];
+    [polygonPath addCurveToPoint: CGPointMake(28.5, 15.25) controlPoint1: CGPointMake(24.9, 6.25) controlPoint2: CGPointMake(28.5, 10.67)];
+    [polygonPath addCurveToPoint: CGPointMake(20.25, 33.75) controlPoint1: CGPointMake(28.5, 19.83) controlPoint2: CGPointMake(20.25, 33.75)];
+    [polygonPath addCurveToPoint: CGPointMake(11.5, 15.25) controlPoint1: CGPointMake(20.25, 33.75) controlPoint2: CGPointMake(11.5, 19.83)];
+    [polygonPath addCurveToPoint: CGPointMake(20.25, 6.25) controlPoint1: CGPointMake(11.5, 10.67) controlPoint2: CGPointMake(15.6, 6.25)];
+    [polygonPath closePath];
+    [UIColor.darkGrayColor setStroke];
+    polygonPath.lineWidth = 1;
+    [polygonPath stroke];
+
+
+    //// Oval Drawing
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(17, 10.75, 6, 6)];
+    [UIColor.darkGrayColor setStroke];
+    ovalPath.lineWidth = 1;
+    [ovalPath stroke];
+}
+
++ (void)drawAdd;
+{
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    //// Rectangle Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 19.75, 18.5);
+
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(-0.75, -12.5, 1.5, 25)];
+    [UIColor.darkGrayColor setFill];
+    [rectanglePath fill];
+
+    CGContextRestoreGState(context);
+
+
+    //// Rectangle 2 Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 19.75, 18.5);
+    CGContextRotateCTM(context, -90 * M_PI / 180);
+
+    UIBezierPath* rectangle2Path = [UIBezierPath bezierPathWithRect: CGRectMake(-0.75, -12.5, 1.5, 25)];
+    [UIColor.darkGrayColor setFill];
+    [rectangle2Path fill];
+
+    CGContextRestoreGState(context);
+}
+
++ (void)drawAvatar;
+{
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    //// Rectangle Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 20, 25);
+
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(-9.5, -7.5, 19, 15) byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: CGSizeMake(7, 7)];
+    [rectanglePath closePath];
+    [UIColor.darkGrayColor setStroke];
+    rectanglePath.lineWidth = 1;
+    [rectanglePath stroke];
+
+    CGContextRestoreGState(context);
+
+
+    //// Oval Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 20, 10.5);
+
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(-5.5, -5, 11, 10)];
+    [UIColor.darkGrayColor setStroke];
+    ovalPath.lineWidth = 1;
+    [ovalPath stroke];
+
+    CGContextRestoreGState(context);
+}
+
++ (void)drawSend;
+{
+
+    //// Bezier Drawing
+    UIBezierPath* bezierPath = UIBezierPath.bezierPath;
+    [bezierPath moveToPoint: CGPointMake(5.5, 19.5)];
+    [bezierPath addLineToPoint: CGPointMake(17, 32)];
+    [bezierPath addLineToPoint: CGPointMake(35.5, 5.5)];
+    bezierPath.lineCapStyle = kCGLineCapSquare;
+
+    [UIColor.darkGrayColor setStroke];
+    bezierPath.lineWidth = 1.5;
+    [bezierPath stroke];
+}
+
 #pragma mark Generated Images
 
 + (UIImage*)imageOfLoginDisabled;
@@ -188,6 +330,71 @@ static UIImage* _imageOfFacebookLogin = nil;
     return imageOfCurrentLocation;
 }
 
++ (UIImage*)imageOfMessage;
+{
+    if (_imageOfMessage)
+        return _imageOfMessage;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(40, 40), NO, 0.0f);
+    [PCLocoMojo drawMessage];
+    _imageOfMessage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfMessage;
+}
+
++ (UIImage*)imageOfMapIcon;
+{
+    if (_imageOfMapIcon)
+        return _imageOfMapIcon;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(40, 40), NO, 0.0f);
+    [PCLocoMojo drawMapIcon];
+    _imageOfMapIcon = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfMapIcon;
+}
+
++ (UIImage*)imageOfAdd;
+{
+    if (_imageOfAdd)
+        return _imageOfAdd;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(40, 40), NO, 0.0f);
+    [PCLocoMojo drawAdd];
+    _imageOfAdd = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfAdd;
+}
+
++ (UIImage*)imageOfAvatar;
+{
+    if (_imageOfAvatar)
+        return _imageOfAvatar;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(40, 40), NO, 0.0f);
+    [PCLocoMojo drawAvatar];
+    _imageOfAvatar = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfAvatar;
+}
+
++ (UIImage*)imageOfSend;
+{
+    if (_imageOfSend)
+        return _imageOfSend;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(40, 40), NO, 0.0f);
+    [PCLocoMojo drawSend];
+    _imageOfSend = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfSend;
+}
+
 #pragma mark Customization Infrastructure
 
 - (void)setLoginDisabledTargets: (NSArray*)loginDisabledTargets
@@ -220,6 +427,46 @@ static UIImage* _imageOfFacebookLogin = nil;
 
     for (id target in self.facebookLoginTargets)
         [target setImage: PCLocoMojo.imageOfFacebookLogin];
+}
+
+- (void)setMessageTargets: (NSArray*)messageTargets
+{
+    _messageTargets = messageTargets;
+
+    for (id target in self.messageTargets)
+        [target setImage: PCLocoMojo.imageOfMessage];
+}
+
+- (void)setMapIconTargets: (NSArray*)mapIconTargets
+{
+    _mapIconTargets = mapIconTargets;
+
+    for (id target in self.mapIconTargets)
+        [target setImage: PCLocoMojo.imageOfMapIcon];
+}
+
+- (void)setAddTargets: (NSArray*)addTargets
+{
+    _addTargets = addTargets;
+
+    for (id target in self.addTargets)
+        [target setImage: PCLocoMojo.imageOfAdd];
+}
+
+- (void)setAvatarTargets: (NSArray*)avatarTargets
+{
+    _avatarTargets = avatarTargets;
+
+    for (id target in self.avatarTargets)
+        [target setImage: PCLocoMojo.imageOfAvatar];
+}
+
+- (void)setSendTargets: (NSArray*)sendTargets
+{
+    _sendTargets = sendTargets;
+
+    for (id target in self.sendTargets)
+        [target setImage: PCLocoMojo.imageOfSend];
 }
 
 

@@ -9,11 +9,14 @@
 #import "CKMojoVC.h"
 #import "CKMessageVC.h"
 #import "CKPost.h"
+#import "PCLocoMojo.h"
 
 @interface CKMojoVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *openPosts;
 @property (weak, nonatomic) IBOutlet UITableView *tblFeed;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiAddMessage;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMap;
 
 @end
 
@@ -37,6 +40,8 @@
     [super viewDidLoad];
     
     [self configureTableView];
+    
+    [self configureUIElements];
 }
 
 #pragma mark - Configuration
@@ -44,6 +49,11 @@
 -(void)configureTableView{
     self.tblFeed.delegate = self;
     self.tblFeed.dataSource = self;
+}
+
+-(void)configureUIElements{
+    self.bbiAddMessage.image = [PCLocoMojo imageOfAdd];
+    self.bbiMap.image = [PCLocoMojo imageOfMapIcon];
 }
 
 #pragma mark - Table View
@@ -62,6 +72,7 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.text = post.user.name;
+//    cell.imageView.image = [PCLocoMojo imageOfAvatar];
     return cell;
 }
 
