@@ -83,8 +83,14 @@
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+
     if([annotation isKindOfClass:CKMapPin.class]){
-        MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+        MKPinAnnotationView *pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
+        if(pin == nil){
+            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+        } else {
+            pin.annotation = annotation;
+        }
         switch (((CKMapPin*)annotation).pinType) {
             case kReadable:
                 pin.pinColor = MKPinAnnotationColorGreen;
@@ -130,6 +136,13 @@
 
 -(void)updateVisiblePosts:(NSMutableArray *)posts{
     self.visiblePosts = posts;
+    for(CKMapPin* annotation in self.mapView.annotations){
+        if([annotation isKindOfClass:CKMapPin.class]){
+            if (annotation.pinType == kVisible) {
+                [self.mapView removeAnnotation:annotation];
+            }
+        }
+    }
     for(CKPost *post in posts){
         [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate withPinType:kVisible]];
     }
@@ -137,6 +150,13 @@
 
 -(void)updateOpenPosts:(NSMutableArray *)posts{
     self.readablePosts = posts;
+    for(CKMapPin* annotation in self.mapView.annotations){
+        if([annotation isKindOfClass:CKMapPin.class]){
+            if (annotation.pinType == kReadable) {
+                [self.mapView removeAnnotation:annotation];
+            }
+        }
+    }
     for(CKPost *post in posts){
         [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate withPinType:kReadable]];
     }

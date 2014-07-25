@@ -13,7 +13,6 @@
 @interface CKMojoVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *openPosts;
-
 @property (weak, nonatomic) IBOutlet UITableView *tblFeed;
 
 @end
@@ -58,9 +57,25 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mojoCell" forIndexPath:indexPath];
     
     CKPost *post = self.openPosts[indexPath.row];
+
     cell.textLabel.text = post.message;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.text = post.user.name;
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSString *cellText = ((CKPost*)self.openPosts[indexPath.row]).message;
+
+    UIFont *FONT = [UIFont systemFontOfSize:14];
+    NSAttributedString *attributedText =[[NSAttributedString alloc]  initWithString:cellText
+                                                                         attributes:@{NSFontAttributeName:FONT}];
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){300, MAXFLOAT}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    return rect.size.height+40;
 }
 
 #pragma mark - Target Actions

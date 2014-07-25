@@ -237,7 +237,7 @@
 }
 
 -(void)didPressNote{
-    [self slideMessages:kUp];
+    [self slideViews:kLeft];
 }
 
 #pragma mark - Map Delegate
@@ -249,7 +249,7 @@
 #pragma mark - Message Delegate
 
 -(void)didPressCancel{
-    [self slideMessages:kDown];
+    [self slideViews:kRight];
 }
 
 -(void)postMessage:(NSString *)message{
@@ -276,6 +276,7 @@
     [UIView animateWithDuration:.3 animations:^{
         self.mojoVC.view.frame = CGRectOffset(self.mojoVC.view.frame, dx, 0);
         self.mapVC.view.frame = CGRectOffset(self.mapVC.view.frame, dx, 0);
+        self.messageVC.view.frame = CGRectOffset(self.messageVC.view.frame, dx, 0);
     } completion:^(BOOL finished) {
         
     }];
@@ -319,7 +320,8 @@
             NSAssert(error, @"Error saving post.");
             NSLog(@"%@",error);
         } else{
-            [self slideMessages:kDown];
+            [self slideViews:kRight];
+            [self.weak_currentUser addRegionalPostWithPfPost:pfMessage];
         }
     }];
 }
@@ -395,7 +397,7 @@
 -(CKMessageVC*)messageVC{
     if(!_messageVC){
         _messageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"messageVC"];
-        _messageVC.view.frame = CGRectOffset(self.view.frame,0,self.view.frame.size.height);
+        _messageVC.view.frame = CGRectOffset(self.view.frame,self.view.frame.size.width,0);
     }
     return _messageVC;
 }

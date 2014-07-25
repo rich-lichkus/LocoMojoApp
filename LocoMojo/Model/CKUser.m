@@ -34,7 +34,7 @@
     self.email = pfUser.email;
 }
 
-#pragma mark
+#pragma mark - Posts
 
 -(void)setRegionalPostsWithArrayofPfPosts:(NSArray*)pfPosts{
     NSMutableArray *posts = [[NSMutableArray alloc] init];
@@ -44,6 +44,11 @@
         [posts addObject:post];
     }
     _regionalPosts = posts;
+}
+
+-(void)addRegionalPostWithPfPost:(PFObject*)pfPost{
+    CKPost *post = [[CKPost alloc] initWithPfPost:pfPost];
+    [self.regionalPosts addObject:post];
 }
 
 @end

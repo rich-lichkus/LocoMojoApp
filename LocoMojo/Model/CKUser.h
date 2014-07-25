@@ -27,5 +27,6 @@
 //TODO:-(void)updateUserWithTWUser:(*)twUser;
 
 -(void)setRegionalPostsWithArrayofPfPosts:(NSArray*)pfPosts;
+-(void)addRegionalPostWithPfPost:(PFObject*)pfPost;
 
 @end
