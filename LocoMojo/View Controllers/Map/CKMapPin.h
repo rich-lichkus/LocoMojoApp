@@ -12,8 +12,10 @@
 @interface CKMapPin : NSObject <MKAnnotation>
 
 @property (nonatomic) CLLocationCoordinate2D coordinate;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic) kPinType pinType;
 
--(instancetype)initWithCoordinate:(CLLocationCoordinate2D)locationCoor withPinType:(kPinType)pinType;
+-(instancetype)initWithCoordinate:(CLLocationCoordinate2D)locationCoor withPinType:(kPinType)pinType withTitle:(NSString*)message;
 
 @end

@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSMutableArray *readablePosts;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet CKButtonLocation *btnLocation;
+@property (weak, nonatomic) IBOutlet UIButton *btnLocation;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
 
 @end
@@ -56,7 +56,6 @@
 #pragma mark - Configuration
 
 -(void)configureMapView{
-    [self.btnLocation toggleOn];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     [self.mapView.userLocation addObserver:self
@@ -66,7 +65,11 @@
 }
 
 -(void)configureUIElements{
+    self.bbiMojo.width = 30.0f;
     self.bbiMojo.image = [PCLocoMojo imageOfMessage];
+    [self.btnLocation setSelected:YES];
+    [self.btnLocation setImage:[PCLocoMojo imageOfCurrentLocationWithIsSelected:YES] forState:UIControlStateSelected];
+    [self.btnLocation setImage:[PCLocoMojo imageOfCurrentLocationWithIsSelected:NO] forState:UIControlStateNormal];
 }
 
 #pragma mark - Map
@@ -101,9 +104,11 @@
         switch (((CKMapPin*)annotation).pinType) {
             case kReadable:
                 pin.pinColor = MKPinAnnotationColorGreen;
+                [pin setCanShowCallout:YES];
                 break;
             case kVisible:
                 pin.pinColor = MKPinAnnotationColorRed;
+                [pin setCanShowCallout:NO];
                 break;
         }
         return pin;
@@ -115,7 +120,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if(self.btnLocation.isOn){
+    if(self.btnLocation.selected){
         MKCoordinateRegion region;
         region.center = self.mapView.userLocation.coordinate;
         
@@ -135,8 +140,8 @@
 }
 
 - (IBAction)pressedLocation:(id)sender {
-    NSLog(@"pressed location");
-    [self.btnLocation toggleOn];
+
+    [self.btnLocation setSelected:!self.btnLocation.selected];
 }
 
 #pragma mark - Methods
@@ -151,7 +156,9 @@
         }
     }
     for(CKPost *post in posts){
-        [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate withPinType:kVisible]];
+        [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate
+                                                             withPinType:kVisible
+                                                               withTitle:post.message]];
     }
 }
 
@@ -165,7 +172,9 @@
         }
     }
     for(CKPost *post in posts){
-        [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate withPinType:kReadable]];
+        [self.mapView addAnnotation:[[CKMapPin alloc] initWithCoordinate:post.location.coordinate
+                                                             withPinType:kReadable
+                                                               withTitle:post.message]];
     }
 }
 

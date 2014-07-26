@@ -21,15 +21,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.on = NO;
+
     }
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [PCLocoMojo drawCurrentLocationWithIsSelected:self.on];
-}
 
 -(void)toggleOn{
     self.on = !self.on;
