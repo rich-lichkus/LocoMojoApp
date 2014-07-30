@@ -8,6 +8,8 @@
 
 #import "CKAppDelegate.h"
 #import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
+
 
 @implementation CKAppDelegate
 
@@ -29,6 +31,7 @@
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
 
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
     return YES;
 }
 
@@ -52,6 +55,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

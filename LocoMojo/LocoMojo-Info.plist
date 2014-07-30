@@ -30,6 +30,21 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>FacebookAppId</key>
+	<string>1447620768833390</string>
+	<key>FacebookDisplayName</key>
+	<string>LocoMojo</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1447620768833390</string>
+			</array>
+		</dict>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

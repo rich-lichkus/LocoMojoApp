@@ -15,6 +15,7 @@
 		0F0BB6751981831200D1D12F /* CKCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB6741981831200D1D12F /* CKCircle.m */; };
 		0F0BB67B1981AD9D00D1D12F /* CKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB67A1981AD9D00D1D12F /* CKPost.m */; };
 		0F261171198039BD007AD560 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F261170198039BD007AD560 /* Parse.framework */; };
+		0F606A1F19899CD7000F489B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F606A1E19899CD7000F489B /* FacebookSDK.framework */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9271980175700F2A161 /* CoreGraphics.framework */; };
 		0F8FB92A1980175700F2A161 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9291980175700F2A161 /* UIKit.framework */; };
@@ -75,6 +76,7 @@
 		0F0BB6791981AD9D00D1D12F /* CKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKPost.h; path = Model/CKPost.h; sourceTree = "<group>"; };
 		0F0BB67A1981AD9D00D1D12F /* CKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKPost.m; path = Model/CKPost.m; sourceTree = "<group>"; };
 		0F261170198039BD007AD560 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		0F606A1E19899CD7000F489B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Frameworks/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9251980175700F2A161 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F8FB9271980175700F2A161 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -139,6 +141,7 @@
 				0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */,
 				0F8FB9741980265600F2A161 /* CFNetwork.framework in Frameworks */,
 				0F261171198039BD007AD560 /* Parse.framework in Frameworks */,
+				0F606A1F19899CD7000F489B /* FacebookSDK.framework in Frameworks */,
 				0F8FB9721980264F00F2A161 /* AudioToolbox.framework in Frameworks */,
 				0F8FB92A1980175700F2A161 /* UIKit.framework in Frameworks */,
 				0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */,
@@ -225,6 +228,7 @@
 		0F8FB9241980175700F2A161 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F606A1E19899CD7000F489B /* FacebookSDK.framework */,
 				0F261170198039BD007AD560 /* Parse.framework */,
 				0F8FB98F19802D8500F2A161 /* MapKit.framework */,
 				0F8FB9811980269D00F2A161 /* SystemConfiguration.framework */,
@@ -408,6 +412,7 @@
 			knownRegions = (
 				en,
 				Base,
+				he,
 			);
 			mainGroup = 0F8FB9191980175700F2A161;
 			productRefGroup = 0F8FB9231980175700F2A161 /* Products */;
@@ -593,6 +598,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/Ricard/Documents/iDev/Language/iOS/Frameworks/FacebookSDK/FBAudienceNetwork,
+					/Users/Ricard/Documents/iDev/Language/iOS/Frameworks/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LocoMojo/LocoMojo-Prefix.pch";
@@ -613,6 +620,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/Ricard/Documents/iDev/Language/iOS/Frameworks/FacebookSDK/FBAudienceNetwork,
+					/Users/Ricard/Documents/iDev/Language/iOS/Frameworks/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LocoMojo/LocoMojo-Prefix.pch";
