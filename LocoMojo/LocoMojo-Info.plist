@@ -30,7 +30,7 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>FacebookAppId</key>
+	<key>FacebookAppID</key>
 	<string>1447620768833390</string>
 	<key>FacebookDisplayName</key>
 	<string>LocoMojo</string>

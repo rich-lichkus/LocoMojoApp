@@ -210,7 +210,39 @@
 }
 
 -(void)pressedFacebookLogin:(id)sender{
-    //[self.weak_oAuthController authenticateUserWithWebService:kFacebook];
+    // The permissions requested from the user
+    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            [self unlockScreen:YES];
+            NSLog(@"User with facebook signed up and logged in!");
+            
+        } else {
+            NSLog(@"User with facebook logged in!");
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self unlockScreen:YES];
+            }];
+            
+            // Create request for user's Facebook data
+            FBRequest *request = [FBRequest requestForMe];
+            
+            // Send request to Facebook
+            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                NSLog(@"%@", result);
+                // Parse user information here
+            }];
+        }
+    }];
 }
 
 -(void)pressedTwitterLogin:(id)sender{

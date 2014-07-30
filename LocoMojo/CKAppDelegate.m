@@ -15,9 +15,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //Intialize Parse
     [Parse setApplicationId:@"neTBf4cU4GNJB5Lg5YAW7CvbJt8z7XH1MoKgMDIj"
                   clientKey:@"ehKzpjNpZQPgh7wfrwfzy8yGhrcsUAD4zSmRxovU"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    //Facebook Initialize
+    [PFFacebookUtils initializeFacebook];
     
     self.currentUser = [CKUser new];
     self.oAuthController = [[CKOAuthController alloc] initWithCurrentUser:self.currentUser];
