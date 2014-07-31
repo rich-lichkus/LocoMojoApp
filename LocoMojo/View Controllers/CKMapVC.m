@@ -66,7 +66,7 @@
 
 -(void)configureUIElements{
     self.bbiMojo.width = 30.0f;
-    self.bbiMojo.image = [PCLocoMojo imageOfMessage];
+    self.bbiMojo.image = [PCLocoMojo imageOfChat];
     [self.btnLocation setSelected:YES];
     [self.btnLocation setImage:[PCLocoMojo imageOfCurrentLocationWithIsSelected:YES] forState:UIControlStateSelected];
     [self.btnLocation setImage:[PCLocoMojo imageOfCurrentLocationWithIsSelected:NO] forState:UIControlStateNormal];

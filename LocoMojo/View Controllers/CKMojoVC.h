@@ -19,6 +19,7 @@
 @interface CKMojoVC : UIViewController
 
 @property (nonatomic, unsafe_unretained) id<CKMojoVCDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 -(void)updateOpenPosts:(NSMutableArray*)posts;
 

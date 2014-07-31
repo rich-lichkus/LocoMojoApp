@@ -25,7 +25,7 @@
 #define VISIBLE_REGION 2000  // Meters
 #define READABLE_REGION 150  // Meters
 
-@interface CKRootVC () <CKMojoVCDelegate,CKMapVCDelegate, UITextFieldDelegate, CLLocationManagerDelegate, CKMessageVCDelegate>
+@interface CKRootVC () <CKMojoVCDelegate,CKMapVCDelegate, UITextFieldDelegate, CLLocationManagerDelegate, CKMessageVCDelegate, UIActionSheetDelegate>
 
 @property (nonatomic) BOOL regionalPostsLoaded;
 
@@ -52,6 +52,11 @@
 @property (strong, nonatomic) UIView *uivBottomView;
 @property (strong, nonatomic) UIButton *btnLogin;
 
+// Profile View
+@property (strong, nonatomic) UIView *userView;
+@property (strong, nonatomic) UIImageView *imgAvatar;
+@property (strong, nonatomic) UIButton *btnUsername;
+
 @end
 
 @implementation CKRootVC
@@ -73,14 +78,60 @@
 {
     [super viewDidLoad];
     
+    [self configureCurrentUser];
+    
     [self configureChildViews];
     
     [self configureLockView];
+    
+    [self configureProfileView];
     
     self.regionalPostsLoaded = NO;
 }
 
 #pragma mark - Configuration
+
+-(void)configureCurrentUser{
+    BOOL unlock = NO;
+    if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
+        NSLog(@"Facebook!");
+        unlock = YES;
+    } else if ([PFUser currentUser].isAuthenticated){
+        NSLog(@"Email!");
+        unlock = YES;
+    }
+    if(unlock){
+        [self unlockScreen:unlock];
+    }
+}
+
+-(void)configureProfileView{
+    
+    CGFloat viewHeight = 44;
+    CGFloat imgSide = 40;
+    CGFloat padding = 5;
+    CGFloat imgPadding = 2;
+    
+    self.userView = [[UIView alloc] initWithFrame: CGRectMake(0, self.view.frame.size.height-viewHeight, self.view.frame.size.width, viewHeight)];
+    self.userView.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
+    
+    self.imgAvatar = [[UIImageView alloc] initWithFrame: CGRectMake(imgPadding, imgPadding, imgSide, imgSide)];
+    self.imgAvatar.image = [UIImage imageNamed:@"profile"];
+    self.imgAvatar.layer.cornerRadius = 5;
+    self.imgAvatar.layer.masksToBounds = YES;
+    
+    self.btnUsername = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnUsername.frame = CGRectMake(self.imgAvatar.frame.size.width+padding, 0,
+                                        self.userView.frame.size.width-2*self.imgAvatar.frame.size.width-2*imgPadding-2*padding, viewHeight);
+    [self.btnUsername setTitle:@"Richard Lichkus" forState:UIControlStateNormal];
+    [self.btnUsername addTarget:self action:@selector(pressedUsername:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.userView addSubview:self.imgAvatar];
+    [self.userView addSubview:self.btnUsername];
+    [self.view addSubview:self.userView];
+}
+
+
 -(void)configureChildViews{
     // Mojo VC
     [self addChildViewController:self.mojoVC];
@@ -97,7 +148,7 @@
     // Messages VC
     [self addChildViewController:self.messageVC];
     [self.messageVC didMoveToParentViewController:self];
-    [self.view addSubview:self.messageVC.view];
+    [self.view addSubview:self.messageVC.view]; 
     self.messageVC.delegate = self;
 }
 
@@ -228,10 +279,7 @@
             
         } else {
             NSLog(@"User with facebook logged in!");
-            
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self unlockScreen:YES];
-            }];
+            [self unlockScreen:YES];
             
             // Create request for user's Facebook data
             FBRequest *request = [FBRequest requestForMe];
@@ -248,6 +296,20 @@
 -(void)pressedTwitterLogin:(id)sender{
     //[self.weak_oAuthController authenticateUserWithWebService:kTwitter];
 }
+
+-(void)pressedUsername:(id)sender{
+    // TODO: Present Action sheet to log out, options based on account used to sign in
+    NSLog(@"Pressed Username");
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Logout?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Logout", nil];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+#pragma mark - Action Sheet Delegate
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+}
+
 
 #pragma mark - TextField Delegate
 
@@ -329,14 +391,17 @@
 }
 
 -(void)unlockScreen:(BOOL)authenticated{
-    int halfScreen = self.view.frame.size.height*.5;
-    int dy = authenticated ? -halfScreen : halfScreen;
     
-    [UIView animateWithDuration:.5 animations:^{
-        self.uivTopView.frame = CGRectOffset(self.uivTopView.frame, 0, dy);
-        self.uivBottomView.frame = CGRectOffset(self.uivBottomView.frame, 0, -dy);
-    } completion:^(BOOL finished) {
-
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        int halfScreen = self.view.frame.size.height*.5;
+        int dy = authenticated ? -halfScreen : halfScreen;
+        
+        [UIView animateWithDuration:.5 animations:^{
+            self.uivTopView.frame = CGRectOffset(self.uivTopView.frame, 0, dy);
+            self.uivBottomView.frame = CGRectOffset(self.uivBottomView.frame, 0, -dy);
+        } completion:^(BOOL finished) {
+            
+        }];
     }];
 }
 

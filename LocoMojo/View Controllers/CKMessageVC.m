@@ -49,11 +49,6 @@
     [self.txvMessage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [self.txvMessage.layer setBorderWidth:2];
     self.txvMessage.delegate = self;
-    
-    self.bbiMojo.image = [PCLocoMojo imageOfMessage];
-    self.bbiMojo.width = 40;
-    self.bbiSend.image = [PCLocoMojo imageOfSend];
-    self.bbiSend.width = 40;
 }
 
 #pragma mark - Methods

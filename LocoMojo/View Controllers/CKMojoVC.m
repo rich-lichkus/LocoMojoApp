@@ -52,8 +52,8 @@
 }
 
 -(void)configureUIElements{
-    self.bbiAddMessage.image = [PCLocoMojo imageOfAdd];
-    self.bbiMap.image = [PCLocoMojo imageOfMapIcon];
+    self.bbiAddMessage.image = [PCLocoMojo imageOfChat];
+    self.bbiMap.image = [PCLocoMojo imageOfPin];
 }
 
 #pragma mark - Table View
