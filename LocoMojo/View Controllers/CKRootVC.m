@@ -102,6 +102,7 @@
     }
     if(unlock){
         [self unlockScreen:unlock];
+        [self showProfileView:YES];
     }
 }
 
@@ -245,14 +246,16 @@
 #pragma mark - Target Action
 
 -(void)pressedLogin:(id)sender{
+// TODO: Handle parse error and/or display
     [self.txtPassword resignFirstResponder];
     if(self.txtPassword.text.length >0 && self.txtUsername.text.length >0){
         [PFUser logInWithUsernameInBackground:self.txtUsername.text password:self.txtPassword.text block:^(PFUser *user, NSError *error) {
             if(!error){
                 [self.weak_currentUser updateUserWithPFUser:user];
                 [self unlockScreen:YES];
+                [self showProfileView:YES];
             } else {
-                // TODO: Handle parse error and/or display
+               
                 NSAssert(error, @"Error: Parse email login.");
                 NSLog(@"%@",error.localizedDescription);
             }
@@ -275,16 +278,16 @@
             }
         } else if (user.isNew) {
             [self unlockScreen:YES];
+            [self showProfileView:YES];
             NSLog(@"User with facebook signed up and logged in!");
             
         } else {
             NSLog(@"User with facebook logged in!");
             [self unlockScreen:YES];
+            [self showProfileView:YES];
             
-            // Create request for user's Facebook data
+            // Get user's Facebook data
             FBRequest *request = [FBRequest requestForMe];
-            
-            // Send request to Facebook
             [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 NSLog(@"%@", result);
                 // Parse user information here
@@ -307,9 +310,16 @@
 #pragma mark - Action Sheet Delegate
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
+    switch (buttonIndex) {
+        case 0:
+        {
+            [PFUser logOut];
+            [self showProfileView:NO];
+            [self unlockScreen:NO];
+        }
+            break;
+    }
 }
-
 
 #pragma mark - TextField Delegate
 
@@ -328,22 +338,26 @@
 
 -(void)didPressMap{
     [self slideViews:kRight];
+    [self showProfileView:NO];
 }
 
 -(void)didPressNote{
     [self slideViews:kLeft];
+    [self showProfileView:NO];
 }
 
 #pragma mark - Map Delegate
 
 -(void)didPressMojo{
     [self slideViews:kLeft];
+    [self showProfileView:YES];
 }
 
 #pragma mark - Message Delegate
 
 -(void)didPressCancel{
     [self slideViews:kRight];
+    [self showProfileView:YES];
 }
 
 -(void)postMessage:(NSString *)message{
@@ -361,6 +375,19 @@
 }
 
 #pragma mark - Animation
+
+-(void)showProfileView:(BOOL)show{
+
+    CGFloat dy = self.userView.frame.size.height;
+    dy = show ? -dy : dy;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [UIView animateWithDuration:.3 animations:^{
+            self.userView.frame = CGRectOffset(self.userView.frame, 0, dy);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+}
 
 -(void)slideViews:(kDirection)direction{
     
@@ -421,6 +448,7 @@
             [self slideViews:kRight];
             [self.weak_currentUser addRegionalPostWithPfPost:pfMessage];
             [self updateFilteredPosts:self.weak_currentUser.lastLocation];
+            [self showProfileView:YES];
         }
     }];
 }
