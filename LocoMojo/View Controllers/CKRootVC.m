@@ -295,7 +295,22 @@
 }
 
 -(void)pressedTwitterLogin:(id)sender{
-    //[self.weak_oAuthController authenticateUserWithWebService:kTwitter];
+    [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"The user cancelled the Twitter login.");
+            return;
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in with Twitter!");
+            [self unlockScreen:YES];
+            [self showProfileView:YES];
+//            [self addNewTWInfoToPFUser];
+        } else {
+            NSLog(@"User logged in with Twitter!");
+            [self unlockScreen:YES];
+            [self showProfileView:YES];
+            // Get user's Twitter data
+        }     
+    }];
 }
 
 -(void)pressedUsername:(id)sender{

@@ -37,6 +37,8 @@
 		0F8FB9801980269300F2A161 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB97F1980269300F2A161 /* StoreKit.framework */; };
 		0F8FB9821980269D00F2A161 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9811980269D00F2A161 /* SystemConfiguration.framework */; };
 		0F8FB99019802D8500F2A161 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB98F19802D8500F2A161 /* MapKit.framework */; };
+		0F914E0E198C32960087282A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F914E0D198C32960087282A /* Accounts.framework */; };
+		0F914E10198C32AB0087282A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F914E0F198C32AB0087282A /* Social.framework */; };
 		0FA18ACE198037C300CFDC8C /* CKRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96A1980246100F2A161 /* CKRootVC.m */; };
 		0FA18AD0198037DE00CFDC8C /* CKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB9351980175700F2A161 /* CKAppDelegate.m */; };
 		0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FB96D198024BD00F2A161 /* CKUser.m */; };
@@ -119,6 +121,8 @@
 		0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMojoVC.h; path = "View Controllers/CKMojoVC.h"; sourceTree = "<group>"; };
 		0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMojoVC.m; path = "View Controllers/CKMojoVC.m"; sourceTree = "<group>"; };
 		0F8FB98F19802D8500F2A161 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0F914E0D198C32960087282A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		0F914E0F198C32AB0087282A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0FC8CB4B1981DB8D00D9DB19 /* CKMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMapPin.h; path = "View Controllers/Map/CKMapPin.h"; sourceTree = "<group>"; };
 		0FC8CB4C1981DB8D00D9DB19 /* CKMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMapPin.m; path = "View Controllers/Map/CKMapPin.m"; sourceTree = "<group>"; };
 		0FC8CB521982DA0700D9DB19 /* CKButtonLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKButtonLocation.h; path = "View Controllers/Map/CKButtonLocation.h"; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F914E10198C32AB0087282A /* Social.framework in Frameworks */,
+				0F914E0E198C32960087282A /* Accounts.framework in Frameworks */,
 				0F8FB99019802D8500F2A161 /* MapKit.framework in Frameworks */,
 				0F8FB9821980269D00F2A161 /* SystemConfiguration.framework in Frameworks */,
 				0F8FB9801980269300F2A161 /* StoreKit.framework in Frameworks */,
@@ -228,6 +234,8 @@
 		0F8FB9241980175700F2A161 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F914E0F198C32AB0087282A /* Social.framework */,
+				0F914E0D198C32960087282A /* Accounts.framework */,
 				0F606A1E19899CD7000F489B /* FacebookSDK.framework */,
 				0F261170198039BD007AD560 /* Parse.framework */,
 				0F8FB98F19802D8500F2A161 /* MapKit.framework */,

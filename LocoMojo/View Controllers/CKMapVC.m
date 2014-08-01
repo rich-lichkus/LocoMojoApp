@@ -127,7 +127,11 @@
         span.longitudeDelta = .005;
         region.span = span;
         
-        [self.mapView setRegion:region animated:YES];
+        if(region.center.longitude == -180.00000000){
+            NSLog(@"Invalid region!");
+        }else{
+            [self.mapView setRegion:region animated:YES];
+        }
     }
 }
 

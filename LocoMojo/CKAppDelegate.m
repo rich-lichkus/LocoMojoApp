@@ -23,6 +23,10 @@
     //Facebook Initialize
     [PFFacebookUtils initializeFacebook];
     
+    // Twitter Initialize
+    [PFTwitterUtils initializeWithConsumerKey:@"2gEnsPAyg4FXsuCS9iBzhQuJJ"
+                               consumerSecret:@"Jos06yn32EWpcSM6HnVHL8Pg9AMedolr6n2076ZEd8glPioqPi"];
+    
     self.currentUser = [CKUser new];
     self.oAuthController = [[CKOAuthController alloc] initWithCurrentUser:self.currentUser];
     self.twitterNC = [CKTwitterNC new];
