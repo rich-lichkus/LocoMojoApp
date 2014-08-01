@@ -78,12 +78,10 @@
     [self.mapView removeOverlays:self.mapView.overlays];
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:userLocation.location.coordinate radius:150];
     [self.mapView addOverlay:circle];
-    NSLog(@"added Overlay");
 }
 
 -(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay{
     if([overlay isKindOfClass:MKCircle.class]) {
-        NSLog(@"render Overlay");
         MKCircleRenderer *circleRender = [[MKCircleRenderer alloc] initWithCircle:overlay];
         circleRender.fillColor = [UIColor colorWithRed:0.000 green:1.000 blue:0.502 alpha:0.500];
         return circleRender;

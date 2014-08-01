@@ -12,19 +12,22 @@
 
 @interface CKUser : NSObject
 
-@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *username;
 @property (nonatomic) kAccountType accountType;
 @property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *avatarLocation;
 
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) CLLocation *regionalLocation;
 @property (strong, nonatomic) NSMutableArray *regionalPosts;
 
 -(instancetype)initUserWithPFUser:(PFUser*)pfUser;
+-(instancetype)initUserWithFBUser:(id)fbUser;
 -(void)updateUserWithPFUser:(PFUser*)pfUser;
-//TODO:-(void)updateUserWithFBUser:(*)fbUser;
+-(void)updateUserWithFBUser:(id)fbUser;
 //TODO:-(void)updateUserWithTWUser:(*)twUser;
 
 -(void)setRegionalPostsWithArrayofPfPosts:(NSArray*)pfPosts;

@@ -71,7 +71,7 @@
     cell.textLabel.text = post.message;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
-    cell.detailTextLabel.text = post.user.name;
+    cell.detailTextLabel.text = [[post.user.firstName stringByAppendingString:@" "] stringByAppendingString:post.user.lastName];
 //    cell.imageView.image = [PCLocoMojo imageOfAvatar];
     return cell;
 }

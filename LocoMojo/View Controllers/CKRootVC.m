@@ -78,8 +78,6 @@
 {
     [super viewDidLoad];
     
-    [self configureCurrentUser];
-    
     [self configureChildViews];
     
     [self configureLockView];
@@ -87,6 +85,8 @@
     [self configureProfileView];
     
     self.regionalPostsLoaded = NO;
+    
+     [self configureCurrentUser];
 }
 
 #pragma mark - Configuration
@@ -113,7 +113,7 @@
     CGFloat padding = 5;
     CGFloat imgPadding = 2;
     
-    self.userView = [[UIView alloc] initWithFrame: CGRectMake(0, self.view.frame.size.height-viewHeight, self.view.frame.size.width, viewHeight)];
+    self.userView = [[UIView alloc] initWithFrame: CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, viewHeight)];
     self.userView.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
     
     self.imgAvatar = [[UIImageView alloc] initWithFrame: CGRectMake(imgPadding, imgPadding, imgSide, imgSide)];
@@ -277,20 +277,18 @@
                 NSLog(@"Uh oh. An error occurred: %@", error);
             }
         } else if (user.isNew) {
+            NSLog(@"User with facebook signed up and logged in!");
             [self unlockScreen:YES];
             [self showProfileView:YES];
-            NSLog(@"User with facebook signed up and logged in!");
-            
+            [self addNewFBInfoToPFUser];
         } else {
             NSLog(@"User with facebook logged in!");
             [self unlockScreen:YES];
             [self showProfileView:YES];
-            
             // Get user's Facebook data
             FBRequest *request = [FBRequest requestForMe];
             [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                NSLog(@"%@", result);
-                // Parse user information here
+                [self.weak_currentUser updateUserWithFBUser:result];
             }];
         }
     }];
@@ -494,6 +492,18 @@
     [self.mapVC updateVisiblePosts:[visiblePosts mutableCopy]];
     [self.mapVC updateOpenPosts:[readablePosts mutableCopy]];
     [self.mojoVC updateOpenPosts:[readablePosts mutableCopy]];
+}
+
+-(void)addNewFBInfoToPFUser{
+    // Get user's Facebook data
+    FBRequest *request = [FBRequest requestForMe];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [PFUser currentUser][@"first_name"] = result[@"first_name"];
+        [PFUser currentUser][@"last_name"] = result[@"last_name"];
+        [PFUser currentUser][@"account_type"] = [NSNumber numberWithInteger:kFacebook];
+        [PFUser currentUser][@"avatar_location"] = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1",result[@"id"]];
+        [[PFUser currentUser] saveInBackground];
+    }];
 }
 
 #pragma mark - Navigation

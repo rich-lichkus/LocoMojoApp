@@ -19,7 +19,22 @@
     if(self){
         self.iD = postObject.objectId;
         self.createdAt = postObject.createdAt;
-        self.user = [[CKUser alloc] initUserWithPFUser:postObject[@"creator"]];
+        NSInteger accountType = [postObject[@"creator"][@"account_type"] integerValue];
+        switch ((kAccountType)accountType) {
+            case kFacebook: {
+                self.user = [[CKUser alloc] initUserWithFBUser:postObject[@"creator"]];
+            }
+                break;
+            case kEmail: {
+                self.user = [[CKUser alloc] initUserWithPFUser:postObject[@"creator"]];
+            }
+                break;
+            case kTwitter: {
+                
+            }
+                break;
+        }
+    
         PFGeoPoint *pfGeoPoint = postObject[@"location"];
         self.location = [[CLLocation alloc] initWithLatitude:pfGeoPoint.latitude longitude:pfGeoPoint.longitude];
         self.message = postObject[@"messageString"];

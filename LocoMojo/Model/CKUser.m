@@ -17,7 +17,8 @@
 -(instancetype)initUserWithPFUser:(PFUser*)pfUser{
     self = [super init];
     if(self){
-        self.name = pfUser[@"name"];
+        self.firstName = pfUser[@"first_name"];
+        self.lastName = pfUser[@"last_name"];
         self.username = pfUser.username;
         self.userId = pfUser.objectId;
         self.accountType = (kAccountType)pfUser[@"account_type"];
@@ -26,12 +27,35 @@
     return self;
 }
 
+-(instancetype)initUserWithFBUser:(id)fbUser{
+    self = [super init];
+    if(self){
+        self.firstName = fbUser[@"first_name"];
+        self.lastName = fbUser[@"last_name"];
+        self.accountType = kFacebook;
+        self.userId = fbUser[@"id"];
+        self.username = fbUser[@"name"];
+        self.avatarLocation = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fbUser[@"id"]];
+    }
+    return self;
+}
+
 -(void)updateUserWithPFUser:(PFUser *)pfUser{
-    self.name = pfUser[@"name"];
+    self.firstName = pfUser[@"first_name"];
+    self.lastName = pfUser[@"last_name"];
     self.username = pfUser.username;
     self.userId = pfUser.objectId;
     self.accountType = (kAccountType)pfUser[@"account_type"];
     self.email = pfUser.email;
+}
+
+-(void)updateUserWithFBUser:(id)fbUser{
+    self.firstName = fbUser[@"first_name"];
+    self.lastName = fbUser[@"last_name"];
+    self.accountType = kFacebook;
+    self.userId = fbUser[@"id"];
+    self.username = fbUser[@"name"];
+    self.avatarLocation = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fbUser[@"id"]];
 }
 
 #pragma mark - Posts
