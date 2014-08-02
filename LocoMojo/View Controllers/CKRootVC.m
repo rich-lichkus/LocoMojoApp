@@ -304,11 +304,13 @@
             [self unlockScreen:YES];
             [self showProfileView:YES];
 //            [self addNewTWInfoToPFUser];
+            NSLog(@"user");
         } else {
             NSLog(@"User logged in with Twitter!");
             [self unlockScreen:YES];
             [self showProfileView:YES];
             // Get user's Twitter data
+            NSLog(@"user");
         }     
     }];
 }

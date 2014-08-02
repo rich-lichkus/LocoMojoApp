@@ -12,6 +12,7 @@
 @interface CKMessageVC () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblGPSPosition;
+@property (weak, nonatomic) IBOutlet UILabel *lblGPSAccuracy;
 @property (weak, nonatomic) IBOutlet UITextView *txvMessage;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiSend;
@@ -46,6 +47,8 @@
 
 -(void)configureUIElements{
     // TextView
+    self.txvMessage.layer.cornerRadius =10;
+    self.txvMessage.layer.masksToBounds = YES;
     [self.txvMessage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [self.txvMessage.layer setBorderWidth:2];
     self.txvMessage.delegate = self;
@@ -53,8 +56,9 @@
 
 #pragma mark - Methods
 
--(void)setTextForGPSLabel:(CLLocation *)location{
-    self.lblGPSPosition.text = [NSString stringWithFormat:@" GPS(%.6f, %.6f)",location.coordinate.latitude, location.coordinate.longitude];
+-(void)setTextForGPSLabel:(CLLocation *)location {
+    self.lblGPSPosition.text = [NSString stringWithFormat:@"GPS: %.6f, %.6f",location.coordinate.latitude, location.coordinate.longitude];
+    self.lblGPSAccuracy.text = [NSString stringWithFormat:@"Accuracy: H%.2f, V%.2f",location.horizontalAccuracy, location.verticalAccuracy];
 }
 
 #pragma mark - Target Actions

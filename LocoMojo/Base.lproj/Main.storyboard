@@ -199,9 +199,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GPS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8E-ZD-E9N">
-                                <rect key="frame" x="20" y="311" width="280" height="21"/>
+                                <rect key="frame" x="8" y="305" width="299" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Accuracy:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWS-nV-VtD">
+                                <rect key="frame" x="8" y="326" width="299" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -211,6 +218,7 @@
                     <connections>
                         <outlet property="bbiMojo" destination="cZV-uX-hCl" id="hr0-lY-pq6"/>
                         <outlet property="bbiSend" destination="9Ov-nE-pOB" id="DiG-od-sQF"/>
+                        <outlet property="lblGPSAccuracy" destination="VWS-nV-VtD" id="0rN-Pp-bJB"/>
                         <outlet property="lblGPSPosition" destination="N8E-ZD-E9N" id="UjA-CM-Fff"/>
                         <outlet property="txvMessage" destination="vTT-G4-Bjl" id="gGb-VH-zew"/>
                     </connections>
