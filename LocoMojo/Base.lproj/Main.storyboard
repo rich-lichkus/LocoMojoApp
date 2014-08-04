@@ -167,7 +167,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vTT-G4-Bjl">
-                                <rect key="frame" x="3" y="68" width="314" height="229"/>
+                                <rect key="frame" x="3" y="68" width="314" height="195"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -212,12 +212,21 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxa-o8-GvK">
+                                <rect key="frame" x="133" y="280" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="pressedCamera:" destination="gbR-Ad-Nil" eventType="touchUpInside" id="EuD-Kk-gmk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="bbiMojo" destination="cZV-uX-hCl" id="hr0-lY-pq6"/>
                         <outlet property="bbiSend" destination="9Ov-nE-pOB" id="DiG-od-sQF"/>
+                        <outlet property="btnCamera" destination="cxa-o8-GvK" id="zza-UY-8Y4"/>
                         <outlet property="lblGPSAccuracy" destination="VWS-nV-VtD" id="0rN-Pp-bJB"/>
                         <outlet property="lblGPSPosition" destination="N8E-ZD-E9N" id="UjA-CM-Fff"/>
                         <outlet property="txvMessage" destination="vTT-G4-Bjl" id="gGb-VH-zew"/>

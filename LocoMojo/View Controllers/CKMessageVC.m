@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *txvMessage;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiSend;
+@property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 
 - (IBAction)pressedBarButton:(id)sender;
 
@@ -62,6 +63,19 @@
 }
 
 #pragma mark - Target Actions
+- (IBAction)pressedCamera:(id)sender {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 10,10)];
+    view.layer.cornerRadius = self.view.frame.size.height*.5;
+    view.layer.masksToBounds = YES;
+    view.backgroundColor = [UIColor blueColor];
+//    [self.view addSubview:view];
+    
+    [UIView animateWithDuration:.4 animations:^{
+        view.frame = CGRectMake(-self.view.frame.size.height*.25, 0, self.view.frame.size.height, self.view.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 - (IBAction)pressedBarButton:(id)sender {
     UIBarButtonItem *barItem = (UIBarButtonItem*)sender;
