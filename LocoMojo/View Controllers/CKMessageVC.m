@@ -18,6 +18,10 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiSend;
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 
+// Camera View
+@property (strong, nonatomic) UIView *cameraView;
+@property (strong, nonatomic) UIButton *btnCancel;
+
 - (IBAction)pressedBarButton:(id)sender;
 
 @end
@@ -53,6 +57,18 @@
     [self.txvMessage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [self.txvMessage.layer setBorderWidth:2];
     self.txvMessage.delegate = self;
+    
+    // Camera View
+    self.cameraView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y,0,0)];
+    self.cameraView.layer.cornerRadius = 0;
+    self.cameraView.layer.masksToBounds = YES;
+    self.cameraView.backgroundColor = [UIColor lightGrayColor];
+    
+    self.btnCancel = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnCancel.frame = CGRectMake(self.view.center.x, self.view.center.y, 60, 44);
+    [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
+    [self.btnCancel addTarget:self action:@selector(pressedCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.cameraView];
 }
 
 #pragma mark - Methods
@@ -64,17 +80,11 @@
 
 #pragma mark - Target Actions
 - (IBAction)pressedCamera:(id)sender {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 10,10)];
-    view.layer.cornerRadius = self.view.frame.size.height*.5;
-    view.layer.masksToBounds = YES;
-    view.backgroundColor = [UIColor blueColor];
-//    [self.view addSubview:view];
-    
-    [UIView animateWithDuration:.4 animations:^{
-        view.frame = CGRectMake(-self.view.frame.size.height*.25, 0, self.view.frame.size.height, self.view.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-    }];
+    [self showCamera:YES];
+}
+
+-(void)pressedCancel:(id)sender{
+    [self showCamera:NO];
 }
 
 - (IBAction)pressedBarButton:(id)sender {
@@ -97,6 +107,39 @@
     
     [self.txvMessage resignFirstResponder];
     self.txvMessage.text = @"";
+}
+
+#pragma mark - Animations
+
+-(void) showCamera:(BOOL)show{
+    
+    [self.btnCancel removeFromSuperview];
+    
+    CGFloat viewSide = show ? self.view.frame.size.height*1.2 : 0;
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"cornerRadius"];
+    animation.timingFunction = [CAMediaTimingFunction     functionWithName:kCAMediaTimingFunctionLinear];
+    
+    animation.fromValue = [NSNumber numberWithFloat:show ? 0.0f : viewSide*.5];
+    animation.toValue = [NSNumber numberWithFloat:show ? viewSide*.5 : 0.0f];
+    
+    animation.duration = .5;
+    
+    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.cameraView.frame = CGRectMake(self.view.center.x-viewSide*.5,
+                                self.view.center.y-viewSide*.5,
+                                viewSide, viewSide);
+        [self.cameraView.layer addAnimation:animation forKey:@"cornerRadius"];
+    } completion: ^(BOOL finished){
+        [self.cameraView addSubview:self.btnCancel];
+        if(show){
+            self.cameraView.frame = self.view.frame;
+            self.cameraView.layer.cornerRadius = 0;
+        } else {
+            [self.btnCancel removeFromSuperview];
+            self.cameraView.layer.cornerRadius = viewSide*.5;
+        }
+    }];
 }
 
 #pragma mark - Navigation
