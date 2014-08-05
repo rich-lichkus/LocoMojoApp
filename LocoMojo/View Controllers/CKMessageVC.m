@@ -9,8 +9,9 @@
 #import "CKMessageVC.h"
 #import "PCLocoMojo.h"
 #import <AVFoundation/AVFoundation.h>
+#import <ImageIO/ImageIO.h>
 
-@interface CKMessageVC () <UITextViewDelegate>
+@interface CKMessageVC () <UITextViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblGPSPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblGPSAccuracy;
@@ -21,7 +22,9 @@
 
 // Camera View
 @property (strong, nonatomic) AVCaptureSession *session;
+@property (strong, nonatomic) AVCaptureDevice *deviceCamera;
 @property (strong, nonatomic) UIView *cameraView;
+@property (strong, nonatomic) AVCaptureStillImageOutput *capturedImage;
 @property (strong, nonatomic) UIImageView *imgCamera;
 @property (strong, nonatomic) UIButton *btnCancel;
 @property (strong, nonatomic) UIButton *btnFlash;
@@ -77,8 +80,6 @@
                                                                    self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.height*.5,
                                                                    self.view.frame.size.width, self.view.frame.size.height)];
     [self.cameraView addSubview:self.imgCamera];
-    
-   
     [self.view addSubview:self.cameraView];
 }
 
@@ -94,14 +95,21 @@
 	captureVideoPreviewLayer.frame = self.imgCamera.bounds;
 	[self.imgCamera.layer addSublayer:captureVideoPreviewLayer];
 	
-	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	self.deviceCamera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	NSError *error = nil;
-	AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+	AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:self.deviceCamera error:&error];
 	if (!input) {
 		// Handle the error appropriately.
 		NSLog(@"ERROR: trying to open camera: %@", error);
 	}
 	[self.session addInput:input];
+    
+    self.capturedImage = [[AVCaptureStillImageOutput alloc] init];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    [self.capturedImage setOutputSettings:outputSettings];
+    
+    [self.session addOutput:self.capturedImage];
+    
     [self.session startRunning];
 }
 
@@ -118,11 +126,43 @@
 }
 
 -(void)pressedCapture:(id)sender{
-    // Take Photo
+    
+    AVCaptureConnection *videoConnection = nil;
+    for (AVCaptureConnection *connection in self.capturedImage.connections)
+    {
+        for (AVCaptureInputPort *port in [connection inputPorts])
+        {
+            if ([[port mediaType] isEqual:AVMediaTypeVideo] )
+            {
+                videoConnection = connection;
+                break;
+            }
+        }
+        if (videoConnection) { break; }
+    }
+    
+    NSLog(@"about to request a capture from: %@", self.capturedImage);
+    [self.capturedImage captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler: ^(CMSampleBufferRef imageSampleBuffer, NSError *error)
+     {
+         CFDictionaryRef exifAttachments = CMGetAttachment(imageSampleBuffer, kCGImagePropertyExifDictionary, NULL);
+         if (exifAttachments)
+         {
+             // Do something with the attachments.
+             NSLog(@"attachements: %@", exifAttachments);
+         }
+         else
+             NSLog(@"no attachments");
+         
+         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+         UIImage *image = [[UIImage alloc] initWithData:imageData];
+         
+         self.imgCamera.image = image;
+     }];
 }
 
 -(void)pressedSwitchCamera:(id)sender{
     // Switch Camera
+
 }
 
 -(void)pressedPhoto:(id)sender{
@@ -131,6 +171,20 @@
 
 -(void)pressedFlash:(id)sender{
     // Switch flash
+    NSError *configError = nil;
+    [self.deviceCamera lockForConfiguration:&configError];
+    switch (self.deviceCamera.flashMode) {
+        case AVCaptureFlashModeAuto:
+            [self.deviceCamera setFlashMode:AVCaptureFlashModeOn];
+            break;
+        case AVCaptureFlashModeOn:
+            [self.deviceCamera setFlashMode:AVCaptureFlashModeOff];
+            break;
+        case AVCaptureFlashModeOff:
+            [self.deviceCamera setFlashMode:AVCaptureFlashModeAuto];
+            break;
+    }
+    [self.deviceCamera unlockForConfiguration];
 }
 
 -(void)pressedCancel:(id)sender{
@@ -221,6 +275,7 @@
     self.btnCapture.frame = CGRectMake(self.view.center.x-buttonSide*.5, self.view.frame.size.height-buttonPadding-buttonSide, buttonSide, buttonSide);
     [self.btnCapture setTitle:@"Capture" forState:UIControlStateNormal];
     [self.cameraView addSubview:self.btnCapture];
+    [self.btnCapture addTarget:self action:@selector(pressedCapture:) forControlEvents:UIControlEventTouchUpInside];
     
     // Photo Button
     self.btnPhoto = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -252,6 +307,7 @@
     [self.btnPhoto removeFromSuperview];
     [self.btnCancel removeFromSuperview];
 }
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
