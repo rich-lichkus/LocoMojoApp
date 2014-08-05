@@ -8,6 +8,7 @@
 
 #import "CKMessageVC.h"
 #import "PCLocoMojo.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CKMessageVC () <UITextViewDelegate>
 
@@ -19,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 
 // Camera View
+@property (strong, nonatomic) AVCaptureSession *session;
 @property (strong, nonatomic) UIView *cameraView;
+@property (strong, nonatomic) UIImageView *imgCamera;
 @property (strong, nonatomic) UIButton *btnCancel;
 
 - (IBAction)pressedBarButton:(id)sender;
@@ -46,6 +49,8 @@
     [super viewDidLoad];
     
     [self configureUIElements];
+    
+    [self configureCameraView];
 }
 
 #pragma mark - Configuration
@@ -64,11 +69,38 @@
     self.cameraView.layer.masksToBounds = YES;
     self.cameraView.backgroundColor = [UIColor lightGrayColor];
     
+    self.imgCamera = [[UIImageView alloc] initWithFrame:CGRectMake(self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.width*.5,
+                                                                   self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.height*.5,
+                                                                   self.view.frame.size.width, self.view.frame.size.height)];
+    [self.cameraView addSubview:self.imgCamera];
+    
     self.btnCancel = [UIButton buttonWithType:UIButtonTypeSystem];
     self.btnCancel.frame = CGRectMake(self.view.center.x, self.view.center.y, 60, 44);
     [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
     [self.btnCancel addTarget:self action:@selector(pressedCancel:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.cameraView];
+}
+
+-(void)configureCameraView{
+    
+    self.session = [[AVCaptureSession alloc] init];
+	self.session.sessionPreset = AVCaptureSessionPreset1920x1080;
+	
+	CALayer *viewLayer = self.imgCamera.layer;
+	NSLog(@"viewLayer = %@", viewLayer);
+	
+	AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+	captureVideoPreviewLayer.frame = self.imgCamera.bounds;
+	[self.imgCamera.layer addSublayer:captureVideoPreviewLayer];
+	
+	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	NSError *error = nil;
+	AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+	if (!input) {
+		// Handle the error appropriately.
+		NSLog(@"ERROR: trying to open camera: %@", error);
+	}
+	[self.session addInput:input];
 }
 
 #pragma mark - Methods
@@ -81,10 +113,12 @@
 #pragma mark - Target Actions
 - (IBAction)pressedCamera:(id)sender {
     [self showCamera:YES];
+    [self.session startRunning];
 }
 
 -(void)pressedCancel:(id)sender{
     [self showCamera:NO];
+    [self.session stopRunning];
 }
 
 - (IBAction)pressedBarButton:(id)sender {
@@ -113,12 +147,15 @@
 
 -(void) showCamera:(BOOL)show{
     
-    [self.btnCancel removeFromSuperview];
+    [self removeSubviewsToCameraView];
     
     if(!show){
         self.cameraView.frame = CGRectMake(self.view.center.x-self.view.frame.size.height*1.2 *.5,
                                             self.view.center.y-self.view.frame.size.height*1.2 *.5,
                                             self.view.frame.size.height*1.2 , self.view.frame.size.height*1.2 );
+        self.imgCamera.frame = CGRectMake(self.view.frame.size.height*1.2*.5-self.view.frame.size.width*.5,
+                                           self.view.frame.size.height*1.2*.5-self.view.frame.size.height*.5,
+                                           self.view.frame.size.width, self.view.frame.size.height);
     }
     
     CGFloat viewSide = show ? self.view.frame.size.height*1.2 : 0;
@@ -127,18 +164,24 @@
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     animation.fromValue = [NSNumber numberWithFloat:show ? 0.0f : self.view.frame.size.height*1.2*.5];
     animation.toValue = [NSNumber numberWithFloat:show ? self.view.frame.size.height*1.2*.5 : 0.0f];
-    animation.duration = .5;
+    animation.duration = .3;
     
-    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.cameraView.frame = CGRectMake(self.view.center.x-viewSide*.5,
                                 self.view.center.y-viewSide*.5,
                                 viewSide, viewSide);
         [self.cameraView.layer addAnimation:animation forKey:@"cornerRadius"];
+        
+        self.imgCamera.frame = CGRectMake(viewSide*.5-self.view.frame.size.width*.5,
+                                          viewSide*.5-self.view.frame.size.height*.5,
+                                          self.view.frame.size.width, self.view.frame.size.height);
+        
     } completion: ^(BOOL finished){
-        [self.cameraView addSubview:self.btnCancel];
+        [self addSubviewsToCameraView];
         if(show){
             self.cameraView.frame = self.view.frame;
             self.cameraView.layer.cornerRadius = 0;
+            self.imgCamera.frame = self.view.frame;
         } else {
             [self.btnCancel removeFromSuperview];
             self.cameraView.layer.cornerRadius = 0;
@@ -146,6 +189,15 @@
     }];
 }
 
+-(void)addSubviewsToCameraView{
+
+    [self.cameraView addSubview:self.btnCancel];
+}
+
+-(void)removeSubviewsToCameraView{
+//    [self.imgCamera removeFromSuperview];
+    [self.btnCancel removeFromSuperview];
+}
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

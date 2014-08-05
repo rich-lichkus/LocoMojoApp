@@ -14,6 +14,10 @@
 		0F0BB67219817FD300D1D12F /* CKCircleOverlayRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB67119817FD300D1D12F /* CKCircleOverlayRender.m */; };
 		0F0BB6751981831200D1D12F /* CKCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB6741981831200D1D12F /* CKCircle.m */; };
 		0F0BB67B1981AD9D00D1D12F /* CKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0BB67A1981AD9D00D1D12F /* CKPost.m */; };
+		0F1E40E019913FDB009886E0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1E40DF19913FDB009886E0 /* AVFoundation.framework */; };
+		0F1E40E219913FE3009886E0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1E40E119913FE3009886E0 /* CoreVideo.framework */; };
+		0F1E40E419913FEE009886E0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1E40E319913FEE009886E0 /* CoreMedia.framework */; };
+		0F1E40E619913FF5009886E0 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1E40E519913FF5009886E0 /* ImageIO.framework */; };
 		0F261171198039BD007AD560 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F261170198039BD007AD560 /* Parse.framework */; };
 		0F606A1F19899CD7000F489B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F606A1E19899CD7000F489B /* FacebookSDK.framework */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
@@ -77,6 +81,10 @@
 		0F0BB6741981831200D1D12F /* CKCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKCircle.m; path = "View Controllers/Map/CKCircle.m"; sourceTree = "<group>"; };
 		0F0BB6791981AD9D00D1D12F /* CKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKPost.h; path = Model/CKPost.h; sourceTree = "<group>"; };
 		0F0BB67A1981AD9D00D1D12F /* CKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKPost.m; path = Model/CKPost.m; sourceTree = "<group>"; };
+		0F1E40DF19913FDB009886E0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0F1E40E119913FE3009886E0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		0F1E40E319913FEE009886E0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0F1E40E519913FF5009886E0 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0F261170198039BD007AD560 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0F606A1E19899CD7000F489B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Frameworks/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +142,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F1E40E619913FF5009886E0 /* ImageIO.framework in Frameworks */,
+				0F1E40E419913FEE009886E0 /* CoreMedia.framework in Frameworks */,
+				0F1E40E219913FE3009886E0 /* CoreVideo.framework in Frameworks */,
+				0F1E40E019913FDB009886E0 /* AVFoundation.framework in Frameworks */,
 				0F914E10198C32AB0087282A /* Social.framework in Frameworks */,
 				0F914E0E198C32960087282A /* Accounts.framework in Frameworks */,
 				0F8FB99019802D8500F2A161 /* MapKit.framework in Frameworks */,
@@ -234,6 +246,10 @@
 		0F8FB9241980175700F2A161 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F1E40E519913FF5009886E0 /* ImageIO.framework */,
+				0F1E40E319913FEE009886E0 /* CoreMedia.framework */,
+				0F1E40E119913FE3009886E0 /* CoreVideo.framework */,
+				0F1E40DF19913FDB009886E0 /* AVFoundation.framework */,
 				0F914E0F198C32AB0087282A /* Social.framework */,
 				0F914E0D198C32960087282A /* Accounts.framework */,
 				0F606A1E19899CD7000F489B /* FacebookSDK.framework */,
