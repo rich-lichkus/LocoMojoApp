@@ -115,14 +115,18 @@
     
     [self.btnCancel removeFromSuperview];
     
+    if(!show){
+        self.cameraView.frame = CGRectMake(self.view.center.x-self.view.frame.size.height*1.2 *.5,
+                                            self.view.center.y-self.view.frame.size.height*1.2 *.5,
+                                            self.view.frame.size.height*1.2 , self.view.frame.size.height*1.2 );
+    }
+    
     CGFloat viewSide = show ? self.view.frame.size.height*1.2 : 0;
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"cornerRadius"];
-    animation.timingFunction = [CAMediaTimingFunction     functionWithName:kCAMediaTimingFunctionLinear];
-    
-    animation.fromValue = [NSNumber numberWithFloat:show ? 0.0f : viewSide*.5];
-    animation.toValue = [NSNumber numberWithFloat:show ? viewSide*.5 : 0.0f];
-    
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.fromValue = [NSNumber numberWithFloat:show ? 0.0f : self.view.frame.size.height*1.2*.5];
+    animation.toValue = [NSNumber numberWithFloat:show ? self.view.frame.size.height*1.2*.5 : 0.0f];
     animation.duration = .5;
     
     [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -137,7 +141,7 @@
             self.cameraView.layer.cornerRadius = 0;
         } else {
             [self.btnCancel removeFromSuperview];
-            self.cameraView.layer.cornerRadius = viewSide*.5;
+            self.cameraView.layer.cornerRadius = 0;
         }
     }];
 }
