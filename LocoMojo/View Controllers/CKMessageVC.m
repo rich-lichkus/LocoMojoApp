@@ -24,6 +24,10 @@
 @property (strong, nonatomic) UIView *cameraView;
 @property (strong, nonatomic) UIImageView *imgCamera;
 @property (strong, nonatomic) UIButton *btnCancel;
+@property (strong, nonatomic) UIButton *btnFlash;
+@property (strong, nonatomic) UIButton *btnSwitchCamera;
+@property (strong, nonatomic) UIButton *btnCapture;
+@property (strong, nonatomic) UIButton *btnPhoto;
 
 - (IBAction)pressedBarButton:(id)sender;
 
@@ -74,10 +78,7 @@
                                                                    self.view.frame.size.width, self.view.frame.size.height)];
     [self.cameraView addSubview:self.imgCamera];
     
-    self.btnCancel = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.btnCancel.frame = CGRectMake(self.view.center.x, self.view.center.y, 60, 44);
-    [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
-    [self.btnCancel addTarget:self action:@selector(pressedCancel:) forControlEvents:UIControlEventTouchUpInside];
+   
     [self.view addSubview:self.cameraView];
 }
 
@@ -101,6 +102,7 @@
 		NSLog(@"ERROR: trying to open camera: %@", error);
 	}
 	[self.session addInput:input];
+    [self.session startRunning];
 }
 
 #pragma mark - Methods
@@ -113,12 +115,26 @@
 #pragma mark - Target Actions
 - (IBAction)pressedCamera:(id)sender {
     [self showCamera:YES];
-    [self.session startRunning];
+}
+
+-(void)pressedCapture:(id)sender{
+    // Take Photo
+}
+
+-(void)pressedSwitchCamera:(id)sender{
+    // Switch Camera
+}
+
+-(void)pressedPhoto:(id)sender{
+    // Show photo library
+}
+
+-(void)pressedFlash:(id)sender{
+    // Switch flash
 }
 
 -(void)pressedCancel:(id)sender{
     [self showCamera:NO];
-    [self.session stopRunning];
 }
 
 - (IBAction)pressedBarButton:(id)sender {
@@ -189,13 +205,51 @@
     }];
 }
 
--(void)addSubviewsToCameraView{
-
+-(void)addSubviewsToCameraView
+{
+    CGFloat buttonPadding = 10;
+    CGFloat buttonSide = 50;
+    
+    // Switch Camera Button
+    self.btnSwitchCamera = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnSwitchCamera.frame = CGRectMake(self.view.frame.size.width-buttonPadding-buttonSide, buttonPadding, buttonSide, buttonSide);
+    [self.btnSwitchCamera setTitle:@"Flip" forState:UIControlStateNormal];
+    [self.cameraView addSubview:self.btnSwitchCamera];
+    
+    // Capture Button
+    self.btnCapture = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnCapture.frame = CGRectMake(self.view.center.x-buttonSide*.5, self.view.frame.size.height-buttonPadding-buttonSide, buttonSide, buttonSide);
+    [self.btnCapture setTitle:@"Capture" forState:UIControlStateNormal];
+    [self.cameraView addSubview:self.btnCapture];
+    
+    // Photo Button
+    self.btnPhoto = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnPhoto.frame = CGRectMake(self.view.frame.size.width-buttonPadding-buttonSide, self.view.frame.size.height-buttonPadding-buttonSide,
+                                   buttonSide, buttonSide);
+    [self.btnPhoto setTitle:@"Photo" forState:UIControlStateNormal];
+    [self.cameraView addSubview:self.btnPhoto];
+    
+    // Flash Button
+    self.btnFlash = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnFlash.frame = CGRectMake(buttonPadding, buttonPadding,
+                                   buttonSide, buttonSide);
+    [self.btnFlash setTitle:@"Flash" forState:UIControlStateNormal];
+    [self.cameraView addSubview:self.btnFlash];
+    
+    // Cancel Button
+    self.btnCancel = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.btnCancel.frame = CGRectMake(buttonPadding, self.view.frame.size.height-buttonPadding-buttonSide,
+                            buttonSide, buttonSide);
+    [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
+    [self.btnCancel addTarget:self action:@selector(pressedCancel:) forControlEvents:UIControlEventTouchUpInside];
     [self.cameraView addSubview:self.btnCancel];
 }
 
 -(void)removeSubviewsToCameraView{
-//    [self.imgCamera removeFromSuperview];
+    [self.btnFlash removeFromSuperview];
+    [self.btnSwitchCamera removeFromSuperview];
+    [self.btnCapture removeFromSuperview];
+    [self.btnPhoto removeFromSuperview];
     [self.btnCancel removeFromSuperview];
 }
 #pragma mark - Navigation
