@@ -49,8 +49,6 @@
     float halfScreen = self.frame.size.height*.5;
     float uiElementWidth = self.frame.size.width*.75;
     
-
-    
     // Lock Screen Top View
     self.uivTopView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,
                                                                self.frame.size.width,

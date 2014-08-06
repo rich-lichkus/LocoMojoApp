@@ -84,8 +84,8 @@
     
     [self configureChildViews];
     
-    self.uivLogin = [[CKLoginView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:self.uivLogin];
+//    self.uivLogin = [[CKLoginView alloc] initWithFrame:self.view.frame];
+//    [self.view addSubview:self.uivLogin];
     
     [self configureLockView];
     
