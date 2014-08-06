@@ -90,25 +90,25 @@
     
     self.regionalPostsLoaded = NO;
     
-     //[self configureCurrentUser];
+    [self configureCurrentUser];
 }
 
 #pragma mark - Configuration
 
-//-(void)configureCurrentUser{
-//    BOOL unlock = NO;
-//    if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
-//        NSLog(@"Facebook!");
-//        unlock = YES;
-//    } else if ([PFUser currentUser].isAuthenticated){
-//        NSLog(@"Email!");
-//        unlock = YES;
-//    }
-//    if(unlock){
-//        [self.loginVC.loginView unlockScreen:unlock];
-//        [self showProfileView:YES];
-//    }
-//}
+-(void)configureCurrentUser{
+    BOOL unlock = NO;
+    if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
+        NSLog(@"Facebook!");
+        unlock = YES;
+    } else if ([PFUser currentUser].isAuthenticated){
+        NSLog(@"Email!");
+        unlock = YES;
+    }
+    if(unlock){
+        [self.loginVC.loginView unlockScreen:unlock];
+        [self showProfileView:YES];
+    }
+}
 
 -(void)configureProfileView{
     
