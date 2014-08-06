@@ -13,6 +13,8 @@
 #import "CKMojoVC.h"
 #import "PCLocoMojo.h"
 
+#import "CKLoginView.h"
+
 #define CELL_SEPARATOR_HEIGHT 1
 #define PERCENTAGE_VIEW_WIDTH .70
 #define TEXTFIELD_HEIGHT 40
@@ -42,7 +44,9 @@
 @property (weak, nonatomic) CKTwitterNC *weak_twitterNC;
 @property (weak, nonatomic) CKUser *weak_currentUser;
 
-// Lock Screen
+@property (strong, nonatomic) CKLoginView *uivLogin;
+
+//// Lock Screen
 @property (strong, nonatomic) UIView *uivTopView;
 @property (strong, nonatomic) UIButton *btnFacebook;
 @property (strong, nonatomic) UIButton *btnTwitter;
@@ -79,6 +83,9 @@
     [super viewDidLoad];
     
     [self configureChildViews];
+    
+    self.uivLogin = [[CKLoginView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:self.uivLogin];
     
     [self configureLockView];
     

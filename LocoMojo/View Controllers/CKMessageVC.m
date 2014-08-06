@@ -162,7 +162,6 @@
 
 -(void)pressedSwitchCamera:(id)sender{
     // Switch Camera
-
 }
 
 -(void)pressedPhoto:(id)sender{
@@ -321,8 +320,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-
 
 
 @end

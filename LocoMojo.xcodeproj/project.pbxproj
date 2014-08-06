@@ -19,6 +19,7 @@
 		0F1E40E419913FEE009886E0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1E40E319913FEE009886E0 /* CoreMedia.framework */; };
 		0F1E40E619913FF5009886E0 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1E40E519913FF5009886E0 /* ImageIO.framework */; };
 		0F261171198039BD007AD560 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F261170198039BD007AD560 /* Parse.framework */; };
+		0F4A99711991AA6700C82A00 /* CKLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A99701991AA6700C82A00 /* CKLoginView.m */; };
 		0F606A1F19899CD7000F489B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F606A1E19899CD7000F489B /* FacebookSDK.framework */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9271980175700F2A161 /* CoreGraphics.framework */; };
@@ -86,6 +87,8 @@
 		0F1E40E319913FEE009886E0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0F1E40E519913FF5009886E0 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0F261170198039BD007AD560 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		0F4A996F1991AA6700C82A00 /* CKLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKLoginView.h; path = "View Controllers/Root/CKLoginView.h"; sourceTree = "<group>"; };
+		0F4A99701991AA6700C82A00 /* CKLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKLoginView.m; path = "View Controllers/Root/CKLoginView.m"; sourceTree = "<group>"; };
 		0F606A1E19899CD7000F489B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Frameworks/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9251980175700F2A161 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -224,6 +227,15 @@
 			name = MojoVC;
 			sourceTree = "<group>";
 		};
+		0F4A99721991AA6E00C82A00 /* Root Views */ = {
+			isa = PBXGroup;
+			children = (
+				0F4A996F1991AA6700C82A00 /* CKLoginView.h */,
+				0F4A99701991AA6700C82A00 /* CKLoginView.m */,
+			);
+			name = "Root Views";
+			sourceTree = "<group>";
+		};
 		0F8FB9191980175700F2A161 = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +334,7 @@
 			children = (
 				0F8FB9691980246100F2A161 /* CKRootVC.h */,
 				0F8FB96A1980246100F2A161 /* CKRootVC.m */,
+				0F4A99721991AA6E00C82A00 /* Root Views */,
 				0F0BB6781981944300D1D12F /* MojoVC */,
 				0F0BB6761981942E00D1D12F /* MapVC */,
 				0F0BB6771981943900D1D12F /* MessageVC */,
@@ -481,6 +494,7 @@
 				0FA18AD0198037DE00CFDC8C /* CKAppDelegate.m in Sources */,
 				0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */,
 				0FC8CB4D1981DB8D00D9DB19 /* CKMapPin.m in Sources */,
+				0F4A99711991AA6700C82A00 /* CKLoginView.m in Sources */,
 				0FC8CB541982DA0700D9DB19 /* CKButtonLocation.m in Sources */,
 				0F0BB6751981831200D1D12F /* CKCircle.m in Sources */,
 				0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */,
