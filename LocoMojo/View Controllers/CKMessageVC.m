@@ -57,7 +57,7 @@
     
     [self configureUIElements];
     
-    [self configureCameraView];
+    //[self configureCameraView];
 }
 
 #pragma mark - Configuration
@@ -71,15 +71,15 @@
     self.txvMessage.delegate = self;
     
     // Camera View
-    self.cameraView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y,0,0)];
-    self.cameraView.layer.cornerRadius = 0;
-    self.cameraView.layer.masksToBounds = YES;
-    self.cameraView.backgroundColor = [UIColor lightGrayColor];
-    
-    self.imgCamera = [[UIImageView alloc] initWithFrame:CGRectMake(self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.width*.5,
-                                                                   self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.height*.5,
-                                                                   self.view.frame.size.width, self.view.frame.size.height)];
-    [self.cameraView addSubview:self.imgCamera];
+//    self.cameraView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y,0,0)];
+//    self.cameraView.layer.cornerRadius = 0;
+//    self.cameraView.layer.masksToBounds = YES;
+//    self.cameraView.backgroundColor = [UIColor lightGrayColor];
+//    
+//    self.imgCamera = [[UIImageView alloc] initWithFrame:CGRectMake(self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.width*.5,
+//                                                                   self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.height*.5,
+//                                                                   self.view.frame.size.width, self.view.frame.size.height)];
+//    [self.cameraView addSubview:self.imgCamera];
     [self.view addSubview:self.cameraView];
 }
 

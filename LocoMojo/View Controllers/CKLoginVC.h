@@ -21,5 +21,4 @@
 @property (strong, nonatomic) CKLoginView *loginView;
 @property (nonatomic, getter = isLocked) BOOL locked;
 
-
 @end
