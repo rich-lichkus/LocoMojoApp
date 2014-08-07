@@ -25,9 +25,9 @@
 @property (strong, nonatomic) NSMutableArray *regionalPosts;
 
 -(instancetype)initUserWithPFUser:(PFUser*)pfUser;
--(instancetype)initUserWithFBUser:(id)fbUser;
+-(instancetype)initUserWithFBUser:(PFUser*)fbUser;
 -(void)updateUserWithPFUser:(PFUser*)pfUser;
--(void)updateUserWithFBUser:(id)fbUser;
+-(void)updateUserWithFBUser:(PFUser*)fbUser;
 //TODO:-(void)updateUserWithTWUser:(*)twUser;
 
 -(void)setRegionalPostsWithArrayofPfPosts:(NSArray*)pfPosts;

@@ -27,13 +27,13 @@
     return self;
 }
 
--(instancetype)initUserWithFBUser:(id)fbUser{
+-(instancetype)initUserWithFBUser:(PFUser*)fbUser{
     self = [super init];
     if(self){
         self.firstName = fbUser[@"first_name"];
         self.lastName = fbUser[@"last_name"];
         self.accountType = kFacebook;
-        self.userId = fbUser[@"id"];
+        self.userId = fbUser.objectId;
         self.username = fbUser[@"name"];
         self.avatarLocation = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fbUser[@"id"]];
     }
@@ -49,11 +49,11 @@
     self.email = pfUser.email;
 }
 
--(void)updateUserWithFBUser:(id)fbUser{
+-(void)updateUserWithFBUser:(PFUser*)fbUser{
     self.firstName = fbUser[@"first_name"];
     self.lastName = fbUser[@"last_name"];
     self.accountType = kFacebook;
-    self.userId = fbUser[@"id"];
+    self.userId = fbUser.objectId;
     self.username = fbUser[@"name"];
     self.avatarLocation = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fbUser[@"id"]];
 }

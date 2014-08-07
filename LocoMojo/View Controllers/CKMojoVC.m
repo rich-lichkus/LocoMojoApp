@@ -9,6 +9,7 @@
 #import "CKMojoVC.h"
 #import "CKMessageVC.h"
 #import "CKPost.h"
+#import "CKUser.h"
 #import "PCLocoMojo.h"
 
 @interface CKMojoVC () <UITableViewDataSource, UITableViewDelegate>
@@ -72,7 +73,6 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.text = [[post.user.firstName stringByAppendingString:@" "] stringByAppendingString:post.user.lastName];
-//    cell.imageView.image = [PCLocoMojo imageOfAvatar];
     return cell;
 }
 
@@ -87,6 +87,29 @@
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
     return rect.size.height+40;
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    return NO;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if([self.openPosts[indexPath.row] isKindOfClass: CKPost.class]){
+        CKPost *post = (CKPost*)self.openPosts[indexPath.row];
+        if ([post.user.userId isEqualToString: [PFUser currentUser].objectId])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //TODO: delete post in parse
+        NSLog(@"Delete post");
+    }
 }
 
 #pragma mark - Target Actions

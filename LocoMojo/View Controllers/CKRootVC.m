@@ -72,31 +72,16 @@
 {
     [super viewDidLoad];
     
+    [self configureProfileView];
+    
     [self configureControllers];
     
     [self configureChildViews];
-    
-    [self configureProfileView];
     
     self.regionalPostsLoaded = NO;
 }
 
 #pragma mark - Configuration
-
--(void)configureCurrentUser{
-    BOOL unlock = NO;
-    if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
-        NSLog(@"Facebook!");
-        unlock = YES;
-    } else if ([PFUser currentUser].isAuthenticated){
-        NSLog(@"Email!");
-        unlock = YES;
-    }
-    if(unlock){
-        [self.loginVC.loginView unlockScreen:unlock];
-        [self showProfileView:YES];
-    }
-}
 
 -(void)configureProfileView{
     
@@ -122,6 +107,7 @@
     [self.userView addSubview:self.imgAvatar];
     [self.userView addSubview:self.btnUsername];
     [self.view addSubview:self.userView];
+    NSLog(@"Profile view");
 }
 
 -(void)configureChildViews{
@@ -149,6 +135,8 @@
     [self.loginVC didMoveToParentViewController:self];
     [self.view addSubview:self.loginVC.view];
     self.loginVC.delegate = self;
+    [self.loginVC configureCurrentUser];
+    NSLog(@"set delegate");
 }
 
 -(void)configureControllers {
@@ -224,7 +212,7 @@
     [self parsePostMessage:message];
 }
 
-#pragma mark - Notes Delegate
+#pragma mark - Login Delegate
 
 -(void)openProfileView{
     [self showProfileView:YES];
@@ -245,10 +233,13 @@
 -(void)showProfileView:(BOOL)show{
 
     CGFloat dy = self.userView.frame.size.height;
+    [self.view bringSubviewToFront:self.userView];
+    NSLog(@"%@", NSStringFromCGRect(self.userView.frame));
     dy = show ? -dy : dy;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [UIView animateWithDuration:.3 animations:^{
             self.userView.frame = CGRectOffset(self.userView.frame, 0, dy);
+            NSLog(@"%@", NSStringFromCGRect(self.userView.frame));
         } completion:^(BOOL finished) {
             
         }];

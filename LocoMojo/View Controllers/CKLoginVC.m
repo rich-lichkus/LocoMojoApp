@@ -23,7 +23,7 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if(self){
-        NSLog(@"coder");
+        
     }
     return self;
 }
@@ -37,9 +37,27 @@
     [self configureLoginViews];
     
     [self configureControllers];
+    
+//    [self configureCurrentUser];
 }
 
 #pragma mark - Configuration
+
+-(void)configureCurrentUser{
+    NSLog(@"configureCurrentUser");
+    BOOL unlock = NO;
+    if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
+        NSLog(@"Facebook!");
+        unlock = YES;
+    } else if ([PFUser currentUser].isAuthenticated){
+        NSLog(@"Email!");
+        unlock = YES;
+    }
+    if(unlock){
+        [self.loginView unlockScreen:unlock];
+        [self.delegate openProfileView];
+    }
+}
 
 -(void)configureLoginViews{
     self.loginView = [[CKLoginView alloc] initWithFrame:self.view.frame];
