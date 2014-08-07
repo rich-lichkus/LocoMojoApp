@@ -1,6 +1,6 @@
 LocoMojoApp
 ===========
-|           |              
+|           |                  |
 |:----------|:-----------------|
 |Developer  | Richard Lichkus  |
 |Target     | iOS 7            |
@@ -8,7 +8,7 @@ LocoMojoApp
 
 Test Account
 -------------
-|          |          |
+|Account   |Params    |
 |:---------|:---------|
 |Username  |Test      |
 |Password  |password  |
@@ -22,11 +22,16 @@ Features
    - Messages are visible in table view
 * Red pins
    - Messages pinned within 2 kilometers of your current location
+* Account Types Supported
+   - Facebook
+   - Twitter
+   - Email
 
 Frameworks
 ----------
 * Map Kit
 * Core Location
+* Facebook SDK
 
 Back End
 --------
