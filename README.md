@@ -1,6 +1,6 @@
 LocoMojoApp
 ===========
-|           |                  |
+
 |:----------|:-----------------|
 |Developer  | Richard Lichkus  |
 |Target     | iOS 7            |
