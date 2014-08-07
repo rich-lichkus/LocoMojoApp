@@ -62,7 +62,7 @@
 
 #pragma mark - Configuration
 
--(void)configureUIElements{                                 
+-(void)configureUIElements{
     // TextView
     self.txvMessage.layer.cornerRadius =10;
     self.txvMessage.layer.masksToBounds = YES;

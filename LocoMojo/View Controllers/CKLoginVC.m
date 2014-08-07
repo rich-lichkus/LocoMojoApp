@@ -67,6 +67,9 @@
             if(!error){
                 [self.weak_currentUser updateUserWithPFUser:user];
                 [self unlockScreen];
+                self.loginView.txtPassword.text = @"";
+                self.loginView.txtUsername.text = @"";
+                self.loginView.btnLogin.enabled = NO;
             } else {
                 NSAssert(error, @"Error: Parse email login.");
                 NSLog(@"%@",error.localizedDescription);
