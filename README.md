@@ -12,7 +12,7 @@ Test Account
 |Username  |Test      |
 |Password  |password  |
 
-* Set iphone simulator position to **position** for sample interaction.
+* Set iphone simulator position to **[47.605050, -122.334569]** for sample interaction.
 
 Features
 ---------
