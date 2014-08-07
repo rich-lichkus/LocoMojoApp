@@ -144,6 +144,7 @@
 - (IBAction)pressedLocation:(id)sender {
 
     [self.btnLocation setSelected:!self.btnLocation.selected];
+    [self observeValueForKeyPath:@"ckCalled" ofObject:nil change:nil context:nil];
 }
 
 #pragma mark - Methods
@@ -202,7 +203,5 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-
 
 @end

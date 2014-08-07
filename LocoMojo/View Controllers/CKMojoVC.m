@@ -108,7 +108,18 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //TODO: delete post in parse
-        NSLog(@"Delete post");
+        if([self.openPosts[indexPath.row] isKindOfClass: CKPost.class]){
+            CKPost *post = (CKPost*)self.openPosts[indexPath.row];
+            PFQuery *query = [PFQuery queryWithClassName:@"post"];
+            [query whereKey:@"objectId" equalTo:post.iD];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if(objects.count > 0){
+//                    [objects[0] deleteInBackground];
+//                    [self.openPosts removeObjectAtIndex:indexPath.row];
+//                    [self.tblFeed deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                }
+            }];
+        }
     }
 }
 
