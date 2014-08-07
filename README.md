@@ -17,16 +17,16 @@ Test Account
 Features
 ---------
 * App allows users to pin geo-tagged messages. 
-* All messages are tagged with the users current location.
-* Green pins
-   - Messages pinned within 250 meters of your current location
-   - Messages are visible in table view
-* Red pins
-   - Messages pinned within 2 kilometers of your current location
+* All messages are tagged with the user's current location.
+* Green Pins
+   - Pinned within 250 meters of the user's current location
+   - Messages displayed in the table
+* Red Pins
+   - Pinned within 2 kilometers of the user's current location
 * Map
-   - Green circle annotation which
+   - Green circle annotation shows a 250 meter radius.
    - Displays both red and green pins.
-   - Green pins have a callout 
+   - Green pins have a message callout.
 * Sign-In
    - Facebook
    - Email
