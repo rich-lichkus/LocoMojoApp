@@ -20,6 +20,10 @@
 @property (strong, nonatomic) UIView *uivBottomView;
 @property (strong, nonatomic) UIButton *btnLogin;
 
+@property (strong, nonatomic) UIView *uivError;
+@property (strong, nonatomic) UILabel *lblError;
+
 -(void)unlockScreen:(BOOL)authenticated;
+-(void)showErrorMessage:(NSString*)errorMessage willShow:(BOOL)show;
 
 @end

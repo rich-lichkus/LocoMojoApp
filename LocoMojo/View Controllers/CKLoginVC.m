@@ -37,13 +37,12 @@
     [self configureLoginViews];
     
     [self configureControllers];
-    
-//    [self configureCurrentUser];
 }
 
 #pragma mark - Configuration
 
 -(void)configureCurrentUser{
+    
     NSLog(@"configureCurrentUser");
     BOOL unlock = NO;
     if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
@@ -78,7 +77,6 @@
 #pragma mark - Target Actions
 
 -(void)pressedLogin:(id)sender{
-    // TODO: Handle parse error and/or display
     [self.loginView.txtPassword resignFirstResponder];
     if(self.loginView.txtPassword.text.length >0 && self.loginView.txtPassword.text.length >0){
         [PFUser logInWithUsernameInBackground:self.loginView.txtUsername.text password:self.loginView.txtPassword.text block:^(PFUser *user, NSError *error) {
@@ -89,8 +87,7 @@
                 self.loginView.txtUsername.text = @"";
                 self.loginView.btnLogin.enabled = NO;
             } else {
-                NSAssert(error, @"Error: Parse email login.");
-                NSLog(@"%@",error.localizedDescription);
+                [self handleLoginError:error];
             }
         }];
     }
@@ -99,15 +96,15 @@
 -(void)pressedFacebookLogin:(id)sender{
     // The permissions requested from the user
     NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
-    
+
     // Login PFUser using Facebook
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
 
         if (!user) {
             if (!error) {
-                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                [self.loginView showErrorMessage:@"Facebook login canceled." willShow:YES];
             } else {
-                NSLog(@"Uh oh. An error occurred: %@", error);
+                [self handleLoginError:error];
             }
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
@@ -163,10 +160,10 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     switch (textField.tag) {
         case kLoginUsernameTxtTag:
-            
             break;
-        case kLoginPasswordTxtTag:
+        case kLoginPasswordTxtTag:{
             [self.loginView.btnLogin setEnabled:YES];
+        }
             break;
     }
 }
@@ -174,8 +171,30 @@
 #pragma mark - Self Defined
 
 -(void)unlockScreen{
+    [self.loginView showErrorMessage:nil willShow:NO];
     [self.loginView unlockScreen:YES];
     [self.delegate openProfileView];
+}
+
+-(void)handleLoginError:(id)error{
+    
+    NSString *errorMessage;
+    
+    if([error isKindOfClass:[NSError class]]){
+        
+        NSError *nsError = (NSError*)error;
+        
+        switch ([nsError.userInfo[@"code"] integerValue]) {
+            case 101:
+                 errorMessage = @"Invalid Credentials.";
+                break;
+            default:
+                 errorMessage = @"Error Occurred.";
+                break;
+        }
+    }
+    
+    [self.loginView showErrorMessage:errorMessage willShow:YES];
 }
 
 #pragma mark - Navigation

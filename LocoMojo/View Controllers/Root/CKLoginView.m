@@ -60,6 +60,19 @@
     [self.btnTwitter setBackgroundImage:[PCLocoMojo imageOfLoginTwitter] forState:UIControlStateNormal];
     [self.btnTwitter setTitle:@"Twitter" forState:UIControlStateNormal];
     
+    // Error View
+    self.uivError = [[UIView alloc] initWithFrame:CGRectMake(self.uivTopView.frame.origin.x,
+                                                             self.btnFacebook.frame.origin.y+TEXTFIELD_PADDING+TEXTFIELD_HEIGHT+20,
+                                                             self.uivTopView.frame.size.width, 0)];
+    self.uivError.backgroundColor = [UIColor redColor];
+    [self.uivTopView addSubview:self.uivError];
+    
+    self.lblError = [[UILabel alloc] initWithFrame:self.uivError.bounds];
+    self.lblError.text = @"Error";
+    self.lblError.textAlignment = NSTextAlignmentCenter;
+    self.lblError.textColor = [UIColor whiteColor];
+    [self.uivError addSubview:self.lblError];
+
     
     self.txtUsername = [[UITextField alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5),
                                                                      self.uivTopView.frame.size.height - (2*TEXTFIELD_HEIGHT+2*TEXTFIELD_PADDING),
@@ -97,8 +110,10 @@
     [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginNormal] forState:UIControlStateNormal];
     self.btnLogin.layer.cornerRadius = 5;
     self.btnLogin.layer.masksToBounds = YES;
-    
     [self.uivBottomView addSubview:self.btnLogin];
+    
+ 
+    
     [self addSubview:self.uivBottomView];
 }
 
@@ -124,6 +139,24 @@
             }
         }];
     }];
+}
+
+-(void)showErrorMessage:(NSString*)errorMessage willShow:(BOOL)show{
+    
+    self.lblError.text = errorMessage;
+    
+    CGFloat height = show ? 40 : 0;
+    CGFloat dy = show ? 20 : -20;
+    
+    [UIView animateWithDuration:.3 animations:^{
+        
+        self.uivError.frame = CGRectMake(self.uivError.frame.origin.x, self.uivError.frame.origin.y-dy, self.uivError.frame.size.width, height);
+        self.lblError.frame = self.uivError.bounds;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 @end

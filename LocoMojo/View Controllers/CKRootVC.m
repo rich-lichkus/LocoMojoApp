@@ -162,7 +162,7 @@
 #pragma mark - Target Action
 
 -(void)pressedUsername:(id)sender{
-    // TODO: Present Action sheet to log out, options based on account used to sign in
+    // TODO: Present Action sheet to log out, options based on account used to sign in    
     NSLog(@"Pressed Username");
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Logout?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Logout", nil];
     [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
