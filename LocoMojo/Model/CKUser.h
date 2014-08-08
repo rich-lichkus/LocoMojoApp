@@ -26,9 +26,10 @@
 
 -(instancetype)initUserWithPFUser:(PFUser*)pfUser;
 -(instancetype)initUserWithFBUser:(PFUser*)fbUser;
+-(instancetype)initUserWithTWUser:(PFUser*)twUser;
 -(void)updateUserWithPFUser:(PFUser*)pfUser;
 -(void)updateUserWithFBUser:(PFUser*)fbUser;
-//TODO:-(void)updateUserWithTWUser:(*)twUser;
+-(void)updateUserWithTWUser:(PFUser*)twUser;
 
 -(void)setRegionalPostsWithArrayofPfPosts:(NSArray*)pfPosts;
 -(void)addRegionalPostWithPfPost:(PFObject*)pfPost;

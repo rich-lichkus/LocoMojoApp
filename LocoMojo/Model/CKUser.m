@@ -40,6 +40,19 @@
     return self;
 }
 
+-(instancetype)initUserWithTWUser:(PFUser*)twUser{
+    self = [super init];
+    if (self){
+        self.firstName = twUser[@"first_name"];
+        self.lastName = twUser[@"last_name"];
+        self.accountType = kTwitter;
+        self.userId = twUser.objectId;
+        self.username = [[PFTwitterUtils twitter] screenName];
+        self.avatarLocation = twUser[@"avatar_location"];
+    }
+    return self;
+}
+
 -(void)updateUserWithPFUser:(PFUser *)pfUser{
     self.firstName = pfUser[@"first_name"];
     self.lastName = pfUser[@"last_name"];
@@ -56,6 +69,15 @@
     self.userId = fbUser.objectId;
     self.username = fbUser[@"name"];
     self.avatarLocation = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fbUser[@"id"]];
+}
+
+-(void)updateUserWithTWUser:(PFUser*)twUser{
+    self.firstName = twUser[@"first_name"];
+    self.lastName = twUser[@"last_name"];
+    self.accountType = kTwitter;
+    self.userId = twUser.objectId;
+    self.username = [[PFTwitterUtils twitter] screenName];
+    self.avatarLocation = twUser[@"avatar_location"];
 }
 
 #pragma mark - Posts

@@ -48,6 +48,9 @@
     if([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
         NSLog(@"Facebook!");
         unlock = YES;
+    } else if([PFUser currentUser] && [PFTwitterUtils isLinkedWithUser:[PFUser currentUser]]){
+        NSLog(@"Twitter!");
+        unlock = YES;
     } else if ([PFUser currentUser].isAuthenticated){
         NSLog(@"Email!");
         unlock = YES;
@@ -110,6 +113,7 @@
             NSLog(@"User with facebook signed up and logged in!");
             [self unlockScreen];
             [self addNewFBInfoToPFUser];
+            [self.weak_currentUser updateUserWithFBUser:user];
         } else {
             NSLog(@"User with facebook logged in!");
             [self unlockScreen];
@@ -125,18 +129,38 @@
 -(void)pressedTwitterLogin:(id)sender{
     [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
         if (!user) {
-            NSLog(@"The user cancelled the Twitter login.");
-            return;
+            if(!error){
+                NSLog(@"The user cancelled the Twitter login.");
+            } else {
+                [self handleLoginError:error];
+            }
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in with Twitter!");
+            NSString *twitterUsername = [[PFTwitterUtils twitter] screenName];
+        
+            NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSString * requestString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/users/show.json?screen_name=%@", twitterUsername];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestString]];
+            [[PFTwitterUtils twitter] signRequest:request];
+            NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {                
+                NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+                if (!error) {
+                    NSArray *nameArray = [result[@"name"] componentsSeparatedByString:@" "];
+                    user[@"first_name"] = nameArray[0];
+                    user[@"last_name"] = nameArray[1];
+                    user[@"account_type"] = [NSNumber numberWithInteger: kTwitter];
+                    user[@"avatar_location"] = [result[@"profile_image_url_https"] stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
+                    [user saveEventually];
+                    [self.weak_currentUser updateUserWithTWUser:user];
+                }
+            }];
+            [dataTask resume];
             [self unlockScreen];
-            //[self addNewTWInfoToPFUser];
-            NSLog(@"user");
+
         } else {
             NSLog(@"User logged in with Twitter!");
+            [self.weak_currentUser updateUserWithTWUser:user];
             [self unlockScreen];
-            // Get user's Twitter data
-            NSLog(@"user");
         }
     }];
 }

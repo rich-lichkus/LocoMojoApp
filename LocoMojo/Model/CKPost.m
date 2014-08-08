@@ -30,7 +30,7 @@
             }
                 break;
             case kTwitter: {
-                
+                self.user = [[CKUser alloc] initUserWithTWUser:postObject[@"creator"]];
             }
                 break;
         }
