@@ -14,11 +14,12 @@
 @interface CKMessageVC () <UITextViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblGPSPosition;
-@property (weak, nonatomic) IBOutlet UILabel *lblGPSAccuracy;
+//@property (weak, nonatomic) IBOutlet UILabel *lblGPSAccuracy;
 @property (weak, nonatomic) IBOutlet UITextView *txvMessage;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiSend;
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
+@property (weak, nonatomic) IBOutlet UIImageView *imgAccuracyGauge;
 
 // Camera View
 @property (strong, nonatomic) AVCaptureSession *session;
@@ -70,6 +71,9 @@
     [self.txvMessage.layer setBorderWidth:2];
     self.txvMessage.delegate = self;
     
+    // Accuracy Gauge
+    self.imgAccuracyGauge.image = [PCLocoMojo imageOfAccuracyGaugeWithGpsAccuracy:1000];
+    
     // Camera View
 //    self.cameraView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y,0,0)];
 //    self.cameraView.layer.cornerRadius = 0;
@@ -117,7 +121,9 @@
 
 -(void)setTextForGPSLabel:(CLLocation *)location {
     self.lblGPSPosition.text = [NSString stringWithFormat:@"GPS: %.6f, %.6f",location.coordinate.latitude, location.coordinate.longitude];
-    self.lblGPSAccuracy.text = [NSString stringWithFormat:@"Accuracy: H%.2f, V%.2f",location.horizontalAccuracy, location.verticalAccuracy];
+    
+//    self.lblGPSAccuracy.text = [NSString stringWithFormat:@"Accuracy: H%.2f, V%.2f",location.horizontalAccuracy, location.verticalAccuracy];
+    self.imgAccuracyGauge.image = [PCLocoMojo imageOfAccuracyGaugeWithGpsAccuracy:location.horizontalAccuracy];
 }
 
 #pragma mark - Target Actions

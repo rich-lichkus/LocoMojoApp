@@ -1191,7 +1191,7 @@ static UIImage* _imageOfTable = nil;
 
     CGRect oval5Rect = CGRectMake(-10, -10, 20, 20);
     UIBezierPath* oval5Path = [UIBezierPath bezierPathWithOvalInRect: oval5Rect];
-    [UIColor.lightGrayColor setStroke];
+    [color9 setStroke];
     oval5Path.lineWidth = 1.5;
     [oval5Path stroke];
     NSMutableParagraphStyle* oval5Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
@@ -1206,25 +1206,25 @@ static UIImage* _imageOfTable = nil;
 
     //// Rectangle Drawing
     UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(14, 2, 2, 9)];
-    [UIColor.lightGrayColor setFill];
+    [color9 setFill];
     [rectanglePath fill];
 
 
     //// Rectangle 2 Drawing
     UIBezierPath* rectangle2Path = [UIBezierPath bezierPathWithRect: CGRectMake(14, 19, 2, 9)];
-    [UIColor.lightGrayColor setFill];
+    [color9 setFill];
     [rectangle2Path fill];
 
 
     //// Rectangle 3 Drawing
     UIBezierPath* rectangle3Path = [UIBezierPath bezierPathWithRect: CGRectMake(19, 14, 9, 2)];
-    [UIColor.lightGrayColor setFill];
+    [color9 setFill];
     [rectangle3Path fill];
 
 
     //// Rectangle 4 Drawing
     UIBezierPath* rectangle4Path = [UIBezierPath bezierPathWithRect: CGRectMake(2, 14, 9, 2)];
-    [UIColor.lightGrayColor setFill];
+    [color9 setFill];
     [rectangle4Path fill];
 }
 
