@@ -30,11 +30,11 @@ Features
 * Sign-In
    - Facebook
    - Email
+   - Twitter
 
 Future Features
 ----------------
 * Geo-tagged photos
-* Twitter Sign-In
 * Up/ down voting tagged messages
 
 Frameworks
