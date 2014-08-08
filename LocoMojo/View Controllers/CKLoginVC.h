@@ -12,7 +12,7 @@
 @protocol CKLoginVCDelegate <NSObject>
 
 -(void)openProfileView;
-
+-(void)setUsername;
 @end
 
 @interface CKLoginVC : UIViewController

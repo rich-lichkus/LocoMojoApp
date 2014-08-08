@@ -75,7 +75,7 @@
     [self configureProfileView];
     
     [self configureControllers];
-    
+
     [self configureChildViews];
     
     self.regionalPostsLoaded = NO;
@@ -101,13 +101,13 @@
     self.btnUsername = [UIButton buttonWithType:UIButtonTypeSystem];
     self.btnUsername.frame = CGRectMake(self.imgAvatar.frame.size.width+padding, 0,
                                         self.userView.frame.size.width-2*self.imgAvatar.frame.size.width-2*imgPadding-2*padding, viewHeight);
-    [self.btnUsername setTitle:@"Richard Lichkus" forState:UIControlStateNormal];
+    [self.btnUsername setTitle:@""  forState:UIControlStateNormal];
+    NSLog(@"setTitle");
     [self.btnUsername addTarget:self action:@selector(pressedUsername:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.userView addSubview:self.imgAvatar];
     [self.userView addSubview:self.btnUsername];
     [self.view addSubview:self.userView];
-    NSLog(@"Profile view");
 }
 
 -(void)configureChildViews{
@@ -136,7 +136,6 @@
     [self.view addSubview:self.loginVC.view];
     self.loginVC.delegate = self;
     [self.loginVC configureCurrentUser];
-    NSLog(@"set delegate");
 }
 
 -(void)configureControllers {
@@ -216,6 +215,12 @@
 
 -(void)openProfileView{
     [self showProfileView:YES];
+}
+
+-(void)setUsername{
+    [self.btnUsername setTitle:[[self.weak_currentUser.firstName stringByAppendingString:@" "]
+                                stringByAppendingString:self.weak_currentUser.lastName] forState:UIControlStateNormal];
+    [self.btnUsername setNeedsDisplay];
 }
 
 #pragma mark - Core Location Delegate

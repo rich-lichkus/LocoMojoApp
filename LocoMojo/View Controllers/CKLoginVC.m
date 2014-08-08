@@ -89,6 +89,7 @@
                 self.loginView.txtPassword.text = @"";
                 self.loginView.txtUsername.text = @"";
                 self.loginView.btnLogin.enabled = NO;
+                [self.delegate setUsername];
             } else {
                 [self handleLoginError:error];
             }
@@ -114,6 +115,7 @@
             [self unlockScreen];
             [self addNewFBInfoToPFUser];
             [self.weak_currentUser updateUserWithFBUser:user];
+            [self.delegate setUsername];
         } else {
             NSLog(@"User with facebook logged in!");
             [self unlockScreen];
@@ -121,6 +123,7 @@
             FBRequest *request = [FBRequest requestForMe];
             [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 [self.weak_currentUser updateUserWithFBUser:result];
+                [self.delegate setUsername];
             }];
         }
     }];
@@ -152,6 +155,7 @@
                     user[@"avatar_location"] = [result[@"profile_image_url_https"] stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
                     [user saveEventually];
                     [self.weak_currentUser updateUserWithTWUser:user];
+                    [self.delegate setUsername];
                 }
             }];
             [dataTask resume];
@@ -161,6 +165,7 @@
             NSLog(@"User logged in with Twitter!");
             [self.weak_currentUser updateUserWithTWUser:user];
             [self unlockScreen];
+            [self.delegate setUsername];
         }
     }];
 }

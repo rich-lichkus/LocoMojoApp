@@ -112,8 +112,6 @@
     self.btnLogin.layer.masksToBounds = YES;
     [self.uivBottomView addSubview:self.btnLogin];
     
- 
-    
     [self addSubview:self.uivBottomView];
 }
 
