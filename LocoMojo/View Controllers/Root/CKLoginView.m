@@ -105,7 +105,7 @@
     
     self.btnLogin = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5), 0, uiElementWidth, UIBUTTON_HEIGHT)];
     [self.btnLogin setTitle:@"Login" forState:UIControlStateNormal];
-    self.btnLogin.enabled = NO;
+    self.btnLogin.enabled = YES;
     [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginDisabled] forState:UIControlStateDisabled];
     [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginNormal] forState:UIControlStateNormal];
     self.btnLogin.layer.cornerRadius = 5;
@@ -143,17 +143,20 @@
     
     self.lblError.text = errorMessage;
     
-    CGFloat height = show ? 40 : 0;
-    CGFloat dy = show ? 20 : -20;
+    if (self.uivError.frame.size.height < 40) {
     
-    [UIView animateWithDuration:.3 animations:^{
+        CGFloat height = show ? 40 : 0;
+        CGFloat dy = show ? 20 : -20;
         
-        self.uivError.frame = CGRectMake(self.uivError.frame.origin.x, self.uivError.frame.origin.y-dy, self.uivError.frame.size.width, height);
-        self.lblError.frame = self.uivError.bounds;
-        
-    } completion:^(BOOL finished) {
-        
-    }];
+        [UIView animateWithDuration:.3 animations:^{
+            
+            self.uivError.frame = CGRectMake(self.uivError.frame.origin.x, self.uivError.frame.origin.y-dy, self.uivError.frame.size.width, height);
+            self.lblError.frame = self.uivError.bounds;
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
     
 }
 

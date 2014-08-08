@@ -91,7 +91,7 @@
                     [self unlockScreen];
                     self.loginView.txtPassword.text = @"";
                     self.loginView.txtUsername.text = @"";
-                    self.loginView.btnLogin.enabled = NO;
+                    self.loginView.btnLogin.enabled = YES;
                     [self.delegate setUsername];
                 } else {
                     [self handleLoginError:error];
