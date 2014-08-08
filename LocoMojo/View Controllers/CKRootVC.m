@@ -38,7 +38,8 @@
 @property (strong, nonatomic) CKLoginVC *loginVC;
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) NSDate *lastLocationDate;
-
+@property (nonatomic) BOOL api_status;
+ 
 // Weak
 @property (weak, nonatomic) CKAppDelegate *weak_appDelegate;
 @property (weak, nonatomic) CKOAuthController *weak_oAuthController;
@@ -72,6 +73,10 @@
 {
     [super viewDidLoad];
     
+    self.api_status = YES;
+    
+    [self configureParse];
+    
     [self configureProfileView];
     
     [self configureControllers];
@@ -82,6 +87,20 @@
 }
 
 #pragma mark - Configuration
+
+-(void)configureParse{
+    PFQuery *query = [PFQuery queryWithClassName:@"api"];
+    [query whereKey:@"objectId" equalTo:@"4P2cNUeM2g"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error && objects.count >0){
+            self.api_status =[objects[0][@"status"] boolValue];
+            self.loginVC.api_status = self.api_status;
+            if(!self.api_status){
+                [self.loginVC.loginView showErrorMessage:@"App Shutdown." willShow:YES];
+            }
+        }
+    }];
+}
 
 -(void)configureProfileView{
     

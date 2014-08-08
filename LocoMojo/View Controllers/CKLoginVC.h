@@ -20,6 +20,7 @@
 @property (nonatomic, unsafe_unretained) id<CKLoginVCDelegate> delegate;
 @property (strong, nonatomic) CKLoginView *loginView;
 @property (nonatomic, getter = isLocked) BOOL locked;
+@property (nonatomic) BOOL api_status;
 
 -(void)configureCurrentUser;
 

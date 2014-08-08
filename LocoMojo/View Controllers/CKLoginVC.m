@@ -80,94 +80,102 @@
 #pragma mark - Target Actions
 
 -(void)pressedLogin:(id)sender{
-    [self.loginView.txtPassword resignFirstResponder];
-    if(self.loginView.txtPassword.text.length >0 && self.loginView.txtPassword.text.length >0){
-        [PFUser logInWithUsernameInBackground:self.loginView.txtUsername.text password:self.loginView.txtPassword.text block:^(PFUser *user, NSError *error) {
-            if(!error){
-                [self.weak_currentUser updateUserWithPFUser:user];
-                [self unlockScreen];
-                self.loginView.txtPassword.text = @"";
-                self.loginView.txtUsername.text = @"";
-                self.loginView.btnLogin.enabled = NO;
-                [self.delegate setUsername];
-            } else {
-                [self handleLoginError:error];
-            }
-        }];
+
+    if(self.api_status){
+        [self.loginView.txtUsername resignFirstResponder];
+        [self.loginView.txtPassword resignFirstResponder];
+        if(self.loginView.txtPassword.text.length >0 && self.loginView.txtPassword.text.length >0){
+            [PFUser logInWithUsernameInBackground:self.loginView.txtUsername.text password:self.loginView.txtPassword.text block:^(PFUser *user, NSError *error) {
+                if(!error){
+                    [self.weak_currentUser updateUserWithPFUser:user];
+                    [self unlockScreen];
+                    self.loginView.txtPassword.text = @"";
+                    self.loginView.txtUsername.text = @"";
+                    self.loginView.btnLogin.enabled = NO;
+                    [self.delegate setUsername];
+                } else {
+                    [self handleLoginError:error];
+                }
+            }];
+        }
     }
 }
 
 -(void)pressedFacebookLogin:(id)sender{
     // The permissions requested from the user
     NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    if(self.api_status){
+        // Login PFUser using Facebook
+        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
 
-    // Login PFUser using Facebook
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-
-        if (!user) {
-            if (!error) {
-                [self.loginView showErrorMessage:@"Facebook login canceled." willShow:YES];
-            } else {
-                [self handleLoginError:error];
-            }
-        } else if (user.isNew) {
-            NSLog(@"User with facebook signed up and logged in!");
-            [self unlockScreen];
-            [self addNewFBInfoToPFUser];
-            [self.weak_currentUser updateUserWithFBUser:user];
-            [self.delegate setUsername];
-        } else {
-            NSLog(@"User with facebook logged in!");
-            [self unlockScreen];
-            // Get user's Facebook data
-            FBRequest *request = [FBRequest requestForMe];
-            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                [self.weak_currentUser updateUserWithFBUser:result];
+            if (!user) {
+                if (!error) {
+                    [self.loginView showErrorMessage:@"Facebook login canceled." willShow:YES];
+                } else {
+                    [self handleLoginError:error];
+                }
+            } else if (user.isNew) {
+                NSLog(@"User with facebook signed up and logged in!");
+                [self unlockScreen];
+                [self addNewFBInfoToPFUser];
+                [self.weak_currentUser updateUserWithFBUser:user];
                 [self.delegate setUsername];
-            }];
-        }
-    }];
+            } else {
+                NSLog(@"User with facebook logged in!");
+                [self unlockScreen];
+                // Get user's Facebook data
+                FBRequest *request = [FBRequest requestForMe];
+                [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                    [self.weak_currentUser updateUserWithFBUser:result];
+                    [self.delegate setUsername];
+                }];
+            }
+        }];
+    }
 }
 
 -(void)pressedTwitterLogin:(id)sender{
-    [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
-        if (!user) {
-            if(!error){
-                NSLog(@"The user cancelled the Twitter login.");
-            } else {
-                [self handleLoginError:error];
-            }
-        } else if (user.isNew) {
-            NSLog(@"User signed up and logged in with Twitter!");
-            NSString *twitterUsername = [[PFTwitterUtils twitter] screenName];
-        
-            NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-            NSString * requestString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/users/show.json?screen_name=%@", twitterUsername];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestString]];
-            [[PFTwitterUtils twitter] signRequest:request];
-            NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {                
-                NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-                if (!error) {
-                    NSArray *nameArray = [result[@"name"] componentsSeparatedByString:@" "];
-                    user[@"first_name"] = nameArray[0];
-                    user[@"last_name"] = nameArray[1];
-                    user[@"account_type"] = [NSNumber numberWithInteger: kTwitter];
-                    user[@"avatar_location"] = [result[@"profile_image_url_https"] stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
-                    [user saveEventually];
-                    [self.weak_currentUser updateUserWithTWUser:user];
-                    [self.delegate setUsername];
+    
+    if(self.api_status){
+        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+            if (!user) {
+                if(!error){
+                    NSLog(@"The user cancelled the Twitter login.");
+                } else {
+                    [self handleLoginError:error];
                 }
-            }];
-            [dataTask resume];
-            [self unlockScreen];
+            } else if (user.isNew) {
+                NSLog(@"User signed up and logged in with Twitter!");
+                NSString *twitterUsername = [[PFTwitterUtils twitter] screenName];
+            
+                NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                NSString * requestString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/users/show.json?screen_name=%@", twitterUsername];
+                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestString]];
+                [[PFTwitterUtils twitter] signRequest:request];
+                NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {                
+                    NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+                    if (!error) {
+                        NSArray *nameArray = [result[@"name"] componentsSeparatedByString:@" "];
+                        user[@"first_name"] = nameArray[0];
+                        user[@"last_name"] = nameArray[1];
+                        user[@"account_type"] = [NSNumber numberWithInteger: kTwitter];
+                        user[@"avatar_location"] = [result[@"profile_image_url_https"] stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
+                        [user saveEventually];
+                        [self.weak_currentUser updateUserWithTWUser:user];
+                        [self.delegate setUsername];
+                    }
+                }];
+                [dataTask resume];
+                [self unlockScreen];
 
-        } else {
-            NSLog(@"User logged in with Twitter!");
-            [self.weak_currentUser updateUserWithTWUser:user];
-            [self unlockScreen];
-            [self.delegate setUsername];
-        }
-    }];
+            } else {
+                NSLog(@"User logged in with Twitter!");
+                [self.weak_currentUser updateUserWithTWUser:user];
+                [self unlockScreen];
+                [self.delegate setUsername];
+            }
+        }];
+    }
 }
 
 #pragma mark - Parse
