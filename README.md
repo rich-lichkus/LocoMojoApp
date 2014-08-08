@@ -9,7 +9,7 @@ Test Account
 -------------
 |John      |Doe       |
 |:---------|:---------|
-|Username  |Test      |
+|Username  |JohnDoe   |
 |Password  |password  |
 
 * Set iphone simulator position to **[47.605050, -122.334569]** for sample interaction.
