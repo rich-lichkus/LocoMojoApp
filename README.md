@@ -34,8 +34,11 @@ Features
 
 Future Features
 ----------------
+* Camera
 * Geo-tagged photos
 * Up/ down voting tagged messages
+* NSNotifications
+* Message filtering via tags
 
 Frameworks
 ----------
