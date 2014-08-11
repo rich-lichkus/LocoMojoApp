@@ -80,13 +80,13 @@
     
     NSString *cellText = ((CKPost*)self.openPosts[indexPath.row]).message;
 
-    UIFont *FONT = [UIFont systemFontOfSize:14];
+    UIFont *FONT = [UIFont systemFontOfSize:18];
     NSAttributedString *attributedText =[[NSAttributedString alloc]  initWithString:cellText
                                                                          attributes:@{NSFontAttributeName:FONT}];
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){300, MAXFLOAT}
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
-    return rect.size.height+40;
+    return rect.size.height+50;
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
