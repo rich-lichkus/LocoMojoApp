@@ -210,6 +210,7 @@
 -(void)didPressNote{
     [self slideViews:kLeft];
     [self showProfileView:NO];
+    [self.messageVC.txvMessage becomeFirstResponder];
 }
 
 -(void)removeRegionalPost:(CKPost*)post{
@@ -221,6 +222,11 @@
     }
     [self.weak_currentUser.regionalPosts removeObjectIdenticalTo:deletePost];
     [self updateFilteredPosts:self.lastLocation];
+}
+
+-(void)updatePosts{
+    self.regionalPostsLoaded = NO;
+    [self updatePostMessages:self.lastLocation];
 }
 
 #pragma mark - Map Delegate
@@ -347,6 +353,7 @@
             if(!error){
                 [self.weak_currentUser setRegionalPostsWithArrayofPfPosts:objects];
                 [self updateFilteredPosts:userLocation];
+                [self.mojoVC.refreshControl endRefreshing];
             }
         }];
     }

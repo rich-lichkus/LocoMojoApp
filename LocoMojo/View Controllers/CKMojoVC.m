@@ -54,6 +54,11 @@
 -(void)configureUIElements{
     self.bbiAddMessage.image = [PCLocoMojo imageOfChat];
     self.bbiMap.image = [PCLocoMojo imageOfPin];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.tblFeed addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(updatePosts:) forControlEvents:UIControlEventValueChanged];
+
 }
 
 #pragma mark - Table View
@@ -146,6 +151,10 @@
         }
             break;
     }
+}
+
+-(void)updatePosts:(id)sender{
+    [self.delegate updatePosts];
 }
 
 #pragma mark - Methods

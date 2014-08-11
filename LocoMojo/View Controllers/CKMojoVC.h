@@ -14,6 +14,7 @@
 -(void)didPressMap;
 -(void)didPressNote;
 -(void)removeRegionalPost:(CKPost*)post;
+-(void)updatePosts;
 
 @end
 
@@ -22,6 +23,7 @@
 
 @property (nonatomic, unsafe_unretained) id<CKMojoVCDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 -(void)updateOpenPosts:(NSMutableArray*)posts;
 

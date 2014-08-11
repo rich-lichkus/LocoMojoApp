@@ -20,6 +20,8 @@
 
 @property (nonatomic, unsafe_unretained) id<CKMessageVCDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UITextView *txvMessage;
+
 -(void)setTextForGPSLabel:(CLLocation*)location;
 
 @end

@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblGPSPosition;
 //@property (weak, nonatomic) IBOutlet UILabel *lblGPSAccuracy;
-@property (weak, nonatomic) IBOutlet UITextView *txvMessage;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMojo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiSend;
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
