@@ -212,6 +212,17 @@
     [self showProfileView:NO];
 }
 
+-(void)removeRegionalPost:(CKPost*)post{
+    CKPost *deletePost;
+    for (CKPost *regPost in self.weak_currentUser.regionalPosts){
+        if([regPost.iD isEqualToString:post.iD]){
+            deletePost = regPost;
+        }
+    }
+    [self.weak_currentUser.regionalPosts removeObjectIdenticalTo:deletePost];
+    [self updateFilteredPosts:self.lastLocation];
+}
+
 #pragma mark - Map Delegate
 
 -(void)didPressMojo{

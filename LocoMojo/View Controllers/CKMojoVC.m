@@ -8,7 +8,6 @@
 
 #import "CKMojoVC.h"
 #import "CKMessageVC.h"
-#import "CKPost.h"
 #import "CKUser.h"
 #import "PCLocoMojo.h"
 
@@ -112,11 +111,19 @@
             CKPost *post = (CKPost*)self.openPosts[indexPath.row];
             PFQuery *query = [PFQuery queryWithClassName:@"post"];
             [query whereKey:@"objectId" equalTo:post.iD];
+            
+            [tableView beginUpdates];
+            [self.openPosts removeObjectAtIndex:indexPath.row];
+            [self.tblFeed deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView endUpdates];
+            
+            [self.delegate removeRegionalPost:post];
+            [tableView reloadData];
+            
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if(objects.count > 0){
-//                    [objects[0] deleteInBackground];
-//                    [self.openPosts removeObjectAtIndex:indexPath.row];
-//                    [self.tblFeed deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                if(objects.count > 0) {
+                    [objects[0] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) { 
+                    }];
                 }
             }];
         }

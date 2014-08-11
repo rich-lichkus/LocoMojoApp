@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKPost.h"
 
 @protocol CKMojoVCDelegate <NSObject>
 
 -(void)didPressMap;
 -(void)didPressNote;
+-(void)removeRegionalPost:(CKPost*)post;
 
 @end
 
