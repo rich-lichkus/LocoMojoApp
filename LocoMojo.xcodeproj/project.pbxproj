@@ -22,6 +22,8 @@
 		0F4A99711991AA6700C82A00 /* CKLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A99701991AA6700C82A00 /* CKLoginView.m */; };
 		0F4A99751991DC0B00C82A00 /* CKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A99741991DC0B00C82A00 /* CKLoginVC.m */; };
 		0F606A1F19899CD7000F489B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F606A1E19899CD7000F489B /* FacebookSDK.framework */; };
+		0F6FBDFA1999661300042492 /* CKMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FBDF91999661300042492 /* CKMessageCell.m */; };
+		0F6FBDFD199969A800042492 /* CKLeftMessageBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6FBDFC199969A800042492 /* CKLeftMessageBubbleView.m */; };
 		0F8FB9261980175700F2A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9251980175700F2A161 /* Foundation.framework */; };
 		0F8FB9281980175700F2A161 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9271980175700F2A161 /* CoreGraphics.framework */; };
 		0F8FB92A1980175700F2A161 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FB9291980175700F2A161 /* UIKit.framework */; };
@@ -93,6 +95,10 @@
 		0F4A99731991DC0B00C82A00 /* CKLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKLoginVC.h; path = "View Controllers/CKLoginVC.h"; sourceTree = "<group>"; };
 		0F4A99741991DC0B00C82A00 /* CKLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKLoginVC.m; path = "View Controllers/CKLoginVC.m"; sourceTree = "<group>"; };
 		0F606A1E19899CD7000F489B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Frameworks/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		0F6FBDF81999661300042492 /* CKMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKMessageCell.h; path = "View Controllers/CKMessageCell.h"; sourceTree = "<group>"; };
+		0F6FBDF91999661300042492 /* CKMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKMessageCell.m; path = "View Controllers/CKMessageCell.m"; sourceTree = "<group>"; };
+		0F6FBDFB199969A800042492 /* CKLeftMessageBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKLeftMessageBubbleView.h; path = Media/CKLeftMessageBubbleView.h; sourceTree = "<group>"; };
+		0F6FBDFC199969A800042492 /* CKLeftMessageBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKLeftMessageBubbleView.m; path = Media/CKLeftMessageBubbleView.m; sourceTree = "<group>"; };
 		0F8FB9221980175700F2A161 /* LocoMojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocoMojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8FB9251980175700F2A161 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F8FB9271980175700F2A161 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -226,6 +232,7 @@
 			children = (
 				0F8FB98C19802A7E00F2A161 /* CKMojoVC.h */,
 				0F8FB98D19802A7E00F2A161 /* CKMojoVC.m */,
+				0F6FBDF7199965AA00042492 /* Cell */,
 			);
 			name = MojoVC;
 			sourceTree = "<group>";
@@ -239,6 +246,17 @@
 				0F4A99701991AA6700C82A00 /* CKLoginView.m */,
 			);
 			name = LoginVC;
+			sourceTree = "<group>";
+		};
+		0F6FBDF7199965AA00042492 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F6FBDF81999661300042492 /* CKMessageCell.h */,
+				0F6FBDF91999661300042492 /* CKMessageCell.m */,
+				0F6FBDFB199969A800042492 /* CKLeftMessageBubbleView.h */,
+				0F6FBDFC199969A800042492 /* CKLeftMessageBubbleView.m */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		0F8FB9191980175700F2A161 = {
@@ -500,6 +518,7 @@
 				0FA18AD2198037DE00CFDC8C /* CKUser.m in Sources */,
 				0FC8CB4D1981DB8D00D9DB19 /* CKMapPin.m in Sources */,
 				0F4A99711991AA6700C82A00 /* CKLoginView.m in Sources */,
+				0F6FBDFA1999661300042492 /* CKMessageCell.m in Sources */,
 				0FC8CB541982DA0700D9DB19 /* CKButtonLocation.m in Sources */,
 				0F0BB6751981831200D1D12F /* CKCircle.m in Sources */,
 				0FA18AD5198037DE00CFDC8C /* CKMapVC.m in Sources */,
@@ -507,6 +526,7 @@
 				0FA18AD7198037DE00CFDC8C /* CKMessageVC.m in Sources */,
 				0F0BB66519805A3F00D1D12F /* PCLocoMojo.m in Sources */,
 				0FA18AD9198037DE00CFDC8C /* CKMojoVC.m in Sources */,
+				0F6FBDFD199969A800042492 /* CKLeftMessageBubbleView.m in Sources */,
 				0FA18ADB198037DE00CFDC8C /* CKGitHubNetworkController.m in Sources */,
 				0F0BB66B19805ECB00D1D12F /* CKTwitterNC.m in Sources */,
 				0F0BB67219817FD300D1D12F /* CKCircleOverlayRender.m in Sources */,

@@ -10,6 +10,8 @@
 #import "CKMessageVC.h"
 #import "CKUser.h"
 #import "PCLocoMojo.h"
+#import "CKMessageCell.h"
+#import "CKLeftMessageBubbleView.h"
 
 @interface CKMojoVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblFeed;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiAddMessage;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bbiMap;
+
+@property (nonatomic) CGRect cellRect;
 
 @end
 
@@ -64,33 +68,56 @@
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.openPosts.count;
+    if(self.openPosts.count==0){
+        return 1;
+    }else{
+        return self.openPosts.count;
+    }
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mojoCell" forIndexPath:indexPath];
-    
-    CKPost *post = self.openPosts[indexPath.row];
+    if(self.openPosts.count ==0){
+        cell.textLabel.text = @"Add the first pin in this region!";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+        cell.detailTextLabel.text = @"";
+    } else{
+        CKPost *post = self.openPosts[indexPath.row];
 
-    cell.textLabel.text = post.message;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    cell.detailTextLabel.text = [[post.user.firstName stringByAppendingString:@" "] stringByAppendingString:post.user.lastName];
+//        CAGradientLayer *gradient = [CAGradientLayer layer];
+//        gradient.frame = cell.bounds;
+//        gradient.colors = [NSArray arrayWithObjects:(id)[[PCLocoMojo messageGradientColor2] CGColor], (id)[[UIColor clearColor] CGColor], nil];
+//        [cell.layer insertSublayer:gradient atIndex:1];
+//        cell.textLabel.backgroundColor = [UIColor clearColor];
+        
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.text = post.message;
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.numberOfLines = 0;
+        cell.detailTextLabel.text = [[post.user.firstName stringByAppendingString:@" "] stringByAppendingString:post.user.lastName];
+    }
+    
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSString *cellText = ((CKPost*)self.openPosts[indexPath.row]).message;
 
-    UIFont *FONT = [UIFont systemFontOfSize:18];
-    NSAttributedString *attributedText =[[NSAttributedString alloc]  initWithString:cellText
-                                                                         attributes:@{NSFontAttributeName:FONT}];
-    CGRect rect = [attributedText boundingRectWithSize:(CGSize){300, MAXFLOAT}
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                               context:nil];
-    return rect.size.height+50;
+    if(self.openPosts.count !=0){
+        NSString *cellText = ((CKPost*)self.openPosts[indexPath.row]).message;
+
+        UIFont *FONT = [UIFont systemFontOfSize:18];
+        NSAttributedString *attributedText =[[NSAttributedString alloc]  initWithString:cellText
+                                                                             attributes:@{NSFontAttributeName:FONT}];
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){300, MAXFLOAT}
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        self.cellRect = rect;
+        return rect.size.height+50;
+    }
+    return 50;
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -99,11 +126,13 @@
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if([self.openPosts[indexPath.row] isKindOfClass: CKPost.class]){
-        CKPost *post = (CKPost*)self.openPosts[indexPath.row];
-        if ([post.user.userId isEqualToString: [PFUser currentUser].objectId])
-        {
-            return YES;
+    if(self.openPosts.count !=0){
+        if([self.openPosts[indexPath.row] isKindOfClass: CKPost.class]){
+            CKPost *post = (CKPost*)self.openPosts[indexPath.row];
+            if ([post.user.userId isEqualToString: [PFUser currentUser].objectId])
+            {
+                return YES;
+            }
         }
     }
     return NO;
@@ -134,6 +163,7 @@
         }
     }
 }
+
 
 #pragma mark - Target Actions
 
