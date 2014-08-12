@@ -30,7 +30,7 @@
 - (void)awakeFromNib
 {    
     self.lblTitle = [[UILabel alloc] initWithFrame:self.bounds];
-    [self.lblTitle setFont:[UIFont systemFontOfSize:18.0f]];
+    [self.lblTitle setFont:[UIFont systemFontOfSize:16.0f]];
     [self addSubview:self.lblTitle];
     
     self.lblName = [[UILabel alloc] initWithFrame:self.bounds];
@@ -54,7 +54,6 @@
     CGRect nameFrame = CGRectMake(40, frame.size.height-15, frame.size.width-57, 20);
     
     self.lblTitle.frame = labelFrame;
-
     self.lblTitle.textColor = [UIColor blackColor];
     self.lblTitle.textAlignment = NSTextAlignmentLeft;
     self.lblName.frame = nameFrame;

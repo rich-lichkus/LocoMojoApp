@@ -17,6 +17,7 @@
 @interface CKMapVC : UIViewController
 
 @property (strong, nonatomic) id<CKMapVCDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 -(void)updateVisiblePosts:(NSMutableArray*)posts;
 -(void)updateOpenPosts:(NSMutableArray*)posts;

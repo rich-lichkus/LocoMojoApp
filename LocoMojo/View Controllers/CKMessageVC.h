@@ -21,6 +21,7 @@
 @property (nonatomic, unsafe_unretained) id<CKMessageVCDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UITextView *txvMessage;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 -(void)setTextForGPSLabel:(CLLocation*)location;
 

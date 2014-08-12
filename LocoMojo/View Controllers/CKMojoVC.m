@@ -63,6 +63,10 @@
     [self.tblFeed addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(updatePosts:) forControlEvents:UIControlEventValueChanged];
 
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,50,30)];
+    titleLabel.text = @"LocoMojo";
+    [titleLabel setFont:[UIFont fontWithName:@"Marker Felt" size:25.0f]];
+    self.navBar.topItem.titleView = titleLabel;
 }
 
 #pragma mark - Table View
@@ -87,11 +91,11 @@
         CKMessageCell *bubbleCell = [tableView dequeueReusableCellWithIdentifier:@"mojoCell" forIndexPath:indexPath];
         
         CKPost *post = self.openPosts[indexPath.row];
-        if ([post.user.userId isEqualToString: [PFUser currentUser].objectId]){
+        //if ([post.user.userId isEqualToString: [PFUser currentUser].objectId]){
             [bubbleCell updateRightFrame:bubbleCell.bounds];
-        }else{
-            [bubbleCell updateLeftFrame:bubbleCell.bounds];
-        }
+        //}else{
+        //  [bubbleCell updateLeftFrame:bubbleCell.bounds];
+        //}
         // Some other joker
 //        bubbleCell.lblTitle.textAlignment = NSTextAlignmentLeft;
 //        bubbleCell.lblTitle.textColor = [UIColor blackColor];
@@ -109,7 +113,7 @@
     if(self.openPosts.count !=0){
         NSString *cellText = ((CKPost*)self.openPosts[indexPath.row]).message;
 
-        UIFont *FONT = [UIFont systemFontOfSize:18];
+        UIFont *FONT = [UIFont systemFontOfSize:16];
         NSAttributedString *attributedText =[[NSAttributedString alloc]  initWithString:cellText
                                                                              attributes:@{NSFontAttributeName:FONT}];
         CGRect rect = [attributedText boundingRectWithSize:(CGSize){300, MAXFLOAT}

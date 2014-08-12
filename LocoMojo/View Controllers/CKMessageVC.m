@@ -58,7 +58,7 @@
     
     [self configureUIElements];
     
-    //[self configureCameraView];
+//    [self configureCameraView];
 }
 
 #pragma mark - Configuration
@@ -74,7 +74,13 @@
     // Accuracy Gauge
     self.imgAccuracyGauge.image = [PCLocoMojo imageOfAccuracyGaugeWithGpsAccuracy:1000];
     
-    // Camera View
+    // Title
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,50,30)];
+    titleLabel.text = @"New Message";
+    [titleLabel setFont:[UIFont fontWithName:@"Marker Felt" size:25.0f]];
+    self.navBar.topItem.titleView = titleLabel;
+    
+//    // Camera View
 //    self.cameraView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y,0,0)];
 //    self.cameraView.layer.cornerRadius = 0;
 //    self.cameraView.layer.masksToBounds = YES;
@@ -84,7 +90,7 @@
 //                                                                   self.cameraView.frame.size.height*1.2*.5-self.view.frame.size.height*.5,
 //                                                                   self.view.frame.size.width, self.view.frame.size.height)];
 //    [self.cameraView addSubview:self.imgCamera];
-    [self.view addSubview:self.cameraView];
+//    [self.view addSubview:self.cameraView];
 }
 
 -(void)configureCameraView{
@@ -128,6 +134,7 @@
 
 #pragma mark - Target Actions
 - (IBAction)pressedCamera:(id)sender {
+   // [self.txvMessage resignFirstResponder];
     [self showCamera:YES];
 }
 

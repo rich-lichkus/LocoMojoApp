@@ -62,14 +62,23 @@
                                 forKeyPath:@"location"
                                    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
                                    context:nil];
+    CGRect mapRect = self.mapView.frame;
 }
 
 -(void)configureUIElements{
     self.bbiMojo.width = 30.0f;
     self.bbiMojo.image = [PCLocoMojo imageOfChat];
     [self.btnLocation setSelected:YES];
+    self.btnLocation.frame = CGRectMake(self.view.frame.size.height-self.btnLocation.frame.size.height+20,20,
+                                        self.btnLocation.frame.size.width, self.btnLocation.frame.size.height);
     [self.btnLocation setImage:[PCLocoMojo imageOfCurrentLocationWithIsSelected:YES] forState:UIControlStateSelected];
     [self.btnLocation setImage:[PCLocoMojo imageOfCurrentLocationWithIsSelected:NO] forState:UIControlStateNormal];
+    
+    // Title
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,50,30)];
+    titleLabel.text = @"Map";
+    [titleLabel setFont:[UIFont fontWithName:@"Marker Felt" size:25.0f]];
+    self.navBar.topItem.titleView = titleLabel;
 }
 
 #pragma mark - Map
