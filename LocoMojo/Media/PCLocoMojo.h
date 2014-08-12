@@ -73,6 +73,8 @@
 + (void)drawMessageBubble;
 + (void)drawRightMessageBubbleWithFrame: (CGRect)frame;
 + (void)drawLeftMessageBubbleWithFrame: (CGRect)frame;
++ (void)drawRightSharpMessageBubbleWithFrame: (CGRect)frame;
++ (void)drawLeftSharpMessageBubbleWithFrame: (CGRect)frame;
 
 // Generated Images
 + (UIImage*)imageOfLoginDisabled;

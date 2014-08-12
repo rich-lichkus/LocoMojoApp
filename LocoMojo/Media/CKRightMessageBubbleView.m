@@ -24,7 +24,7 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    [PCLocoMojo drawRightMessageBubbleWithFrame:rect];
+    [PCLocoMojo drawRightSharpMessageBubbleWithFrame:rect];
 }
 
 

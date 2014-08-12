@@ -23,7 +23,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [PCLocoMojo drawLeftMessageBubbleWithFrame:rect];
+    [PCLocoMojo drawLeftSharpMessageBubbleWithFrame:rect];
 }
 
 

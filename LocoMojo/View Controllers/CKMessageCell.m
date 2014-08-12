@@ -35,6 +35,7 @@
     
     self.lblName = [[UILabel alloc] initWithFrame:self.bounds];
     self.lblName.font = [UIFont systemFontOfSize:12.0f];
+    self.lblName.textColor = [UIColor lightGrayColor];
     [self addSubview:self.lblName];
 }
 
@@ -49,8 +50,8 @@
     CGRect labelFrame = CGRectMake(frame.origin.x+10,
                                    frame.origin.y,
                                    frame.size.width-20,
-                                   frame.size.height-10);
-    CGRect nameFrame = CGRectMake(50, frame.size.height-20, frame.size.width-57, 20);
+                                   frame.size.height-12);
+    CGRect nameFrame = CGRectMake(40, frame.size.height-15, frame.size.width-57, 20);
     
     self.lblTitle.frame = labelFrame;
 
@@ -70,8 +71,8 @@
     CGRect labelFrame = CGRectMake(frame.origin.x+10,
                                    frame.origin.y,
                                    frame.size.width-20,
-                                   frame.size.height-10);
-    CGRect nameFrame = CGRectMake(7, frame.size.height-20, frame.size.width-60, 20);
+                                   frame.size.height-12);
+    CGRect nameFrame = CGRectMake(7, frame.size.height-20, frame.size.width-45, 20);
     
     self.lblTitle.frame = labelFrame;
     self.lblTitle.textColor = [UIColor whiteColor];
