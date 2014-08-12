@@ -76,31 +76,32 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mojoCell" forIndexPath:indexPath];
+
     if(self.openPosts.count ==0){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell" forIndexPath:indexPath];
         cell.textLabel.text = @"Add the first pin in this region!";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.textColor = [UIColor lightGrayColor];
-        cell.detailTextLabel.text = @"";
+        return cell;
     } else{
-        CKPost *post = self.openPosts[indexPath.row];
-
-//        CAGradientLayer *gradient = [CAGradientLayer layer];
-//        gradient.frame = cell.bounds;
-//        gradient.colors = [NSArray arrayWithObjects:(id)[[PCLocoMojo messageGradientColor2] CGColor], (id)[[UIColor clearColor] CGColor], nil];
-//        [cell.layer insertSublayer:gradient atIndex:1];
-//        cell.textLabel.backgroundColor = [UIColor clearColor];
+        CKMessageCell *bubbleCell = [tableView dequeueReusableCellWithIdentifier:@"mojoCell" forIndexPath:indexPath];
         
-        cell.textLabel.textAlignment = NSTextAlignmentLeft;
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.textLabel.text = post.message;
-        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.textLabel.numberOfLines = 0;
-        cell.detailTextLabel.text = [[post.user.firstName stringByAppendingString:@" "] stringByAppendingString:post.user.lastName];
+        CKPost *post = self.openPosts[indexPath.row];
+        if ([post.user.userId isEqualToString: [PFUser currentUser].objectId]){
+            [bubbleCell updateRightFrame:bubbleCell.bounds];
+        }else{
+            [bubbleCell updateLeftFrame:bubbleCell.bounds];
+        }
+        // Some other joker
+//        bubbleCell.lblTitle.textAlignment = NSTextAlignmentLeft;
+//        bubbleCell.lblTitle.textColor = [UIColor blackColor];
+        bubbleCell.lblTitle.text = post.message;
+        bubbleCell.lblTitle.lineBreakMode = NSLineBreakByWordWrapping;
+        bubbleCell.lblTitle.numberOfLines = 0;
+        bubbleCell.lblName.text = [[post.user.firstName stringByAppendingString:@" "] stringByAppendingString:post.user.lastName];
+        
+        return bubbleCell;
     }
-    
-    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -115,7 +116,7 @@
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                    context:nil];
         self.cellRect = rect;
-        return rect.size.height+50;
+        return rect.size.height+40;
     }
     return 50;
 }
@@ -140,7 +141,6 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //TODO: delete post in parse
         if([self.openPosts[indexPath.row] isKindOfClass: CKPost.class]){
             CKPost *post = (CKPost*)self.openPosts[indexPath.row];
             PFQuery *query = [PFQuery queryWithClassName:@"post"];

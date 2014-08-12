@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CKLeftMessageBubbleView.h"
+#import "CKRightMessageBubbleView.h"
 
 @interface CKMessageCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet CKLeftMessageBubbleView *uivBubble;
+@property (strong, nonatomic) UIView *bubble;
+@property (strong, nonatomic) UILabel *lblTitle;
+@property (strong, nonatomic) UILabel *lblName;
+
+-(void)updateLeftFrame:(CGRect)frame;
+-(void)updateRightFrame:(CGRect)frame;
 
 @end

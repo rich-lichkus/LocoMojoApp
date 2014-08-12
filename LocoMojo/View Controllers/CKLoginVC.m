@@ -56,7 +56,9 @@
         unlock = YES;
     }
     if(unlock){
+        [self.weak_currentUser updateUserWithPFUser:[PFUser currentUser]];
         [self.loginView unlockScreen:unlock];
+        [self.delegate setUsername];
         [self.delegate openProfileView];
     }
 }
