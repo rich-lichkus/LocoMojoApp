@@ -10,6 +10,8 @@
 #import "CKLoginView.h"
 #import <Parse/Parse.h>
 
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
+
 #define CELL_SEPARATOR_HEIGHT 1
 #define PERCENTAGE_VIEW_WIDTH .70
 #define TEXTFIELD_HEIGHT 40
@@ -37,6 +39,21 @@
 }
 
 -(void)configureUIElements{
+    
+    CGFloat txtField_Height;
+    CGFloat btn_Height;
+    NSInteger heightMultiplier;
+    
+    if(isiPhone5){
+        txtField_Height =40;
+        btn_Height =40;
+        heightMultiplier =0;
+    } else {
+        txtField_Height =30;
+        btn_Height = 30;
+        heightMultiplier =1;
+    }
+    
     float halfScreen = self.frame.size.height*.5;
     float uiElementWidth = self.frame.size.width*.75;
     
@@ -47,22 +64,22 @@
     self.uivTopView.backgroundColor = [UIColor whiteColor];
     
     self.btnFacebook = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5),
-                                                                  self.uivTopView.frame.size.height - (4*TEXTFIELD_HEIGHT+4*TEXTFIELD_PADDING),
+                                                                  self.uivTopView.frame.size.height - ((heightMultiplier+4)*txtField_Height+4*TEXTFIELD_PADDING),
                                                                   uiElementWidth*.5-TEXTFIELD_PADDING*.5,
-                                                                  TEXTFIELD_HEIGHT)];
+                                                                  txtField_Height)];
     [self.btnFacebook setBackgroundImage:[PCLocoMojo imageOfFacebookLogin] forState:UIControlStateNormal];
     [self.btnFacebook setTitle:@"Facebook" forState:UIControlStateNormal];
     
     self.btnTwitter = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x+TEXTFIELD_PADDING*.5,
-                                                                 self.uivTopView.frame.size.height - (4*TEXTFIELD_HEIGHT+4*TEXTFIELD_PADDING),
+                                                                 self.uivTopView.frame.size.height - ((heightMultiplier+4)*txtField_Height+4*TEXTFIELD_PADDING),
                                                                  uiElementWidth*.5,
-                                                                 TEXTFIELD_HEIGHT)];
+                                                                 txtField_Height)];
     [self.btnTwitter setBackgroundImage:[PCLocoMojo imageOfLoginTwitter] forState:UIControlStateNormal];
     [self.btnTwitter setTitle:@"Twitter" forState:UIControlStateNormal];
     
     // Error View
     self.uivError = [[UIView alloc] initWithFrame:CGRectMake(self.uivTopView.frame.origin.x,
-                                                             self.btnFacebook.frame.origin.y+TEXTFIELD_PADDING+TEXTFIELD_HEIGHT+20,
+                                                             self.btnFacebook.frame.origin.y+TEXTFIELD_PADDING+txtField_Height+20,
                                                              self.uivTopView.frame.size.width, 0)];
     self.uivError.backgroundColor = [UIColor redColor];
     [self.uivTopView addSubview:self.uivError];
@@ -75,18 +92,18 @@
 
     
     self.txtUsername = [[UITextField alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5),
-                                                                     self.uivTopView.frame.size.height - (2*TEXTFIELD_HEIGHT+2*TEXTFIELD_PADDING),
+                                                                     self.uivTopView.frame.size.height - ((heightMultiplier+2)*txtField_Height+2*TEXTFIELD_PADDING),
                                                                      uiElementWidth,
-                                                                     TEXTFIELD_HEIGHT)];
+                                                                     txtField_Height)];
     self.txtUsername.borderStyle = UITextBorderStyleRoundedRect;
     self.txtUsername.backgroundColor = [UIColor colorWithWhite:0.800 alpha:0.250];
     self.txtUsername.placeholder = @"Username";
     self.txtUsername.tag = kLoginUsernameTxtTag;
     
     self.txtPassword = [[UITextField alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5),
-                                                                     self.uivTopView.frame.size.height - TEXTFIELD_HEIGHT - TEXTFIELD_PADDING,
+                                                                     self.uivTopView.frame.size.height - (heightMultiplier+1)*txtField_Height - TEXTFIELD_PADDING,
                                                                      uiElementWidth,
-                                                                     TEXTFIELD_HEIGHT)];
+                                                                     txtField_Height)];
     self.txtPassword.borderStyle = UITextBorderStyleRoundedRect;
     self.txtPassword.backgroundColor = [UIColor colorWithWhite:0.800 alpha:0.250];
     self.txtPassword.placeholder = @"Password";
@@ -97,21 +114,37 @@
     [self.uivTopView addSubview:self.btnTwitter];
     [self.uivTopView addSubview:self.txtUsername];
     [self.uivTopView addSubview:self.txtPassword];
+    
+    if(!isiPhone5){
+        self.btnLogin = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5),
+                                                                   self.uivTopView.frame.size.height - txtField_Height,
+                                                                   uiElementWidth,
+                                                                   txtField_Height)];
+        [self.btnLogin setTitle:@"Login" forState:UIControlStateNormal];
+        self.btnLogin.enabled = YES;
+        [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginDisabled] forState:UIControlStateDisabled];
+        [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginNormal] forState:UIControlStateNormal];
+        self.btnLogin.layer.cornerRadius = 5;
+        self.btnLogin.layer.masksToBounds = YES;
+        [self.uivTopView addSubview:self.btnLogin];
+    }
+    
     [self addSubview:self.uivTopView];
     
     // Lock Screen Bottom View
     self.uivBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, halfScreen,self.frame.size.width, halfScreen)];
     self.uivBottomView.backgroundColor = [UIColor whiteColor];
-    
-    self.btnLogin = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5), 0, uiElementWidth, UIBUTTON_HEIGHT)];
-    [self.btnLogin setTitle:@"Login" forState:UIControlStateNormal];
-    self.btnLogin.enabled = YES;
-    [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginDisabled] forState:UIControlStateDisabled];
-    [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginNormal] forState:UIControlStateNormal];
-    self.btnLogin.layer.cornerRadius = 5;
-    self.btnLogin.layer.masksToBounds = YES;
-    [self.uivBottomView addSubview:self.btnLogin];
-    
+   
+    if(isiPhone5){
+        self.btnLogin = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x-(uiElementWidth*.5), 0, uiElementWidth, btn_Height)];
+        [self.btnLogin setTitle:@"Login" forState:UIControlStateNormal];
+        self.btnLogin.enabled = YES;
+        [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginDisabled] forState:UIControlStateDisabled];
+        [self.btnLogin setBackgroundImage:[PCLocoMojo imageOfLoginNormal] forState:UIControlStateNormal];
+        self.btnLogin.layer.cornerRadius = 5;
+        self.btnLogin.layer.masksToBounds = YES;
+        [self.uivBottomView addSubview:self.btnLogin];
+    }
     [self addSubview:self.uivBottomView];
 }
 
@@ -143,7 +176,7 @@
     
     self.lblError.text = errorMessage;
     
-    if (self.uivError.frame.size.height < 40) {
+    if (self.uivError.frame.size.height < 40 || !show) {
     
         CGFloat height = show ? 40 : 0;
         CGFloat dy = show ? 20 : -20;

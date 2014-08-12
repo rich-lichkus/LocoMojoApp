@@ -198,8 +198,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vTT-G4-Bjl">
-                                <rect key="frame" x="3" y="68" width="314" height="161"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTT-G4-Bjl">
+                                <rect key="frame" x="3" y="68" width="314" height="155"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -230,8 +230,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GPS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8E-ZD-E9N">
-                                <rect key="frame" x="3" y="237" width="201" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GPS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8E-ZD-E9N">
+                                <rect key="frame" x="3" y="243" width="201" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="201" id="pXb-Tl-ymy"/>
@@ -240,15 +240,15 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxa-o8-GvK">
-                                <rect key="frame" x="257" y="232" width="54" height="34"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxa-o8-GvK">
+                                <rect key="frame" x="257" y="226" width="54" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Camera"/>
                                 <connections>
                                     <action selector="pressedCamera:" destination="gbR-Ad-Nil" eventType="touchUpInside" id="EuD-Kk-gmk"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1p-2p-Smr">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w1p-2p-Smr">
                                 <rect key="frame" x="227" y="237" width="90" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -269,7 +269,7 @@
                             <constraint firstItem="N8E-ZD-E9N" firstAttribute="leading" secondItem="vTT-G4-Bjl" secondAttribute="leading" id="oki-Ft-q1Y"/>
                             <constraint firstItem="w1p-2p-Smr" firstAttribute="trailing" secondItem="vTT-G4-Bjl" secondAttribute="trailing" id="qcD-3m-DH8"/>
                             <constraint firstItem="1YA-a9-nqu" firstAttribute="top" secondItem="cxa-o8-GvK" secondAttribute="bottom" constant="214" id="vYa-b2-KZO"/>
-                            <constraint firstItem="N8E-ZD-E9N" firstAttribute="top" secondItem="w1p-2p-Smr" secondAttribute="top" id="xXM-Lk-BUd"/>
+                            <constraint firstItem="N8E-ZD-E9N" firstAttribute="top" secondItem="w1p-2p-Smr" secondAttribute="top" constant="6" id="xXM-Lk-BUd"/>
                             <constraint firstAttribute="trailing" secondItem="vTT-G4-Bjl" secondAttribute="trailing" constant="3" id="ykV-BJ-tHB"/>
                         </constraints>
                     </view>
