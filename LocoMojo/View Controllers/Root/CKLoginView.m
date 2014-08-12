@@ -176,10 +176,18 @@
     
     self.lblError.text = errorMessage;
     
-    if (self.uivError.frame.size.height < 40 || !show) {
+    CGFloat errorHeight;
     
-        CGFloat height = show ? 40 : 0;
-        CGFloat dy = show ? 20 : -20;
+    if (isiPhone5) {
+        errorHeight = 40.0;
+    } else {
+        errorHeight = 30.0;
+    }
+    
+    if (self.uivError.frame.size.height < errorHeight || !show) {
+    
+        CGFloat height = show ? errorHeight : 0;
+        CGFloat dy = show ? errorHeight*.5 : -errorHeight*.5;
         
         [UIView animateWithDuration:.3 animations:^{
             

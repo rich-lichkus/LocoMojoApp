@@ -96,9 +96,6 @@
         //}else{
         //  [bubbleCell updateLeftFrame:bubbleCell.bounds];
         //}
-        // Some other joker
-//        bubbleCell.lblTitle.textAlignment = NSTextAlignmentLeft;
-//        bubbleCell.lblTitle.textColor = [UIColor blackColor];
         bubbleCell.lblTitle.text = post.message;
         bubbleCell.lblTitle.lineBreakMode = NSLineBreakByWordWrapping;
         bubbleCell.lblTitle.numberOfLines = 0;
