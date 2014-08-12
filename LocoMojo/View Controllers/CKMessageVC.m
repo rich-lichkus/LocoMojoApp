@@ -77,7 +77,7 @@
     // Title
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,50,30)];
     titleLabel.text = @"New Message";
-    [titleLabel setFont:[UIFont fontWithName:@"Marker Felt" size:25.0f]];
+    [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
     self.navBar.topItem.titleView = titleLabel;
     
 //    // Camera View

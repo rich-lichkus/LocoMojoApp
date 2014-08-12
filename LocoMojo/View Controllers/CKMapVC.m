@@ -77,8 +77,7 @@
     // Title
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,50,30)];
     titleLabel.text = @"Map";
-    [titleLabel setFont:[UIFont fontWithName:@"Marker Felt" size:25.0f]];
-    self.navBar.topItem.titleView = titleLabel;
+    [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];    self.navBar.topItem.titleView = titleLabel;
 }
 
 #pragma mark - Map

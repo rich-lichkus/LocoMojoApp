@@ -262,6 +262,7 @@
 #pragma mark - Core Location Delegate
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *lastLocation = [locations lastObject];
+    NSLog(@"Location called");
     self.weak_currentUser.lastLocation = lastLocation;
     self.lastLocationDate = lastLocation.timestamp;
     self.lastLocation = lastLocation;
