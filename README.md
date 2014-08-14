@@ -34,9 +34,9 @@ Features
 
 Snapshots
 ---------
-<img src="https://raw.github.com/rpl5018/LocoMojoApp/master/LocoMojo/Resources/Mojo.png">
-<img src="https://raw.github.com/rpl5018/LocoMojoApp/master/LocoMojo/Resources/Map.png">
-<img src="https://raw.github.com/rpl5018/LocoMojoApp/master/LocoMojo/Resources/Message.png">
+<img src="https://raw.github.com/rpl5018/LocoMojoApp/master/LocoMojo/Resources/Mojo.png" width="50%" height="50%>
+<img src="https://raw.github.com/rpl5018/LocoMojoApp/master/LocoMojo/Resources/Map.png" width="50%" height="50%>
+<img src="https://raw.github.com/rpl5018/LocoMojoApp/master/LocoMojo/Resources/Message.png" width="50%" height="50%>
 
 
 Future Features
